@@ -1,94 +1,85 @@
 -- ============================================================================
 -- Trabajo integrador ae4 de gestión avanzada de bases de datos (2026)
--- Script 01: creación del data warehouse en modelo estrella y carga de dim_tiempo
+-- Script 01: creación del data warehouse en esquema estrella y carga de dim_tiempo
 -- ============================================================================
 
--- Se borran las tablas previas para poder ejecutar el script desde cero
+-- Se eliminan las tablas previas (incluyendo las de versiones anteriores) para recrear desde cero
+DROP TABLE IF EXISTS fact_locales_consumo CASCADE;
 DROP TABLE IF EXISTS fact_ventas CASCADE;
-DROP TABLE IF EXISTS dim_cadena CASCADE;
+DROP TABLE IF EXISTS dim_geografia CASCADE;
 DROP TABLE IF EXISTS dim_ubicacion CASCADE;
+DROP TABLE IF EXISTS dim_cadena CASCADE;
 DROP TABLE IF EXISTS dim_tiempo CASCADE;
 
 -- ============================================================================
 -- 1. Creación de las dimensiones
 -- ============================================================================
 
--- Dimensión tiempo obligatoria con fecha, día, mes, trimestre y año
+-- Dimensión tiempo obligatoria con fecha, día, mes, nombre del mes, trimestre y año
 CREATE TABLE dim_tiempo (
-    tiempo_id          SERIAL PRIMARY KEY,
-    fecha              DATE UNIQUE NOT NULL,
-    dia                INTEGER NOT NULL,
-    mes                INTEGER NOT NULL,
-    trimestre          INTEGER NOT NULL,
-    año                INTEGER NOT NULL,
-    dia_semana         INTEGER NOT NULL,
-    nombre_mes         VARCHAR(20) NOT NULL,
-    nombre_dia_semana  VARCHAR(20) NOT NULL,
-    es_fin_de_semana   BOOLEAN NOT NULL
+    tiempo_id   SERIAL PRIMARY KEY,
+    fecha       DATE UNIQUE NOT NULL,
+    dia         INTEGER NOT NULL,
+    mes         INTEGER NOT NULL,
+    nombre_mes  VARCHAR(20) NOT NULL,
+    trimestre   INTEGER NOT NULL,
+    anio        INTEGER NOT NULL
 );
 
--- Dimensión cadena con nombre de franquicia, categoría gastronómica y segmento de precio
+-- Dimensión geografía con estado, región censal, ciudad, código postal y población estatal
+CREATE TABLE dim_geografia (
+    geografia_id      SERIAL PRIMARY KEY,
+    province          VARCHAR(2) NOT NULL,
+    state_name        VARCHAR(100) NOT NULL,
+    census_region     VARCHAR(50) NOT NULL,
+    city              VARCHAR(120) NOT NULL,
+    postal_code       VARCHAR(10) NOT NULL,
+    population_total  BIGINT NOT NULL
+);
+
+-- Dimensión cadena con nombre normalizado de la franquicia y categoría principal
 CREATE TABLE dim_cadena (
-    cadena_id         SERIAL PRIMARY KEY,
-    nombre_cadena     VARCHAR(150) NOT NULL,
-    categoria_comida  VARCHAR(100) NOT NULL,
-    segmento_precio   VARCHAR(50) NOT NULL,
-    codigo_cadena     VARCHAR(50) UNIQUE NOT NULL
-);
-
--- Dimensión ubicación con ciudad, código postal, estado, región y población estatal
-CREATE TABLE dim_ubicacion (
-    ubicacion_id      SERIAL PRIMARY KEY,
-    pais              VARCHAR(50) NOT NULL DEFAULT 'US',
-    estado_codigo     VARCHAR(10) NOT NULL,
-    estado_nombre     VARCHAR(100) NOT NULL,
-    ciudad            VARCHAR(120) NOT NULL,
-    codigo_postal     VARCHAR(20) NOT NULL,
-    region_eeuu       VARCHAR(50) NOT NULL,
-    poblacion_estado  INTEGER NOT NULL,
-    codigo_ubicacion  VARCHAR(100) UNIQUE NOT NULL
+    cadena_id            SERIAL PRIMARY KEY,
+    nombre_cadena        VARCHAR(150) UNIQUE NOT NULL,
+    categoria_principal  VARCHAR(100) NOT NULL
 );
 
 -- ============================================================================
 -- 2. Creación de la tabla de hechos
--- Granularidad: un cierre trimestral de una sucursal en el último día del trimestre
+-- Granularidad: un local de comida rápida vinculado a su ubicación, cadena y corte temporal
 -- ============================================================================
 
-CREATE TABLE fact_ventas (
-    venta_id             SERIAL PRIMARY KEY,
-    tiempo_id            INTEGER NOT NULL REFERENCES dim_tiempo(tiempo_id),
-    cadena_id            INTEGER NOT NULL REFERENCES dim_cadena(cadena_id),
-    ubicacion_id         INTEGER NOT NULL REFERENCES dim_ubicacion(ubicacion_id),
-    id_operacion         VARCHAR(50) UNIQUE NOT NULL,
-    sucursal_key         VARCHAR(180) NOT NULL,
-    cantidad_ordenes     INTEGER NOT NULL,        -- Métrica aditiva de cantidad de órdenes
-    ventas_usd           DECIMAL(15,2) NOT NULL,  -- Métrica aditiva de ventas en dólares
-    costo_operativo_usd  DECIMAL(15,2) NOT NULL,  -- Métrica aditiva de costo operativo
-    ganancia_neta_usd    DECIMAL(15,2) NOT NULL   -- Métrica aditiva de ganancia neta
+CREATE TABLE fact_locales_consumo (
+    hecho_id                      SERIAL PRIMARY KEY,
+    tiempo_id                     INTEGER NOT NULL REFERENCES dim_tiempo(tiempo_id),
+    geografia_id                  INTEGER NOT NULL REFERENCES dim_geografia(geografia_id),
+    cadena_id                     INTEGER NOT NULL REFERENCES dim_cadena(cadena_id),
+    latitude                      NUMERIC(10,6) NOT NULL,
+    longitude                     NUMERIC(10,6) NOT NULL,
+    cantidad_locales              INTEGER NOT NULL DEFAULT 1,
+    calorias_diarias_promedio_ff  NUMERIC(8,2) NOT NULL,
+    pct_consumo_diario            NUMERIC(6,2) NOT NULL,
+    tasa_obesidad_pct             NUMERIC(6,2) NOT NULL
 );
 
 -- ============================================================================
--- 3. Carga de dim_tiempo con todos los días de 2023 y 2024 (731 filas)
--- Se genera el calendario completo para que existan todas las fechas posibles
+-- 3. Carga de dim_tiempo con todos los días del año 2024 (366 filas por año bisiesto)
 -- ============================================================================
 
-INSERT INTO dim_tiempo (fecha, dia, mes, trimestre, año, dia_semana, nombre_mes, nombre_dia_semana, es_fin_de_semana)
+INSERT INTO dim_tiempo (fecha, dia, mes, nombre_mes, trimestre, anio)
 SELECT
     fecha::date,
     EXTRACT(DAY FROM fecha),
     EXTRACT(MONTH FROM fecha),
-    EXTRACT(QUARTER FROM fecha),
-    EXTRACT(YEAR FROM fecha),
-    EXTRACT(ISODOW FROM fecha),          -- Del 1 (lunes) al 7 (domingo)
     TRIM(TO_CHAR(fecha, 'Month')),
-    TRIM(TO_CHAR(fecha, 'Day')),
-    EXTRACT(ISODOW FROM fecha) IN (6, 7)
-FROM generate_series('2023-01-01'::date, '2024-12-31'::date, '1 day') AS fecha;
+    EXTRACT(QUARTER FROM fecha),
+    EXTRACT(YEAR FROM fecha)
+FROM generate_series('2024-01-01'::date, '2024-12-31'::date, '1 day') AS fecha;
 
 -- ============================================================================
--- 4. Índices sobre las claves foráneas para acelerar las consultas analíticas
+-- 4. Índices sobre las claves foráneas para optimizar las consultas analíticas
 -- ============================================================================
 
-CREATE INDEX idx_fact_tiempo ON fact_ventas(tiempo_id);
-CREATE INDEX idx_fact_cadena ON fact_ventas(cadena_id);
-CREATE INDEX idx_fact_ubicacion ON fact_ventas(ubicacion_id);
+CREATE INDEX idx_fact_tiempo ON fact_locales_consumo(tiempo_id);
+CREATE INDEX idx_fact_geografia ON fact_locales_consumo(geografia_id);
+CREATE INDEX idx_fact_cadena ON fact_locales_consumo(cadena_id);

@@ -1,16 +1,14 @@
 # %% [markdown]
 # # Proceso etl del trabajo integrador ae4
-# Ingestión, limpieza, transformación, merge, validaciones y carga al data warehouse en postgresql.
+# Ingestión, limpieza, transformación, merge por estado y carga al data warehouse en postgresql.
 
 # %%
 from pathlib import Path
-
 import pandas as pd
 from sqlalchemy import create_engine, text
+from comun import leer_fastfood_csv, clasificar_categoria
 
-from comun import leer_fastfood_csv
-
-# Rutas del proyecto (funciona tanto desde la raíz como desde la carpeta etl)
+# Rutas del proyecto (funciona desde la carpeta raíz o desde la subcarpeta etl)
 BASE_DIR = Path.cwd().parent if Path.cwd().name == "etl" else Path.cwd()
 DIR_ORIGINALES = BASE_DIR / "datos" / "originales"
 DIR_PROCESADOS = BASE_DIR / "datos" / "procesados"
@@ -20,33 +18,33 @@ DB_URL = "postgresql+psycopg2://postgres:postgres@localhost:5432/dw_fastfood"
 
 # %% [markdown]
 # ## 1. Ingestión de cada fuente por separado
-# - **Fuente 1 (real y externa):** catálogo de 10.000 sucursales de comida rápida en estados unidos.
-# - **Fuente 2 (construida por el grupo):** cierres trimestrales de operaciones por sucursal entre 2023 y 2024.
+# - **Fuente 1 (real y externa):** padrón de 10.000 locales de comida rápida en estados unidos.
+# - **Fuente 2 (construida por el grupo):** indicadores demográficos, calóricos y de obesidad por estado (censo y cdc).
 
 # %%
 suc_raw, filas_reparadas = leer_fastfood_csv(DIR_ORIGINALES / "FastFoodRestaurants.csv")
-ope_raw = pd.read_csv(DIR_ORIGINALES / "operaciones_franquicias_2023_2024.csv")
+dem_raw = pd.read_csv(DIR_ORIGINALES / "us_states_consumption_demographics.csv")
 
-print(f"Fuente 1 (sucursales): {len(suc_raw)} filas, {suc_raw.shape[1]} columnas")
+print(f"Fuente 1 (locales): {len(suc_raw)} filas, {suc_raw.shape[1]} columnas")
 print(f"Filas reparadas por comas dentro de la dirección: {filas_reparadas}")
-print(f"Fuente 2 (operaciones): {len(ope_raw)} filas, {ope_raw.shape[1]} columnas")
+print(f"Fuente 2 (demografía y obesidad): {len(dem_raw)} filas, {dem_raw.shape[1]} columnas")
 
 # %% [markdown]
-# ## 2. Limpieza de la fuente 1 (sucursales)
-# Se filtran coordenadas fuera de estados unidos, se unifican nombres de cadenas, se corrigen estados y se quitan duplicados.
+# ## 2. Limpieza de la fuente 1 (oferta de locales)
+# Se filtran coordenadas fuera de estados unidos, se unifican nombres de cadenas, se formatea el código postal a 5 dígitos y se eliminan locales duplicados.
 
 # %%
 suc = suc_raw.replace("", pd.NA)
 print(f"Nulos iniciales en fuente 1: {int(suc.isna().sum().sum())}")
 
-# Coordenadas: se convierten a número y se descartan las que caen fuera de estados unidos
-suc["latitude"] = pd.to_numeric(suc["latitude"], errors="coerce")
-suc["longitude"] = pd.to_numeric(suc["longitude"], errors="coerce")
+# Coordenadas: se convierten a número y se descartan los registros fuera de estados unidos
+suc["latitude"] = pd.to_numeric(suc["latitude"], errors="coerce").round(6)
+suc["longitude"] = pd.to_numeric(suc["longitude"], errors="coerce").round(6)
 dentro_de_eeuu = suc["latitude"].between(18, 72) & suc["longitude"].between(-170, -65)
-print(f"Sucursales fuera de estados unidos eliminadas: {(~dentro_de_eeuu).sum()}")
+print(f"Locales fuera de estados unidos eliminados: {(~dentro_de_eeuu).sum()}")
 suc = suc[dentro_de_eeuu].copy()
 
-# Nombres de cadena: si coinciden sin mayúsculas ni signos, se unifican con la forma más frecuente
+# Unificación de nombres de cadenas que solo difieren en mayúsculas o signos
 suc["name"] = suc["name"].str.strip()
 clave_cadena = suc["name"].str.lower().str.replace(r"[^a-z0-9]", "", regex=True)
 nombre_mas_frecuente = suc.groupby(clave_cadena)["name"].agg(lambda s: s.mode()[0])
@@ -54,146 +52,165 @@ cadenas_antes = suc["name"].nunique()
 suc["name"] = clave_cadena.map(nombre_mas_frecuente)
 print(f"Cadenas únicas: {cadenas_antes} antes, {suc['name'].nunique()} después de unificar")
 
-# Normalización de textos y códigos postales de 5 dígitos
+# Estandarización de código de estado, ciudad, dirección y código postal de 5 dígitos
 suc["province"] = suc["province"].str.strip().str.upper().replace({"CO SPGS": "CO"})
 suc["city"] = suc["city"].str.strip().str.title()
+suc["address"] = suc["address"].str.strip()
 suc["postalCode"] = suc["postalCode"].str.strip().str[:5].str.zfill(5)
-suc["keys"] = suc["keys"].str.strip().str.lower()
 
-# Eliminación de duplicados por clave de sucursal
-print(f"Sucursales duplicadas eliminadas: {suc.duplicated('keys').sum()}")
-suc = suc.drop_duplicates("keys").reset_index(drop=True)
-print(f"Fuente 1 limpia: {len(suc)} sucursales, {int(suc.isna().sum().sum())} nulos")
-
-# %% [markdown]
-# ## 3. Limpieza de la fuente 2 (operaciones)
-# Se eliminan duplicados y montos negativos, se normalizan textos y se completan los valores nulos.
-
-# %%
-ope = ope_raw.copy()
-print(f"Nulos iniciales en fuente 2: {int(ope.isna().sum().sum())}")
-
-# Eliminación de filas duplicadas exactas
-print(f"Filas duplicadas eliminadas: {ope.duplicated().sum()}")
-ope = ope.drop_duplicates()
-
-# Normalización de textos en categoría, región, estado y clave de sucursal
-CATEGORIAS = ["Burgers & Grill", "Tex-Mex", "Pizza & Italian", "Chicken & Wings", "Sandwiches & Subs",
-              "Coffee, Bakery & Ice Cream", "Asian & Seafood", "Otros / Regional"]
-ope["categoria_comida"] = ope["categoria_comida"].str.strip().str.lower().map({c.lower(): c for c in CATEGORIAS})
-ope["region_eeuu"] = ope["region_eeuu"].str.strip().str.title()
-ope["estado_codigo"] = ope["estado_codigo"].str.strip().str.upper()
-ope["sucursal_key"] = ope["sucursal_key"].str.strip().str.lower()
-
-# Descarte de valores atípicos con ventas u órdenes menores o iguales a cero
-validas = (ope["ventas_usd"] > 0) & (ope["cantidad_ordenes"] > 0)
-print(f"Operaciones con ventas u órdenes menores o iguales a cero eliminadas: {(~validas).sum()}")
-ope = ope[validas].copy()
-
-# Imputación de nulos en segmento de precio usando el valor de la misma sucursal
-print(f"Nulos completados en segmento de precio: {ope['segmento_precio'].isna().sum()}")
-segmento_sucursal = ope.groupby("sucursal_key")["segmento_precio"].transform("first")
-ope["segmento_precio"] = ope["segmento_precio"].fillna(segmento_sucursal)
-
-# Imputación de nulos en costo operativo usando la mediana de la proporción costo sobre venta de su categoría
-print(f"Nulos completados en costo operativo: {ope['costo_operativo_usd'].isna().sum()}")
-proporcion_costo = ope["costo_operativo_usd"] / ope["ventas_usd"]
-mediana_categoria = proporcion_costo.groupby(ope["categoria_comida"]).transform("median")
-ope["costo_operativo_usd"] = ope["costo_operativo_usd"].fillna((ope["ventas_usd"] * mediana_categoria).round(2))
-
-# Conversión de fecha y cálculo de ganancia neta
-ope["fecha_reporte"] = pd.to_datetime(ope["fecha_reporte"]).dt.date
-ope["ganancia_neta_usd"] = (ope["ventas_usd"] - ope["costo_operativo_usd"]).round(2)
-print(f"Fuente 2 limpia: {len(ope)} operaciones, {int(ope.isna().sum().sum())} nulos")
+# Eliminación de locales duplicados por dirección, ciudad y estado
+duplicados_f1 = suc.duplicated(["address", "city", "province"]).sum()
+print(f"Locales duplicados por dirección, ciudad y estado eliminados: {duplicados_f1}")
+suc = suc.drop_duplicates(["address", "city", "province"]).reset_index(drop=True)
+print(f"Fuente 1 limpia: {len(suc)} locales, {int(suc.isna().sum().sum())} nulos")
 
 # %% [markdown]
-# ## 4. Merge entre fuentes y validaciones posteriores
-# Se realiza un inner join por clave de sucursal para conservar solo operaciones de locales válidos dentro de estados unidos.
+# ## 3. Limpieza de la fuente 2 (demografía, consumo y obesidad estatal)
+# Se normalizan los textos de estado y región, se quitan filas repetidas y se imputan nulos con el promedio regional.
 
 # %%
-sucursales = suc.rename(columns={"keys": "sucursal_key", "name": "nombre_cadena", "city": "ciudad",
-                                 "postalCode": "codigo_postal", "province": "estado_fuente_1"})
-sucursales = sucursales[["sucursal_key", "nombre_cadena", "ciudad", "codigo_postal", "estado_fuente_1"]]
+dem = dem_raw.copy()
+print(f"Nulos iniciales en fuente 2: {int(dem.isna().sum().sum())}")
 
-sin_sucursal = (~ope["sucursal_key"].isin(sucursales["sucursal_key"])).sum()
-df = ope.merge(sucursales, on="sucursal_key", how="inner", validate="many_to_one")
+# Normalización de clave de estado y nombre de región censal
+dem["province"] = dem["province"].astype(str).str.strip().str.upper()
+dem["state_name"] = dem["state_name"].astype(str).str.strip()
+dem["census_region"] = dem["census_region"].astype(str).str.strip().str.title()
 
-print(f"Filas antes del merge en fuente 2: {len(ope)}")
-print(f"Operaciones sin sucursal válida descartadas: {sin_sucursal}")
-print(f"Filas después del merge: {len(df)}")
-print(f"Sucursales integradas: {df['sucursal_key'].nunique()} de {len(sucursales)}")
+# Eliminación de estados duplicados
+duplicados_f2 = dem.duplicated("province").sum()
+print(f"Filas duplicadas por estado eliminadas en fuente 2: {duplicados_f2}")
+dem = dem.drop_duplicates("province").copy()
+
+# Imputación de valores nulos en calorías y tasa de obesidad usando el promedio de la región censal
+nulos_cal = dem["avg_daily_ff_calories"].isna().sum()
+nulos_obe = dem["obesity_rate_pct"].isna().sum()
+dem["avg_daily_ff_calories"] = dem["avg_daily_ff_calories"].fillna(
+    dem.groupby("census_region")["avg_daily_ff_calories"].transform("mean").round(1)
+)
+dem["obesity_rate_pct"] = dem["obesity_rate_pct"].fillna(
+    dem.groupby("census_region")["obesity_rate_pct"].transform("mean").round(1)
+)
+print(f"Nulos completados en fuente 2: {nulos_cal} en calorías y {nulos_obe} en tasa de obesidad")
+
+# Conversión de la fecha de corte del relevamiento
+dem["reference_date"] = pd.to_datetime(dem["reference_date"]).dt.date
+dem = dem.sort_values("province").reset_index(drop=True)
+print(f"Fuente 2 limpia: {len(dem)} jurisdicciones estatales, {int(dem.isna().sum().sum())} nulos")
+
+# %% [markdown]
+# ## 4. Merge entre fuentes por estado y validaciones posteriores
+# Se realiza un inner join mediante la clave `province` vinculando cada local con los indicadores demográficos y sanitarios de su estado.
+
+# %%
+sin_estado = (~suc["province"].isin(dem["province"])).sum()
+df = suc.merge(dem, on="province", how="inner", validate="many_to_one")
+
+print(f"Filas en fuente 1 antes del merge: {len(suc)}")
+print(f"Filas en fuente 2 antes del merge: {len(dem)}")
+print(f"Locales sin estado válido descartados: {sin_estado}")
+print(f"Filas totales integradas después del merge: {len(df)}")
+print(f"Estados integrados en el cruce: {df['province'].nunique()} de {len(dem)}")
 print(f"Nulos introducidos por el merge: {int(df.isna().sum().sum())}")
-print(f"Duplicados de operación después del merge: {df.duplicated('id_operacion').sum()}")
-print(f"Estados que no coinciden entre fuentes: {(df['estado_codigo'] != df['estado_fuente_1']).sum()}")
+print(f"Duplicados de dirección, ciudad y estado tras el merge: {df.duplicated(['address', 'city', 'province']).sum()}")
 
 # %% [markdown]
 # ## 5. Construcción de las dimensiones de negocio
-# Se arman las tablas de cadenas y ubicaciones sin duplicados y con sus códigos naturales.
+# Se generan las tablas `dim_geografia` y `dim_cadena` sin duplicados para cargar al esquema estrella.
 
 # %%
-# Dimensión cadena: una fila por cadena con su categoría y segmento
-dim_cadena = (df.groupby("nombre_cadena")[["categoria_comida", "segmento_precio"]]
-              .agg(lambda s: s.mode()[0])
-              .reset_index())
-dim_cadena["codigo_cadena"] = "CAD_" + (dim_cadena.index + 1).astype(str).str.zfill(5)
+# Dimensión geografía: una fila por combinación única de estado, ciudad y código postal
+dim_geografia = (
+    df[["province", "state_name", "census_region", "city", "postalCode", "population_total"]]
+    .rename(columns={"postalCode": "postal_code"})
+    .drop_duplicates(["province", "city", "postal_code"])
+    .sort_values(["province", "city", "postal_code"])
+    .reset_index(drop=True)
+)
 
-# Dimensión ubicación: una fila por combinación única de estado, ciudad y código postal
-columnas_ubicacion = ["estado_codigo", "estado_nombre", "ciudad", "codigo_postal", "region_eeuu", "poblacion_estado"]
-dim_ubicacion = (df[columnas_ubicacion]
-                 .drop_duplicates(["estado_codigo", "ciudad", "codigo_postal"])
-                 .sort_values(["estado_codigo", "ciudad", "codigo_postal"])
-                 .reset_index(drop=True))
-dim_ubicacion.insert(0, "pais", "US")
-dim_ubicacion["codigo_ubicacion"] = "UBI_" + (dim_ubicacion.index + 1).astype(str).str.zfill(5)
+# Dimensión cadena: una fila por cadena normalizada con su categoría gastronómica principal
+dim_cadena = (
+    df[["name"]]
+    .drop_duplicates()
+    .rename(columns={"name": "nombre_cadena"})
+    .sort_values("nombre_cadena")
+    .reset_index(drop=True)
+)
+dim_cadena["categoria_principal"] = dim_cadena["nombre_cadena"].apply(clasificar_categoria)
 
+print(f"Dimensión geografía generada: {len(dim_geografia)} filas")
 print(f"Dimensión cadena generada: {len(dim_cadena)} filas")
-print(f"Dimensión ubicación generada: {len(dim_ubicacion)} filas")
 
 # %% [markdown]
 # ## 6. Carga al data warehouse en postgresql
-# Se recrean las tablas ejecutando el script sql, se insertan las dimensiones y luego la tabla de hechos.
+# Se ejecuta el script ddl, se insertan las dimensiones y se vinculan las claves foráneas para poblar `fact_locales_consumo`.
 
 # %%
 engine = create_engine(DB_URL)
 
-# Ejecución del script ddl que crea las 4 tablas y puebla la dimensión tiempo
+# Creación del esquema estrella y población de la dimensión tiempo (año 2024 completo)
 with engine.begin() as conn:
     conn.execute(text((BASE_DIR / "sql" / "01_creacion_dw.sql").read_text(encoding="utf-8")))
 
-# Carga de las dimensiones de negocio
+# Inserción de las dimensiones de negocio
+dim_geografia.to_sql("dim_geografia", engine, if_exists="append", index=False, method="multi", chunksize=1000)
 dim_cadena.to_sql("dim_cadena", engine, if_exists="append", index=False, method="multi", chunksize=1000)
-dim_ubicacion.to_sql("dim_ubicacion", engine, if_exists="append", index=False, method="multi", chunksize=1000)
 
-# Lectura de las claves subrogadas generadas por postgresql para armar la tabla de hechos
+# Lectura de las claves subrogadas desde postgresql para armar la tabla de hechos
 ids_tiempo = pd.read_sql(text("SELECT tiempo_id, fecha FROM dim_tiempo"), engine)
+ids_geografia = pd.read_sql(text("SELECT geografia_id, province, city, postal_code FROM dim_geografia"), engine)
 ids_cadena = pd.read_sql(text("SELECT cadena_id, nombre_cadena FROM dim_cadena"), engine)
-ids_ubicacion = pd.read_sql(text("SELECT ubicacion_id, estado_codigo, ciudad, codigo_postal FROM dim_ubicacion"), engine)
 
-fact_ventas = (df.rename(columns={"fecha_reporte": "fecha"})
-               .merge(ids_tiempo, on="fecha")
-               .merge(ids_cadena, on="nombre_cadena")
-               .merge(ids_ubicacion, on=["estado_codigo", "ciudad", "codigo_postal"]))
-print(f"Hechos vinculados con sus tres claves foráneas: {len(fact_ventas)} de {len(df)}")
+fact = (
+    df.rename(columns={
+        "reference_date": "fecha",
+        "postalCode": "postal_code",
+        "name": "nombre_cadena",
+        "avg_daily_ff_calories": "calorias_diarias_promedio_ff",
+        "pct_daily_fastfood_consumption": "pct_consumo_diario",
+        "obesity_rate_pct": "tasa_obesidad_pct",
+    })
+    .merge(ids_tiempo, on="fecha")
+    .merge(ids_geografia, on=["province", "city", "postal_code"])
+    .merge(ids_cadena, on="nombre_cadena")
+)
+fact["cantidad_locales"] = 1
+print(f"Hechos vinculados con sus tres claves foráneas: {len(fact)} de {len(df)}")
 
-columnas_fact = ["tiempo_id", "cadena_id", "ubicacion_id", "id_operacion", "sucursal_key",
-                 "cantidad_ordenes", "ventas_usd", "costo_operativo_usd", "ganancia_neta_usd"]
-fact_ventas[columnas_fact].to_sql("fact_ventas", engine, if_exists="append", index=False,
-                                  method="multi", chunksize=1000)
+columnas_fact = [
+    "tiempo_id",
+    "geografia_id",
+    "cadena_id",
+    "latitude",
+    "longitude",
+    "cantidad_locales",
+    "calorias_diarias_promedio_ff",
+    "pct_consumo_diario",
+    "tasa_obesidad_pct",
+]
+fact[columnas_fact].to_sql("fact_locales_consumo", engine, if_exists="append", index=False, method="multi", chunksize=1000)
 
 # %% [markdown]
-# ## 7. Verificación de la carga y exportación de tablas procesadas
-# Se exportan las 4 tablas a archivos csv para power bi y se verifican las cantidades cargadas.
+# ## 7. Verificación de la carga y exportación de archivos csv para power bi
+# Se exportan las 4 tablas físicas del data warehouse a `datos/procesados/` y se verifican los 3 indicadores clave.
 
 # %%
-for tabla in ["dim_tiempo", "dim_cadena", "dim_ubicacion", "fact_ventas"]:
+for tabla in ["dim_tiempo", "dim_geografia", "dim_cadena", "fact_locales_consumo"]:
     datos = pd.read_sql(text(f"SELECT * FROM {tabla}"), engine)
     datos.to_csv(DIR_PROCESADOS / f"{tabla}.csv", index=False, encoding="utf-8")
     print(f"Tabla {tabla}: {len(datos)} filas cargadas y exportadas")
 
-kpis = pd.read_sql(text("""
-    SELECT ROUND(SUM(ventas_usd), 2)                                          AS kpi1_ingreso_total_usd,
-           ROUND(SUM(ventas_usd) / SUM(cantidad_ordenes), 2)                  AS kpi2_ticket_promedio_usd,
-           ROUND((SUM(ventas_usd) - SUM(costo_operativo_usd)) / SUM(ventas_usd) * 100, 2) AS kpi3_margen_pct
-    FROM fact_ventas
+resumen_kpis = pd.read_sql(text("""
+    WITH est AS (
+        SELECT g.province, MAX(g.population_total) AS pob, SUM(f.cantidad_locales) AS loc,
+               MAX(f.pct_consumo_diario) AS cons, MAX(f.tasa_obesidad_pct) AS obe
+        FROM fact_locales_consumo f JOIN dim_geografia g ON f.geografia_id = g.geografia_id
+        GROUP BY g.province
+    )
+    SELECT SUM(loc) AS locales,
+           ROUND(SUM(loc) * 100000.0 / SUM(pob), 2) AS dlff_nacional,
+           ROUND(SUM(cons * pob) / SUM(pob), 2) AS tpcd_nacional,
+           ROUND(SUM(obe * pob) / SUM(pob), 2) AS obesidad_nacional
+    FROM est
 """), engine)
-print(f"Indicadores calculados: ingreso total {kpis['kpi1_ingreso_total_usd'][0]}, ticket promedio {kpis['kpi2_ticket_promedio_usd'][0]}, margen {kpis['kpi3_margen_pct'][0]}%")
+print(f"Indicadores nacionales: {resumen_kpis['locales'][0]} locales, densidad {resumen_kpis['dlff_nacional'][0]} cada 100k hab, consumo diario {resumen_kpis['tpcd_nacional'][0]}%, obesidad {resumen_kpis['obesidad_nacional'][0]}%")

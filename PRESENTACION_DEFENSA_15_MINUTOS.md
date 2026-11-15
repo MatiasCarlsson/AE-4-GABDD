@@ -1,82 +1,56 @@
 # Guión y Estructura de la Defensa Oral (15 Minutos)
 ## Trabajo Integrador AE4 — Gestión Avanzada de Bases de Datos (2026)
-### “Integración de Datos y Analítica: Desempeño Comercial y Expansión Territorial de Fast Food en EE. UU.”
+### “Oferta Comercial de Fast Food, Consumo Calórico y Prevalencia de Obesidad en EE. UU.”
 
-- **Modalidad:** Exposición grupal (2 o 3 integrantes) — **Duración total:** 15 minutos + ronda de preguntas individuales.
-- **Enfoque clave de evaluación:** Los profesores (Gabriel del Rosario, Marcos Portel, Victoria Fernández) evaluarán el **hilo conductor verificable**:
-  *Qué se quería conocer (Negocio) → Qué datos se procesaron (ETL) → Cómo se modeló (DW PostgreSQL) → Qué se muestra (Power BI) → Qué decisión permite tomar.*
+- **Modalidad:** Exposición grupal (2 o 3 integrantes) — **Duración total:** 15 minutos + preguntas individuales.
+- **Hilo conductor evaluado por la cátedra:**
+  *Preguntas de Negocio y KPIs → Fuentes y ETL en Python/pandas → Modelo Estrella en PostgreSQL (`dw_fastfood`) → Dashboard en Power BI → Hallazgos y Decisión.*
 
 ---
 
-## Estructura de Tiempos Recomendada (15 Minutos)
+## Distribución de Tiempos Sugerida (15 Minutos)
 
-| Bloque | Minutos | Tema Principal | Responsable Sugerido |
+| Bloque | Tiempo | Contenido | Responsable Sugerido |
 | :---: | :---: | :--- | :--- |
-| **Bloque 1** | `00:00 - 02:30` (2,5 min) | Contexto de Negocio, 4 Preguntas, 3 KPIs y Criterios | Integrante 1 |
-| **Bloque 2** | `02:30 - 06:00` (3,5 min) | Fuentes de Datos, Pipeline ETL y Validaciones de Merge | Integrante 2 (Matias) |
-| **Bloque 3** | `06:00 - 09:30` (3,5 min) | Data Warehouse en PostgreSQL (Modelo Estrella, DDL, Índices) | Integrante 1 o 2 |
-| **Bloque 4** | `09:30 - 13:00` (3,5 min) | Dashboard Power BI (Demostración de los 4 Visuales y Filtros) | Integrante 3 (Compañera Windows) |
-| **Bloque 5** | `13:00 - 15:00` (2,0 min) | Hallazgos Analíticos Concretos, Decisión de Negocio y Cierre | Todo el grupo |
+| **Bloque 1** | `00:00 - 02:30` (2,5 min) | Contexto sanitario/comercial, 4 preguntas de negocio y 3 KPIs (`DLFF`, `PMC`, `TPCD`) | Integrante 1 |
+| **Bloque 2** | `02:30 - 06:00` (3,5 min) | Fuentes de datos, limpieza en Python/pandas y validaciones del `merge` por `province` | Integrante 2 (Matias) |
+| **Bloque 3** | `06:00 - 09:30` (3,5 min) | Modelo Estrella en PostgreSQL (`dim_tiempo`, `dim_geografia`, `dim_cadena`, `fact_locales_consumo`) | Integrante 1 o 2 |
+| **Bloque 4** | `09:30 - 13:00` (3,5 min) | Demostración del Dashboard en Power BI (medidas DAX, 2 filtros y las 4 visualizaciones) | Integrante 3 (Compañera Windows) |
+| **Bloque 5** | `13:00 - 15:00` (2,0 min) | Hallazgos cuantitativos, recomendación dual (comercial y salud pública) y cierre | Todo el grupo |
 
 ---
 
-## Diapositiva por Diapositiva: Contenido y Qué Decir
+## Contenido por Diapositiva y Qué Explicar
 
 ### Diapositiva 1: Portada
-- **Título:** Desempeño Comercial y Expansión Territorial de Cadenas de Fast Food en EE. UU. (2023–2024).
-- **Subtítulo:** Trabajo Integrador AE4 — Gestión Avanzada de Bases de Datos.
-- **Qué decir:** *"Buenas tardes profesores. Hoy presentamos nuestro Trabajo Integrador AE4 donde integramos de punta a punta un flujo de analítica de datos: desde la ingestión de fuentes con Python, el modelado dimensional en PostgreSQL y la visualización analítica en Power BI, enfocado en responder decisiones estratégicas de expansión para un grupo franquiciante gastronómico."*
+- **Título:** Análisis de la Oferta Comercial de Comida Rápida, Patrones de Consumo Calórico y Prevalencia de Obesidad en EE. UU.
+- **Qué decir:** *"Buenas tardes profesores. Nuestro trabajo integrador cruza la oferta geolocalizada de 9.904 locales de comida rápida en EE. UU. con los indicadores demográficos, calóricos y de obesidad adulta por estado del Censo y del CDC, integrando el ETL en Python, el Data Warehouse en PostgreSQL y la visualización en Power BI."*
 
-### Diapositiva 2: Contexto del Negocio y Definición del Problema
-- **Contenido:**
-  - Industria de comida rápida en EE. UU.: mercado masivo y altamente competitivo.
-  - Alcance: `9.949` sucursales de `468` cadenas en las 4 regiones del país.
-  - Objetivo: Responder dónde abrir nuevas sucursales, qué categorías priorizar y cómo amortiguar la estacionalidad.
+### Diapositiva 2: Contexto, las 4 Preguntas y los 3 KPIs
+- **Preguntas:**
+  - **P1:** ¿Cuáles son los 5 estados con mayor densidad de locales cada 100.000 habitantes (`DLFF`) vs. el promedio nacional?
+  - **P2:** ¿Existe relación entre la densidad regional de locales y el porcentaje de consumo diario (`TPCD`) y obesidad?
+  - **P3:** ¿Cómo se distribuye la cuota de mercado (`PMC`) de las principales cadenas según las 4 regiones censales?
+  - **P4:** ¿Qué regiones superan en los relevamientos 2024 las `900 kcal` diarias de *fast food* y cuántas sucursales operan en ellas?
+- **KPIs:**
+  - **KPI 1 (Principal — `DLFF`):** `2,96` locales cada 100.000 habitantes.
+  - **KPI 2 (`PMC`):** *McDonald's* lidera con `21,29%` de participación nacional.
+  - **KPI 3 (`TPCD`):** `36,13%` de consumo diario ponderado (con `32,60%` de obesidad adulta nacional).
 
-### Diapositiva 3: Las 4 Preguntas de Negocio y los 3 KPIs
-- **Contenido:**
-  - **P1 (Tiempo):** ¿Cómo evolucionaron los ingresos trimestrales (2023–2024) y qué trimestre concentra el pico de demanda?
-  - **P2 (Cadena):** ¿Qué categorías gastronómicas lideran la facturación y cuál logra el mayor ingreso promedio por local?
-  - **P3 (Ubicación):** ¿Qué estados concentran mayor facturación vs. saturación de locales por habitante?
-  - **P4 (Cruce Multidimensional):** ¿Cómo varía el ticket promedio y margen de las top 10 cadenas según la región en 2024?
-  - **KPIs:**
-    - **KPI 1 (Principal):** Ingreso Total Acumulado = `SUM(ventas_usd)` (**$55.439,69 M USD**).
-    - **KPI 2:** Ticket Promedio por Orden = `SUM(ventas_usd) / SUM(cantidad_ordenes)` (**$12,27 USD/orden**).
-    - **KPI 3:** Margen Operativo Bruto = `((SUM(ventas_usd) - SUM(costo_operativo_usd)) / SUM(ventas_usd)) * 100` (**35,53%**).
+### Diapositiva 3: Fuentes de Datos y Proceso ETL (`etl/etl_fastfood_dw.py`)
+- **Fuente 1 (Externa):** `FastFoodRestaurants.csv` (`10.000` locales). Limpieza: reparación de `20` filas con comas internas en la dirección, descarte de `51` locales con coordenadas fuera de EE. UU., unificación de nombres de cadenas (`540` a `466`), corrección de `Co Spgs` → `CO`, `postalCode` a 5 dígitos y eliminación de `45` domicilios duplicados → **`9.904` locales limpios**.
+- **Fuente 2 (Construida):** `us_states_consumption_demographics.csv` (`54` filas iniciales). Limpieza: normalización de códigos de estado y región, eliminación de `3` duplicados e imputación de `2` nulos por promedio regional → **`51` jurisdicciones limpias**.
+- **Merge y Validaciones:** `INNER JOIN` por `province` (`validate="many_to_one"`), integrando los **`9.904` locales** en las **`51` jurisdicciones** con `0` nulos y `0` duplicados.
 
-### Diapositiva 4: Fuentes de Datos y Criterio de Construcción (Punto 3.2)
-- **Contenido:**
-  - **Fuente 1 (Real y Externa):** `FastFoodRestaurants.csv` (Kaggle/Datafiniti) → Padrón físico con `10.000` locales de comida rápida en EE. UU. (dirección, coordenadas, cadena, ciudad, estado).
-  - **Fuente 2 (Construida por el Grupo):** `operaciones_franquicias_2023_2024.csv` → Complementa a la Fuente 1 con 8 cierres trimestrales por sucursal (`2023–2024`), clasificación gastronómica, población y regiones oficiales del *U.S. Census Bureau*, y métricas aditivas (`ventas_usd`, `cantidad_ordenes`, `costo_operativo_usd`).
+### Diapositiva 4: Esquema Estrella en PostgreSQL (`dw_fastfood`)
+- **4 Tablas físicas:**
+  1. `dim_tiempo` (`366` filas: calendario 2024 completo).
+  2. `dim_geografia` (`5.189` filas: ciudad, código postal, estado, región censal y población estatal).
+  3. `dim_cadena` (`466` filas: cadena normalizada y categoría gastronómica principal).
+  4. `fact_locales_consumo` (`9.904` filas: claves foráneas, coordenadas, `cantidad_locales = 1`, calorías diarias, `%` consumo diario y `%` obesidad).
 
-### Diapositiva 5: Pipeline ETL y Calidad de Datos (Python/pandas)
-- **Contenido:**
-  - **Limpieza Fuente 1:** Reparación de 20 filas con comas internas en `address` que desplazaban columnas; filtrado de `51` sucursales con coordenadas fuera de EE. UU.; unificación de cadenas de `540` a `468` nombres únicos; corrección de estado `Co Spgs` → `CO`.
-  - **Limpieza Fuente 2:** Eliminación de `150` duplicados exactos; descarte de `40` registros con ventas ≤ 0; imputación de `80` nulos en `segmento_precio` (por valor de la misma sucursal) y `120` nulos en `costo_operativo_usd` (por mediana del ratio de su categoría).
-
-### Diapositiva 6: Estrategia de Merge y Validaciones Post-Merge
-- **Contenido:**
-  - Clave de cruce: `sucursal_key` (normalizada en minúsculas).
-  - Justificación de `INNER JOIN`: Las `408` operaciones que no cruzan pertenecen exactamente a las `51` sucursales excluidas por estar fuera del territorio estadounidense ($51 \times 8 = 408$).
-  - Validaciones: `79.552` hechos finales, `9.949` sucursales integradas, `0` nulos introducidos, `0` duplicados post-cruce.
-
-### Diapositiva 7: Data Warehouse en PostgreSQL (`dw_fastfood`)
-- **Contenido:**
-  - **Modelo Estrella (Star Schema):** 1 tabla de hechos (`fact_ventas`, `79.552` filas) y 3 dimensiones físicas (`dim_tiempo` con `731` días, `dim_cadena` con `468` cadenas, `dim_ubicacion` con `5.189` ubicaciones).
-  - Índices B-Tree en PostgreSQL sobre las 3 claves foráneas (`tiempo_id`, `cadena_id`, `ubicacion_id`) para acelerar joins analíticos.
-
-### Diapositiva 8: Demostración del Dashboard en Power BI
-- **Contenido:**
-  - Relaciones 1 a muchos entre dimensiones y hechos, medidas DAX de los 3 KPIs y 2 segmentadores interactivos (Año y Región).
-  - Los 4 visuales respondiendo P1, P2, P3 y P4 en sus respectivos títulos/subtítulos.
-
-### Diapositiva 9: Hallazgos Clave del Negocio
-- **Contenido:**
-  1. **Estacionalidad (P1):** Crecimiento interanual del +9,66% en 2024. El **T3 (verano)** concentra el pico anual (**$7.821,16 M USD** en 2024), superando en **+20,5%** al T1 (invierno).
-  2. **Formatos (P2):** *Burgers QSR* lidera en volumen ($31.712 M USD), pero **`Fast Casual`** lidera en ingreso por local (**$7,50 M USD/local** en *Chicken* y **$6,49 M USD/local** en *Tex-Mex* en el bienio).
-  3. **Geografía (P3 y P4):** El **Midwest (Ohio, Indiana)** está saturado con `46–55` locales por millón de habitantes y menor ticket promedio ($11,45). En cambio, **West (California)** y **Northeast (Nueva York)** tienen baja densidad (`13–17` locales/M hab.) y los tickets más altos del país ($13 a $21,55 USD/orden).
-
-### Diapositiva 10: Recomendaciones de Negocio y Conclusiones
-- **Contenido:**
-  - **Decisión 1 (Expansión):** Priorizar aperturas de cadenas *Fast Casual* (*Chicken & Wings* y *Tex-Mex*) en California y la región Northeast.
-  - **Decisión 2 (Mitigación):** Frenar aperturas en el Midwest e implementar promociones de invierno en T1 para compensar la caída estacional.
+### Diapositiva 5: Hallazgos y Recomendaciones
+1. **Top 5 Densidad (`P1`):** South Dakota (`11,20`), Kentucky (`7,11`), New Mexico (`7,05`), Wyoming (`7,02`) y Vermont (`6,49`) duplican o triplican el promedio nacional (`2,96`).
+2. **Correlación Regional (`P2` y `P4`):** **South (`944,9 kcal`, `4.130` locales)** y **Midwest (`925,1 kcal`, `2.691` locales)** son las únicas regiones que superan las `900 kcal/día`, concentrando el **`68,87%` de los locales** y las mayores tasas de obesidad (`~35%`) frente a West y Northeast (`~29%`).
+3. **Market Share (`P3`):** *McDonald's* lidera en todas las regiones (`21,29%` nacional y `26,95%` en Northeast), mientras cadenas como *SONIC Drive In* son fuertemente regionales (`232` locales en el South vs. `5` en el Northeast).
+4. **Decisión:** Focalizar políticas preventivas nutricionales en el *South* y *Midwest*, y orientar nuevas aperturas de formatos saludables hacia estados de baja densidad en el *Northeast* (`1,87` locales/100k hab.) y *West* (`2,56`).

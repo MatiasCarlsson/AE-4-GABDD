@@ -1,172 +1,168 @@
 # Guía Paso a Paso para Armar el Dashboard en Power BI (Windows)
 
-Esta guía está pensada para tu compañera de grupo que usa **Windows + Power BI Desktop**. Cumple al 100% con los requisitos del **Punto 3.5 (Visualización)** de la consigna [AE4 GABD 2026.pdf](file:///home/matias/Downloads/Descargas%20de%20Materias/4to-2do%20Cuatrimestre/Gesti%C3%B3n%20Avanzada%20de%20Base%20de%20Datos/Mes%204/AE4%20GABD%202026.pdf):
-- **Relaciones entre tablas** (Modelo Estrella de 4 tablas).
-- **Uso de Power Query** (transformación documentada).
-- **Al menos 1 medida DAX** (incluimos las 3 medidas DAX de los KPIs listas para copiar y pegar).
-- **4 visualizaciones como mínimo**, cada una indicando en su título o subtítulo qué pregunta de negocio responde.
-- **Los 3 KPIs definidos visibles** (con 1 KPI principal destacado).
-- **2 filtros interactivos (Segmentadores de datos / Slicers)** como mínimo.
+Esta guía está diseñada para tu compañera de grupo que usa **Windows + Power BI Desktop**, alineada 100% con el proyecto de **Oferta de Comida Rápida, Consumo Calórico y Obesidad en EE. UU.** ([contexto_del_proyecto_integrador_de_anal_tica_de_datos.md](file:///home/matias/Downloads/Descargas%20de%20Materias/4to-2do%20Cuatrimestre/Gesti%C3%B3n%20Avanzada%20de%20Base%20de%20Datos/Mes%204/contexto_del_proyecto_integrador_de_anal_tica_de_datos.md)) y el **Punto 3.5** de [AE4 GABD 2026.pdf](file:///home/matias/Downloads/Descargas%20de%20Materias/4to-2do%20Cuatrimestre/Gesti%C3%B3n%20Avanzada%20de%20Base%20de%20Datos/Mes%204/AE4%20GABD%202026.pdf).
 
 ---
 
 ## 1. ¿Qué archivos tenés que pasarle a tu compañera?
 
-Pasale la subcarpeta **`datos/procesados/`** que contiene las **4 tablas físicas del Data Warehouse** ya limpiadas y exportadas desde PostgreSQL:
+Pasale los **4 archivos CSV limpios** que están en la carpeta **`datos/procesados/`**:
 
-1. `datos/procesados/dim_tiempo.csv` (`731` filas)
-2. `datos/procesados/dim_cadena.csv` (`516` filas)
-3. `datos/procesados/dim_ubicacion.csv` (`5.191` filas)
-4. `datos/procesados/fact_ventas.csv` (`19.858` filas)
-
-> **Alternativa si ella también tiene PostgreSQL instalado en Windows:** Puede correr `sql/01_creacion_dw.sql` y `etl/etl_fastfood_dw.py` (o importar los CSV directamente desde Power BI Desktop con **Obtener datos -> Texto o CSV**, que es mucho más rápido y no depende de que tenga el servidor levantado al guardar el `.pbix`).
+1. `datos/procesados/dim_tiempo.csv` (`366` filas)
+2. `datos/procesados/dim_geografia.csv` (`5.189` filas)
+3. `datos/procesados/dim_cadena.csv` (`466` filas)
+4. `datos/procesados/fact_locales_consumo.csv` (`9.904` filas)
 
 ---
 
-## 2. Importación y Uso de Power Query (Requisito obligatorio de Power BI)
+## 2. Importación y Transformación en Power Query (Requisito obligatorio)
 
-1. Abrir **Power BI Desktop** en Windows.
-2. Ir a **Inicio -> Obtener datos -> Texto o CSV** y cargar los 4 archivos:
-   - `dim_tiempo.csv`
-   - `dim_cadena.csv`
-   - `dim_ubicacion.csv`
-   - `fact_ventas.csv`
-3. Antes de hacer clic en "Cargar", hacer clic en **"Transformar datos"** para abrir el editor de **Power Query** y aplicar estos pasos (así queda registrado en el `.pbix` el uso de Power Query que pide la cátedra):
+1. Abrir **Power BI Desktop** en Windows -> **Inicio -> Obtener datos -> Texto o CSV** y seleccionar los 4 archivos.
+2. Hacer clic en **"Transformar datos"** para abrir **Power Query** y verificar los tipos (usando Configuración regional `Inglés (Estados Unidos)` para los decimales con punto `.`):
    - **En `dim_tiempo`**:
-     - Verificar que `fecha` tenga tipo de dato **Fecha (`Date`)** y `tiempo_id`, `dia`, `mes`, `trimestre`, `año` tengan tipo **Número entero (`Whole Number`)**.
-     - Agregar una **Columna personalizada** (pestaña *Agregar columna -> Columna personalizada*) llamada `Periodo_Trimestral` con la fórmula:
+     - `fecha`: tipo **Fecha (`Date`)**.
+     - `tiempo_id`, `dia`, `mes`, `trimestre`, `anio`: tipo **Número entero (`Whole Number`)**.
+     - Agregar una **Columna personalizada** llamada `Trimestre_Anio` con la fórmula:
        ```powerquery
-       "T" & Number.ToText([trimestre]) & " " & Number.ToText([año])
+       "Q" & Number.ToText([trimestre]) & " " & Number.ToText([anio])
        ```
-     - Agregar otra **Columna personalizada** llamada `Orden_Trimestre` (para ordenar cronológicamente el eje X) con la fórmula:
-       ```powerquery
-       [año] * 10 + [trimestre]
-       ```
-       *(Cambiar el tipo de `Orden_Trimestre` a Número entero)*.
-   - **En `fact_ventas`**:
-     - Verificar que `ventas_usd`, `costo_operativo_usd` y `ganancia_neta_usd` tengan tipo **Número decimal fijo / Moneda (`$`)** (usando configuración regional `Inglés (Estados Unidos)` si los decimales tienen punto `.`).
-     - Verificar que `cantidad_ordenes`, `tiempo_id`, `cadena_id`, `ubicacion_id` sean **Número entero**.
-   - **En `dim_ubicacion`**:
-     - Verificar que `codigo_postal` esté como **Texto (`Text`)** (para no perder el cero inicial en códigos postales como `02115`).
-4. Hacer clic en **Inicio -> Cerrar y aplicar**.
+   - **En `dim_geografia`**:
+     - `postal_code`: tipo **Texto (`Text`)** (para conservar el cero inicial en códigos postales como `02115`).
+     - `population_total` y `geografia_id`: tipo **Número entero**.
+   - **En `fact_locales_consumo`**:
+     - `latitude`, `longitude`, `calorias_diarias_promedio_ff`, `pct_consumo_diario`, `tasa_obesidad_pct`: tipo **Número decimal (`Decimal Number`)**.
+     - `cantidad_locales`, `tiempo_id`, `geografia_id`, `cadena_id`: tipo **Número entero**.
+3. Hacer clic en **Inicio -> Cerrar y aplicar**.
 
 ---
 
-## 3. Configurar las Relaciones del Modelo Estrella (Vista de Modelo)
+## 3. Relaciones del Esquema Estrella (Vista de Modelo)
 
-1. En la barra lateral izquierda de Power BI, ir al ícono **Vista de modelo** (el diagrama de 3 tablas conectadas).
-2. Verificar (o arrastrar y soltar) las **3 relaciones `1 a muchos (1:*)`** con **Dirección de filtro cruzado: Único (`Single`)**:
-   - `dim_tiempo[tiempo_id]` (`1`) $\longrightarrow$ `fact_ventas[tiempo_id]` (`*`)
-   - `dim_cadena[cadena_id]` (`1`) $\longrightarrow$ `fact_ventas[cadena_id]` (`*`)
-   - `dim_ubicacion[ubicacion_id]` (`1`) $\longrightarrow$ `fact_ventas[ubicacion_id]` (`*`)
-3. En la vista de datos, seleccionar la columna `Periodo_Trimestral` de `dim_tiempo`, ir arriba a **Herramientas de columnas -> Ordenar por columna** y elegir `Orden_Trimestre`.
+En el ícono izquierdo **Vista de modelo**, verificar o arrastrar las **3 relaciones `1 a muchos (1:*)`** con filtro único (`Single`):
+- `dim_tiempo[tiempo_id]` (`1`) $\longrightarrow$ `fact_locales_consumo[tiempo_id]` (`*`)
+- `dim_geografia[geografia_id]` (`1`) $\longrightarrow$ `fact_locales_consumo[geografia_id]` (`*`)
+- `dim_cadena[cadena_id]` (`1`) $\longrightarrow$ `fact_locales_consumo[cadena_id]` (`*`)
 
 ---
 
-## 4. Crear las Medidas DAX (Los 3 KPIs + Métrica Auxiliar)
+## 4. Medidas DAX para los 3 KPIs y Métricas de Salud (Copiar y Pegar)
 
-Hacer clic derecho sobre la tabla `fact_ventas` en el panel **Datos** -> **Nueva medida**, y pegar una por una estas fórmulas DAX:
+Hacer clic derecho sobre `fact_locales_consumo` -> **Nueva medida** y pegar estas medidas DAX una por una:
 
-### KPI 1 (KPI Principal Destacado): Ingreso Total Acumulado (USD)
+### Medida Base 1: Total de Locales
 ```dax
-KPI_1_Ingreso_Total_USD = SUM(fact_ventas[ventas_usd])
+Total_Locales = SUM(fact_locales_consumo[cantidad_locales])
 ```
-*(En Herramientas de medición, darle formato **Moneda `$`**, con 0 o 2 decimales).*
 
-### KPI 2: Ticket Promedio por Orden (USD / orden)
+### Medida Base 2: Población Total Correcta por Estado (evita sumar varias veces la población de las ciudades de un mismo estado)
 ```dax
-KPI_2_Ticket_Promedio_USD = 
+Poblacion_Total_Estados = 
+SUMX(
+    VALUES(dim_geografia[province]),
+    CALCULATE(MAX(dim_geografia[population_total]))
+)
+```
+
+### KPI 1 (KPI Principal Destacado): Densidad de Locales de Fast Food (`DLFF` cada 100.000 hab.)
+```dax
+KPI_1_DLFF_Cada_100k = 
+DIVIDE([Total_Locales], [Poblacion_Total_Estados], 0) * 100000
+```
+*(Formato: **Número decimal** con `2` decimales. Valor nacional sin filtros: **`2,96`**).*
+
+### KPI 2: Participación de Mercado por Cadena (`PMC %`)
+```dax
+KPI_2_PMC_Pct = 
 DIVIDE(
-    SUM(fact_ventas[ventas_usd]),
-    SUM(fact_ventas[cantidad_ordenes]),
+    [Total_Locales],
+    CALCULATE([Total_Locales], ALL(dim_cadena)),
     0
 )
 ```
-*(Darle formato **Moneda `$`**, con 2 decimales. Valor global esperado: **`$12,27`**).*
+*(Formato: **Porcentaje `%`** con `2` decimales. Para McDonald's muestra **`21,29%`**).*
 
-### KPI 3: Margen Operativo Bruto (%)
+### KPI 3: Tasa Promedio de Consumo Diario Ponderada (`TPCD %`)
 ```dax
-KPI_3_Margen_Operativo_Pct = 
-DIVIDE(
-    SUM(fact_ventas[ventas_usd]) - SUM(fact_ventas[costo_operativo_usd]),
-    SUM(fact_ventas[ventas_usd]),
-    0
+KPI_3_TPCD_Ponderada_Pct = 
+VAR Numerador = 
+    SUMX(
+        VALUES(dim_geografia[province]),
+        CALCULATE(MAX(fact_locales_consumo[pct_consumo_diario])) * CALCULATE(MAX(dim_geografia[population_total]))
+    )
+RETURN
+DIVIDE(Numerador, [Poblacion_Total_Estados], 0)
+```
+*(Formato: **Número decimal** con `2` decimales. Valor nacional sin filtros: **`36,13`** %).*
+
+### Medidas Auxiliares para los Visuales 2 y 4 (Calorías y Obesidad)
+```dax
+Ingesta_Calorica_Promedio_Kcal = 
+AVERAGEX(
+    VALUES(dim_geografia[province]),
+    CALCULATE(MAX(fact_locales_consumo[calorias_diarias_promedio_ff]))
 )
 ```
-*(En Herramientas de medición, hacer clic en el ícono **`%`** con 2 decimales. Valor global esperado: **`35,50%`**).*
 
-### Medida DAX Adicional: Ingreso Promedio por Sucursal (USD / local)
 ```dax
-Ingreso_Promedio_Por_Sucursal_USD = 
-DIVIDE(
-    [KPI_1_Ingreso_Total_USD],
-    DISTINCTCOUNT(fact_ventas[sucursal_key]),
-    0
-)
+Tasa_Obesidad_Ponderada_Pct = 
+VAR Numerador = 
+    SUMX(
+        VALUES(dim_geografia[province]),
+        CALCULATE(MAX(fact_locales_consumo[tasa_obesidad_pct])) * CALCULATE(MAX(dim_geografia[population_total]))
+    )
+RETURN
+DIVIDE(Numerador, [Poblacion_Total_Estados], 0)
 ```
-*(Darle formato **Moneda `$`**).*
 
 ---
 
-## 5. Diseño del Lienzo: Filtros, Tarjetas de KPIs y las 4 Visualizaciones
+## 5. Diseño del Dashboard: Filtros, Tarjetas y las 4 Visualizaciones
 
-### A. Encabezado y los 2 Filtros Interactivos (Segmentadores / Slicers)
-Arriba a la derecha (o en un panel lateral izquierdo), insertar **2 objetos visuales de Segmentación de datos (Slicer)**:
-1. **Filtro 1 — Año / Trimestre:** campo `dim_tiempo[año]` (estilo Botones o Menú desplegable).
-2. **Filtro 2 — Región de EE. UU. / Categoría Gastronómica:** campo `dim_ubicacion[region_eeuu]` (y opcionalmente un 3er filtro con `dim_cadena[categoria_comida]`).
+### A. Los 2 Filtros Interactivos (Segmentadores / Slicers)
+1. **Filtro 1 — Región Censal:** campo `dim_geografia[census_region]`.
+2. **Filtro 2 — Cadena de Fast Food (o Categoría):** campo `dim_cadena[nombre_cadena]` (y opcionalmente `dim_cadena[categoria_principal]`).
 
-### B. Fila Superior: Las 3 Tarjetas de KPIs (con el KPI 1 destacado)
-Insertar **3 objetos visuales de Tarjeta (Card)**:
-1. **Tarjeta Grande Destacada (KPI Principal — color de fondo o borde resaltado):**
-   - Campo: `[KPI_1_Ingreso_Total_USD]`
-   - Etiqueta: `KPI 1 (Principal): Ingreso Total Acumulado (USD)` (`$1.389,93 M` / `$1,39 mil M`).
-2. **Tarjeta Mediana (KPI 2):**
-   - Campo: `[KPI_2_Ticket_Promedio_USD]`
-   - Etiqueta: `KPI 2: Ticket Promedio por Orden ($12,27 USD/orden)`.
-3. **Tarjeta Mediana (KPI 3):**
-   - Campo: `[KPI_3_Margen_Operativo_Pct]`
-   - Etiqueta: `KPI 3: Margen Operativo Bruto (35,50%)`.
+### B. Las 3 Tarjetas de KPIs (Fila Superior)
+1. **Tarjeta Principal Destacada (KPI 1):** `[KPI_1_DLFF_Cada_100k]` $\rightarrow$ Título: `KPI 1 (Principal): Densidad de Locales (DLFF cada 100k hab.)` (`2,96`).
+2. **Tarjeta 2 (KPI 2):** `[KPI_2_PMC_Pct]` (o filtrada por la cadena Top 1 `McDonald's` = `21,29%`) y `[Total_Locales]` (`9.904`).
+3. **Tarjeta 3 (KPI 3):** `[KPI_3_TPCD_Ponderada_Pct]` (`36,13%`) acompañada de `[Tasa_Obesidad_Ponderada_Pct]` (`32,60%`).
 
 ---
 
-### C. Las 4 Visualizaciones Obligatorias (Cada una con la Pregunta que responde en Título/Subtítulo)
+### C. Las 4 Visualizaciones Obligatorias (Con la Pregunta en el Título/Subtítulo)
 
-> **Regla clave de la consigna (Punto 3.5):** *"4 visualizaciones como mínimo, cada una indicando en su título o subtítulo qué pregunta de negocio responde."* Copiá exactamente estos títulos y subtítulos en **Formato visual -> General -> Título**:
+#### Visualización 1 (Arriba Izquierda): Gráfico de Barras Horizontales + Línea Constante
+- **Título:** `Top 5 Estados con Mayor Densidad de Locales cada 100.000 Habitantes (DLFF)`
+- **Subtítulo:** `P1: ¿Cuáles son los 5 estados con mayor densidad de locales cada 100.000 hab. y cómo se comparan con el promedio nacional (2,96)?`
+- **Eje Y:** `dim_geografia[state_name]` *(Filtro de nivel visual: Top N = 5 por `[KPI_1_DLFF_Cada_100k]`)*
+- **Eje X:** `[KPI_1_DLFF_Cada_100k]`
+- **Línea constante en el panel Análisis:** Valor `2.96` con etiqueta `Promedio Nacional (2,96)`.
 
-#### Visualización 1 (Arriba Izquierda): Gráfico de Columnas Agrupadas y Líneas
-- **Título:** `Evolución Trimestral de Ingresos (USD) y Ticket Promedio (2023–2024)`
-- **Subtítulo:** `P1: ¿Cómo evolucionaron los ingresos trimestrales entre 2023 y 2024, y qué trimestre concentra el pico estacional?`
-- **Eje X:** `dim_tiempo[Periodo_Trimestral]`
-- **Eje Y de columnas:** `[KPI_1_Ingreso_Total_USD]`
-- **Eje Y de líneas:** `[KPI_2_Ticket_Promedio_USD]`
+#### Visualización 2 (Arriba Derecha): Gráfico de Dispersión (Scatter Plot)
+- **Título:** `Relación entre Densidad de Restaurantes (DLFF), Consumo Diario (TPCD %) y Obesidad`
+- **Subtítulo:** `P2: ¿Existe relación entre la densidad regional de restaurantes y el porcentaje de población adulta que consume comida rápida diariamente?`
+- **Valores / Detalles:** `dim_geografia[state_name]`
+- **Leyenda:** `dim_geografia[census_region]`
+- **Eje X:** `[KPI_1_DLFF_Cada_100k]`
+- **Eje Y:** `[KPI_3_TPCD_Ponderada_Pct]`
+- **Tamaño de burbuja:** `[Tasa_Obesidad_Ponderada_Pct]`
 
-#### Visualización 2 (Arriba Derecha): Gráfico de Barras Horizontales Agrupadas
-- **Título:** `Facturación Total e Ingreso Promedio por Local según Categoría Gastronómica`
-- **Subtítulo:** `P2: ¿Qué categorías gastronómicas lideran la facturación total y cuál presenta el mayor ingreso promedio por local?`
-- **Eje Y:** `dim_cadena[categoria_comida]`
-- **Eje X:** `[KPI_1_Ingreso_Total_USD]`
-- **Información sobre herramientas (Tooltips):** `[Ingreso_Promedio_Por_Sucursal_USD]` y `Recuento distintivo de sucursal_key`.
+#### Visualización 3 (Abajo Izquierda): Gráfico de Barras Agrupadas o Matriz por Región
+- **Título:** `Cuota de Mercado (PMC %) de las Principales Cadenas por Región Censal`
+- **Subtítulo:** `P3: ¿Cómo se distribuye la cuota de mercado (market share) de las principales cadenas según las 4 regiones censales de EE. UU.?`
+- **Eje X / Filas:** `dim_cadena[nombre_cadena]` *(Filtro Top N = 8 por `[Total_Locales]`)*
+- **Leyenda / Columnas:** `dim_geografia[census_region]`
+- **Eje Y / Valores:** `[KPI_2_PMC_Pct]` y `[Total_Locales]`
 
-#### Visualización 3 (Abajo Izquierda): Mapa Coroplético / Mapa de Burbujas (o Gráfico de Dispersión por Estado)
-- **Título:** `Volumen de Ventas (USD) vs. Cantidad de Sucursales por Región y Estado de EE. UU.`
-- **Subtítulo:** `P3: ¿Qué estados y regiones generan mayor volumen de ventas en relación con su cantidad de sucursales?`
-- **Opción Mapa o Dispersión (Scatter chart):**
-  - **Valores / Detalles:** `dim_ubicacion[estado_nombre]`
-  - **Leyenda:** `dim_ubicacion[region_eeuu]`
-  - **Eje X:** `Recuento distintivo de fact_ventas[sucursal_key]` (Cantidad de Sucursales)
-  - **Eje Y:** `[KPI_1_Ingreso_Total_USD]`
-  - **Tamaño de burbuja:** `[Ingreso_Promedio_Por_Sucursal_USD]`
-
-#### Visualización 4 (Abajo Derecha): Matriz (Matrix) con Formato Condicional
-- **Título:** `Ticket Promedio y Margen Operativo (%) de las Principales Cadenas por Región`
-- **Subtítulo:** `P4: ¿Cómo varía el ticket promedio y el margen operativo entre las principales cadenas según la región geográfica?`
-- **Filas:** `dim_cadena[nombre_cadena]` *(aplicar Filtro de nivel visual: Top N = 10 por `[KPI_1_Ingreso_Total_USD]`)*
-- **Columnas:** `dim_ubicacion[region_eeuu]`
-- **Valores:** `[KPI_2_Ticket_Promedio_USD]` y `[KPI_3_Margen_Operativo_Pct]`
+#### Visualización 4 (Abajo Derecha): Gráfico de Columnas y Líneas por Región y Corte Temporal
+- **Título:** `Regiones con Ingesta Calórica Diaria > 900 kcal y Sucursales Operativas (Relevamiento 2024)`
+- **Subtítulo:** `P4: ¿Qué regiones presentan una ingesta calórica diaria promedio de fast food superior a 900 kcal y cuántas sucursales operan en ellas?`
+- **Eje X:** `dim_geografia[census_region]` (con jerarquía hacia `dim_tiempo[Trimestre_Anio]`)
+- **Eje Y de columnas:** `[Total_Locales]`
+- **Eje Y de línea:** `[Ingesta_Calorica_Promedio_Kcal]` (con línea de referencia horizontal en `900 kcal`).
 
 ---
 
-## 6. Guardar para la Entrega
+## 6. Guardar el Archivo para la Entrega
 
-Guardar el archivo como **`Dashboard_FastFood_AE4.pbix`** y colocarlo en la carpeta del proyecto para comprimirlo junto con los scripts y datos en la entrega final.
-
+Guardar como **`Dashboard_FastFood_Salud_AE4.pbix`** para incluirlo en la carpeta comprimida `.zip` de la entrega final.

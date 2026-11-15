@@ -4,98 +4,173 @@
 -- ============================================================================
 
 -- ----------------------------------------------------------------------------
--- Verificación de la cantidad de filas cargadas en cada tabla del data warehouse
+-- Verificación de la cantidad de registros en las 4 tablas físicas del data warehouse
 -- ----------------------------------------------------------------------------
 SELECT 'dim_tiempo' AS tabla, COUNT(*) AS filas FROM dim_tiempo
+UNION ALL SELECT 'dim_geografia', COUNT(*) FROM dim_geografia
 UNION ALL SELECT 'dim_cadena', COUNT(*) FROM dim_cadena
-UNION ALL SELECT 'dim_ubicacion', COUNT(*) FROM dim_ubicacion
-UNION ALL SELECT 'fact_ventas', COUNT(*) FROM fact_ventas;
+UNION ALL SELECT 'fact_locales_consumo', COUNT(*) FROM fact_locales_consumo;
 
 -- ----------------------------------------------------------------------------
--- Cálculo de los 3 indicadores clave de desempeño del proyecto
+-- Resumen nacional de los 3 indicadores clave (dlff, pmc de la cadena líder y tpcd)
 -- ----------------------------------------------------------------------------
-SELECT
-    COUNT(DISTINCT sucursal_key)                                                       AS sucursales,
-    SUM(cantidad_ordenes)                                                              AS total_ordenes,
-    ROUND(SUM(ventas_usd), 2)                                                          AS kpi1_ingreso_total_usd,
-    ROUND(SUM(ventas_usd) / SUM(cantidad_ordenes), 2)                                  AS kpi2_ticket_promedio_usd,
-    ROUND((SUM(ventas_usd) - SUM(costo_operativo_usd)) / SUM(ventas_usd) * 100, 2)     AS kpi3_margen_pct
-FROM fact_ventas;
-
--- ----------------------------------------------------------------------------
--- Consulta 1 para responder la pregunta de negocio 1 usando la dimensión tiempo
--- ----------------------------------------------------------------------------
-SELECT
-    t.año,
-    t.trimestre,
-    SUM(f.cantidad_ordenes)                                AS total_ordenes,
-    ROUND(SUM(f.ventas_usd), 2)                            AS ingresos_usd,
-    ROUND(SUM(f.ganancia_neta_usd), 2)                     AS ganancia_neta_usd,
-    ROUND(SUM(f.ventas_usd) / SUM(f.cantidad_ordenes), 2)  AS ticket_promedio_usd
-FROM fact_ventas f
-JOIN dim_tiempo t ON f.tiempo_id = t.tiempo_id
-GROUP BY t.año, t.trimestre
-ORDER BY t.año, t.trimestre;
-
--- ----------------------------------------------------------------------------
--- Consulta 2 para responder la pregunta de negocio 2 usando la dimensión cadena
--- ----------------------------------------------------------------------------
-SELECT
-    c.categoria_comida,
-    c.segmento_precio,
-    COUNT(DISTINCT f.sucursal_key)                                                   AS sucursales,
-    ROUND(SUM(f.ventas_usd), 2)                                                      AS facturacion_usd,
-    ROUND(SUM(f.ventas_usd) / COUNT(DISTINCT f.sucursal_key), 2)                     AS ingreso_por_sucursal_usd,
-    ROUND((SUM(f.ventas_usd) - SUM(f.costo_operativo_usd)) / SUM(f.ventas_usd) * 100, 2) AS margen_pct
-FROM fact_ventas f
-JOIN dim_cadena c ON f.cadena_id = c.cadena_id
-GROUP BY c.categoria_comida, c.segmento_precio
-ORDER BY facturacion_usd DESC;
-
--- ----------------------------------------------------------------------------
--- Consulta 3 para responder la pregunta de negocio 3 usando la dimensión ubicación
--- ----------------------------------------------------------------------------
-SELECT
-    u.region_eeuu,
-    u.estado_codigo,
-    u.estado_nombre,
-    MAX(u.poblacion_estado)                                                          AS poblacion,
-    COUNT(DISTINCT f.sucursal_key)                                                   AS sucursales,
-    ROUND(SUM(f.ventas_usd), 2)                                                      AS ventas_usd,
-    ROUND(SUM(f.ventas_usd) / COUNT(DISTINCT f.sucursal_key), 2)                     AS ventas_por_sucursal_usd,
-    ROUND(COUNT(DISTINCT f.sucursal_key) * 1000000.0 / MAX(u.poblacion_estado), 2)   AS sucursales_por_millon_hab
-FROM fact_ventas f
-JOIN dim_ubicacion u ON f.ubicacion_id = u.ubicacion_id
-GROUP BY u.region_eeuu, u.estado_codigo, u.estado_nombre
-ORDER BY ventas_usd DESC
-LIMIT 15;
-
--- ----------------------------------------------------------------------------
--- Consulta 4 para responder la pregunta de negocio 4 cruzando las tres dimensiones
--- ----------------------------------------------------------------------------
-WITH ventas_2024 AS (
-    SELECT f.*
-    FROM fact_ventas f
-    JOIN dim_tiempo t ON f.tiempo_id = t.tiempo_id
-    WHERE t.año = 2024
+WITH resumen_estatal AS (
+    SELECT
+        g.province,
+        MAX(g.population_total) AS poblacion_estado,
+        SUM(f.cantidad_locales) AS locales_estado,
+        MAX(f.pct_consumo_diario) AS pct_consumo_estado,
+        MAX(f.tasa_obesidad_pct) AS tasa_obesidad_estado
+    FROM fact_locales_consumo f
+    JOIN dim_geografia g ON f.geografia_id = g.geografia_id
+    GROUP BY g.province
 ),
-top_cadenas AS (
+cadena_lider AS (
+    SELECT
+        c.nombre_cadena,
+        ROUND(SUM(f.cantidad_locales) * 100.0 / (SELECT SUM(cantidad_locales) FROM fact_locales_consumo), 2) AS pmc_lider_pct
+    FROM fact_locales_consumo f
+    JOIN dim_cadena c ON f.cadena_id = c.cadena_id
+    GROUP BY c.nombre_cadena
+    ORDER BY SUM(f.cantidad_locales) DESC
+    LIMIT 1
+)
+SELECT
+    SUM(r.locales_estado) AS total_locales_analizados,
+    SUM(r.poblacion_estado) AS poblacion_total_eeuu,
+    ROUND(SUM(r.locales_estado) * 100000.0 / SUM(r.poblacion_estado), 2) AS kpi1_dlff_nacional_cada_100k,
+    (SELECT nombre_cadena FROM cadena_lider) AS cadena_numero_1,
+    (SELECT pmc_lider_pct FROM cadena_lider) AS kpi2_pmc_cadena_lider_pct,
+    ROUND(SUM(r.pct_consumo_estado * r.poblacion_estado) / SUM(r.poblacion_estado), 2) AS kpi3_tpcd_nacional_ponderada_pct,
+    ROUND(SUM(r.tasa_obesidad_estado * r.poblacion_estado) / SUM(r.poblacion_estado), 2) AS tasa_obesidad_nacional_ponderada_pct
+FROM resumen_estatal r;
+
+-- ----------------------------------------------------------------------------
+-- Consulta 1 para responder la pregunta de negocio 1:
+-- ¿cuáles son los 5 estados con mayor densidad de locales cada 100.000 habitantes y cómo se comparan con el promedio nacional?
+-- ----------------------------------------------------------------------------
+WITH estados AS (
+    SELECT
+        g.province,
+        g.state_name,
+        g.census_region,
+        MAX(g.population_total) AS poblacion_estado,
+        SUM(f.cantidad_locales) AS cantidad_locales,
+        ROUND(SUM(f.cantidad_locales) * 100000.0 / MAX(g.population_total), 2) AS dlff_estado,
+        MAX(f.tasa_obesidad_pct) AS tasa_obesidad_pct
+    FROM fact_locales_consumo f
+    JOIN dim_geografia g ON f.geografia_id = g.geografia_id
+    GROUP BY g.province, g.state_name, g.census_region
+),
+promedio_nacional AS (
+    SELECT ROUND(SUM(cantidad_locales) * 100000.0 / SUM(poblacion_estado), 2) AS dlff_nacional
+    FROM estados
+)
+SELECT
+    e.province,
+    e.state_name,
+    e.census_region,
+    e.cantidad_locales,
+    e.poblacion_estado,
+    e.dlff_estado,
+    p.dlff_nacional,
+    ROUND(e.dlff_estado - p.dlff_nacional, 2) AS diferencia_vs_nacional,
+    e.tasa_obesidad_pct
+FROM estados e
+CROSS JOIN promedio_nacional p
+ORDER BY e.dlff_estado DESC
+LIMIT 5;
+
+-- ----------------------------------------------------------------------------
+-- Consulta 2 para responder la pregunta de negocio 2:
+-- ¿existe relación entre la densidad regional de restaurantes y el porcentaje de consumo diario y obesidad?
+-- ----------------------------------------------------------------------------
+WITH estados AS (
+    SELECT
+        g.census_region,
+        g.province,
+        MAX(g.population_total) AS poblacion_estado,
+        SUM(f.cantidad_locales) AS locales_estado,
+        MAX(f.pct_consumo_diario) AS pct_consumo_estado,
+        MAX(f.calorias_diarias_promedio_ff) AS calorias_estado,
+        MAX(f.tasa_obesidad_pct) AS obesidad_estado
+    FROM fact_locales_consumo f
+    JOIN dim_geografia g ON f.geografia_id = g.geografia_id
+    GROUP BY g.census_region, g.province
+)
+SELECT
+    census_region,
+    COUNT(province) AS cantidad_estados,
+    SUM(locales_estado) AS total_locales,
+    SUM(poblacion_estado) AS poblacion_regional,
+    ROUND(SUM(locales_estado) * 100000.0 / SUM(poblacion_estado), 2) AS dlff_regional_cada_100k,
+    ROUND(SUM(pct_consumo_estado * poblacion_estado) / SUM(poblacion_estado), 2) AS tpcd_consumo_diario_pct,
+    ROUND(AVG(calorias_estado), 1) AS calorias_diarias_promedio_kcal,
+    ROUND(SUM(obesidad_estado * poblacion_estado) / SUM(poblacion_estado), 2) AS tasa_obesidad_ponderada_pct
+FROM estados
+GROUP BY census_region
+ORDER BY dlff_regional_cada_100k DESC;
+
+-- ----------------------------------------------------------------------------
+-- Consulta 3 para responder la pregunta de negocio 3:
+-- ¿cómo se distribuye la cuota de mercado (pmc) de las principales cadenas según las 4 regiones censales?
+-- ----------------------------------------------------------------------------
+WITH top_cadenas AS (
     SELECT cadena_id
-    FROM ventas_2024
+    FROM fact_locales_consumo
     GROUP BY cadena_id
-    ORDER BY SUM(ventas_usd) DESC
-    LIMIT 10
+    ORDER BY SUM(cantidad_locales) DESC
+    LIMIT 8
+),
+totales_region AS (
+    SELECT
+        g.census_region,
+        SUM(f.cantidad_locales) AS total_locales_region
+    FROM fact_locales_consumo f
+    JOIN dim_geografia g ON f.geografia_id = g.geografia_id
+    GROUP BY g.census_region
 )
 SELECT
     c.nombre_cadena,
-    u.region_eeuu,
-    COUNT(DISTINCT v.sucursal_key)                                                   AS sucursales,
-    ROUND(SUM(v.ventas_usd), 2)                                                      AS ventas_usd,
-    ROUND(SUM(v.ventas_usd) / SUM(v.cantidad_ordenes), 2)                            AS ticket_promedio_usd,
-    ROUND((SUM(v.ventas_usd) - SUM(v.costo_operativo_usd)) / SUM(v.ventas_usd) * 100, 2) AS margen_pct
-FROM ventas_2024 v
-JOIN top_cadenas tc ON v.cadena_id = tc.cadena_id
-JOIN dim_cadena c ON v.cadena_id = c.cadena_id
-JOIN dim_ubicacion u ON v.ubicacion_id = u.ubicacion_id
-GROUP BY c.nombre_cadena, u.region_eeuu
-ORDER BY c.nombre_cadena, ventas_usd DESC;
+    c.categoria_principal,
+    g.census_region,
+    SUM(f.cantidad_locales) AS locales_cadena_en_region,
+    ROUND(SUM(f.cantidad_locales) * 100.0 / tr.total_locales_region, 2) AS pmc_en_region_pct,
+    ROUND(SUM(f.cantidad_locales) * 100.0 / (SELECT SUM(cantidad_locales) FROM fact_locales_consumo), 2) AS pmc_nacional_pct
+FROM fact_locales_consumo f
+JOIN top_cadenas tc ON f.cadena_id = tc.cadena_id
+JOIN dim_cadena c ON f.cadena_id = c.cadena_id
+JOIN dim_geografia g ON f.geografia_id = g.geografia_id
+JOIN totales_region tr ON g.census_region = tr.census_region
+GROUP BY c.nombre_cadena, c.categoria_principal, g.census_region, tr.total_locales_region
+ORDER BY c.nombre_cadena, locales_cadena_en_region DESC;
+
+-- ----------------------------------------------------------------------------
+-- Consulta 4 para responder la pregunta de negocio 4 (vinculada con dim_tiempo):
+-- ¿qué regiones presentan en los relevamientos 2024 una ingesta calórica diaria promedio superior a 900 kcal y cuántas sucursales operan en ellas?
+-- ----------------------------------------------------------------------------
+WITH estados_tiempo AS (
+    SELECT
+        g.census_region,
+        g.province,
+        t.anio,
+        t.trimestre,
+        SUM(f.cantidad_locales) AS locales_estado,
+        MAX(f.calorias_diarias_promedio_ff) AS calorias_estado,
+        MAX(f.tasa_obesidad_pct) AS obesidad_estado
+    FROM fact_locales_consumo f
+    JOIN dim_geografia g ON f.geografia_id = g.geografia_id
+    JOIN dim_tiempo t ON f.tiempo_id = t.tiempo_id
+    GROUP BY g.census_region, g.province, t.anio, t.trimestre
+)
+SELECT
+    census_region,
+    anio,
+    COUNT(DISTINCT trimestre) AS trimestres_relevados,
+    SUM(locales_estado) AS sucursales_operativas,
+    ROUND(AVG(calorias_estado), 1) AS ingesta_calorica_diaria_kcal,
+    ROUND(AVG(obesidad_estado), 2) AS tasa_obesidad_promedio_pct
+FROM estados_tiempo
+GROUP BY census_region, anio
+HAVING AVG(calorias_estado) > 900
+ORDER BY ingesta_calorica_diaria_kcal DESC;

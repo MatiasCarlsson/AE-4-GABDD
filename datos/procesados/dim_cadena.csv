@@ -1,469 +1,467 @@
-cadena_id,nombre_cadena,categoria_comida,segmento_precio,codigo_cadena
-1,31st Avenue Gyro,Otros / Regional,Estándar,CAD_00001
-2,7-11,Otros / Regional,Estándar,CAD_00002
-3,7-Eleven,Otros / Regional,Estándar,CAD_00003
-4,A & W Family Restaurant,Otros / Regional,Estándar,CAD_00004
-5,A&W,Burgers & Grill,Económico (QSR),CAD_00005
-6,A&W All-American Food,Burgers & Grill,Económico (QSR),CAD_00006
-7,A&W All-American Foods,Burgers & Grill,Económico (QSR),CAD_00007
-8,A&W Restaurant,Burgers & Grill,Económico (QSR),CAD_00008
-9,A&W/Long John Silvers,Burgers & Grill,Económico (QSR),CAD_00009
-10,AJ's Hotdogs & Gyros,Otros / Regional,Estándar,CAD_00010
-11,Ama Ristorante,Otros / Regional,Estándar,CAD_00011
-12,Amigos/Kings Classic,Otros / Regional,Estándar,CAD_00012
-13,Aprisa Mexican Cuisine,Tex-Mex,Económico (QSR),CAD_00013
-14,Arby's,Sandwiches & Subs,Económico (QSR),CAD_00014
-15,Arby's Antigo,Sandwiches & Subs,Económico (QSR),CAD_00015
-16,Arctic Circle,Otros / Regional,Estándar,CAD_00016
-17,Au Bon Pain,Otros / Regional,Estándar,CAD_00017
-18,Auntie Anne's,"Coffee, Bakery & Ice Cream",Económico (QSR),CAD_00018
-19,B K,Otros / Regional,Estándar,CAD_00019
-20,B Z Breakfast Burgers Beyond,Burgers & Grill,Económico (QSR),CAD_00020
-21,B. Good,Otros / Regional,Estándar,CAD_00021
-22,BGR - The Burger Joint,Burgers & Grill,Económico (QSR),CAD_00022
-23,BIG & little's Restaurant,Otros / Regional,Estándar,CAD_00023
-24,Back Yard Burgers,Burgers & Grill,Económico (QSR),CAD_00024
-25,Bad Daddys Burger Bar,Burgers & Grill,Económico (QSR),CAD_00025
-26,Baja Fresh,Tex-Mex,Fast Casual,CAD_00026
-27,Baja Fresh Mexican Grill,Tex-Mex,Fast Casual,CAD_00027
-28,Baker's Drive Thru,Otros / Regional,Estándar,CAD_00028
-29,Ball State Lafollette Dining,Otros / Regional,Estándar,CAD_00029
-30,Bamboo Bistro,Otros / Regional,Estándar,CAD_00030
-31,Baskin-Robbins,"Coffee, Bakery & Ice Cream",Económico (QSR),CAD_00031
-32,Bb&t,Otros / Regional,Estándar,CAD_00032
-33,Ben & Jerry's,Otros / Regional,Estándar,CAD_00033
-34,Bills Place,Otros / Regional,Estándar,CAD_00034
-35,Blake's Lotaburger,Burgers & Grill,Económico (QSR),CAD_00035
-36,Blimpie,Sandwiches & Subs,Económico (QSR),CAD_00036
-37,Blimpie Subs & Sandwiches,Sandwiches & Subs,Económico (QSR),CAD_00037
-38,Blondies,Otros / Regional,Estándar,CAD_00038
-39,Bob Evans,Otros / Regional,Estándar,CAD_00039
-40,Bob Evans Restaurant,Otros / Regional,Estándar,CAD_00040
-41,Bobby's Burger Palace,Burgers & Grill,Económico (QSR),CAD_00041
-42,Bojangles' Famous Chicken 'n Biscuits,Chicken & Wings,Económico (QSR),CAD_00042
-43,Boston Chowda Company,Otros / Regional,Estándar,CAD_00043
-44,Boston Market,Otros / Regional,Estándar,CAD_00044
-45,Boston Market 381,Otros / Regional,Estándar,CAD_00045
-46,Braum's,Otros / Regional,Estándar,CAD_00046
-47,Braum's Ice Cream & Dairy Store,Otros / Regional,Estándar,CAD_00047
-48,Bravo Tacos,Tex-Mex,Económico (QSR),CAD_00048
-49,Breadeaux Pizza,Pizza & Italian,Económico (QSR),CAD_00049
-50,Brixton's,Otros / Regional,Estándar,CAD_00050
-51,Buds Chicken & Seafood,Chicken & Wings,Económico (QSR),CAD_00051
-52,Burger King,Burgers & Grill,Económico (QSR),CAD_00052
-53,Burger Time,Burgers & Grill,Económico (QSR),CAD_00053
-54,Burger's Landing,Burgers & Grill,Económico (QSR),CAD_00054
-55,Burgerville,Burgers & Grill,Económico (QSR),CAD_00055
-56,"Burgerville, USA",Burgers & Grill,Económico (QSR),CAD_00056
-57,Bush's Chicken,Chicken & Wings,Económico (QSR),CAD_00057
-58,Cafe Rio,Otros / Regional,Estándar,CAD_00058
-59,Capriotti's Sandwich Shop,Sandwiches & Subs,Económico (QSR),CAD_00059
-60,Capt Crab's Take-Away,Otros / Regional,Estándar,CAD_00060
-61,Captain D's,Asian & Seafood,Fast Casual,CAD_00061
-62,Captain D's Seafood,Asian & Seafood,Fast Casual,CAD_00062
-63,Car's Late Night Delivery,Sandwiches & Subs,Económico (QSR),CAD_00063
-64,Carl's / Green Burrito,Burgers & Grill,Económico (QSR),CAD_00064
-65,Carl's Jr.,Burgers & Grill,Económico (QSR),CAD_00065
-66,Carl's Jr. / Green Burrito,Burgers & Grill,Económico (QSR),CAD_00066
-67,Char-Grill,Otros / Regional,Estándar,CAD_00067
-68,Charcoal Delights,Sandwiches & Subs,Económico (QSR),CAD_00068
-69,Charkies,Otros / Regional,Estándar,CAD_00069
-70,Charley's Grilled Subs,Sandwiches & Subs,Económico (QSR),CAD_00070
-71,Charleys Philly Steaks,Sandwiches & Subs,Económico (QSR),CAD_00071
-72,Charlie Browns,Otros / Regional,Estándar,CAD_00072
-73,Charlie's Chicken,Chicken & Wings,Económico (QSR),CAD_00073
-74,Checker's Drive-in Restaurant,Otros / Regional,Estándar,CAD_00074
-75,Checker's Hamburgers,Burgers & Grill,Económico (QSR),CAD_00075
-76,Checkers,Burgers & Grill,Económico (QSR),CAD_00076
-77,Checkers Burgers and Fries,Burgers & Grill,Económico (QSR),CAD_00077
-78,Cherry Hill Drive In Ice Cream,Otros / Regional,Estándar,CAD_00078
-79,Chicago Union Station Food Court,Otros / Regional,Estándar,CAD_00079
-80,Chick-fil-A,Chicken & Wings,Fast Casual,CAD_00080
-81,Chick-fil-a Magnolia Mall,Chicken & Wings,Fast Casual,CAD_00081
-82,Chick-fil-a Orange Avenue,Chicken & Wings,Fast Casual,CAD_00082
-83,Chick-fil-a Superstition Springs Center,Chicken & Wings,Fast Casual,CAD_00083
-84,Chick-fil-a Truett's Luau,Chicken & Wings,Fast Casual,CAD_00084
-85,Chicken Express,Chicken & Wings,Económico (QSR),CAD_00085
-86,Chicken House,Chicken & Wings,Económico (QSR),CAD_00086
-87,Chickenow,Chicken & Wings,Económico (QSR),CAD_00087
-88,China Buddha Inn II,Asian & Seafood,Fast Casual,CAD_00088
-89,China King,Asian & Seafood,Fast Casual,CAD_00089
-90,China King Restaurant,Asian & Seafood,Fast Casual,CAD_00090
-91,Chipotle Mexican Grill,Tex-Mex,Fast Casual,CAD_00091
-92,Chris' Drive-In,Otros / Regional,Estándar,CAD_00092
-93,Chuck Wagon,Otros / Regional,Estándar,CAD_00093
-94,Church's Chicken,Chicken & Wings,Económico (QSR),CAD_00094
-95,Cinnabon,"Coffee, Bakery & Ice Cream",Económico (QSR),CAD_00095
-96,Circle Drive In,Otros / Regional,Estándar,CAD_00096
-97,City Bites,Otros / Regional,Estándar,CAD_00097
-98,Cody's Cafe,Otros / Regional,Estándar,CAD_00098
-99,Comilao Lanches Bakery,Otros / Regional,Estándar,CAD_00099
-100,Convergence Zone,Otros / Regional,Estándar,CAD_00100
-101,Cook Out,Otros / Regional,Estándar,CAD_00101
-102,Coop DeVille,Otros / Regional,Estándar,CAD_00102
-103,Costa Vida,Otros / Regional,Estándar,CAD_00103
-104,Costa Vida Fresh Mexican Grill,Tex-Mex,Económico (QSR),CAD_00104
-105,Cousins Subs,Sandwiches & Subs,Económico (QSR),CAD_00105
-106,Cousins Subs of Green Bay - Oneida St. & Ramada Way,Sandwiches & Subs,Económico (QSR),CAD_00106
-107,Crispy Chicken & Seafood,Chicken & Wings,Económico (QSR),CAD_00107
-108,Crown Fried Chicken,Chicken & Wings,Económico (QSR),CAD_00108
-109,Crystal Restaurant,Otros / Regional,Estándar,CAD_00109
-110,Culver's,Burgers & Grill,Fast Casual,CAD_00110
-111,Cusinera,Otros / Regional,Estándar,CAD_00111
-112,Custard Hut & Pizza,Pizza & Italian,Económico (QSR),CAD_00112
-113,Cypress Best,Otros / Regional,Estándar,CAD_00113
-114,D'Angelo Grilled Sandwiches,Sandwiches & Subs,Económico (QSR),CAD_00114
-115,DQ Grill & Chill,Otros / Regional,Estándar,CAD_00115
-116,DQ Grill & Chill / Orange Julius,Otros / Regional,Estándar,CAD_00116
-117,DQ Woodlands,Otros / Regional,Estándar,CAD_00117
-118,Dairy Cheer,Otros / Regional,Estándar,CAD_00118
-119,Dairy Freeze,Otros / Regional,Estándar,CAD_00119
-120,Dairy Isle,Otros / Regional,Estándar,CAD_00120
-121,Dairy Queen,"Coffee, Bakery & Ice Cream",Económico (QSR),CAD_00121
-122,Dairy Queen - Round Rock,"Coffee, Bakery & Ice Cream",Económico (QSR),CAD_00122
-123,Dairy Queen Grill & Chill,"Coffee, Bakery & Ice Cream",Económico (QSR),CAD_00123
-124,Dairy Queen Grill & Chill / Orange Julius,"Coffee, Bakery & Ice Cream",Económico (QSR),CAD_00124
-125,Dan's Seafood & Chicken,Chicken & Wings,Económico (QSR),CAD_00125
-126,Dawg House Grill,Otros / Regional,Estándar,CAD_00126
-127,Del Taco,Tex-Mex,Económico (QSR),CAD_00127
-128,Denton's,Otros / Regional,Estándar,CAD_00128
-129,Dewey's Pizza,Pizza & Italian,Económico (QSR),CAD_00129
-130,Dino's Gyros,Otros / Regional,Estándar,CAD_00130
-131,Domino's Pizza,Pizza & Italian,Económico (QSR),CAD_00131
-132,Don & Millie's,Otros / Regional,Estándar,CAD_00132
-133,Dual - Carls / Grn Burrito 1100654,Tex-Mex,Económico (QSR),CAD_00133
-134,Dunkin' Donuts,"Coffee, Bakery & Ice Cream",Económico (QSR),CAD_00134
-135,Eagan's Drive-In,Otros / Regional,Estándar,CAD_00135
-136,Einstein Bros Bagels,"Coffee, Bakery & Ice Cream",Económico (QSR),CAD_00136
-137,El Paragua Restaurant,Otros / Regional,Estándar,CAD_00137
-138,El Pollo Loco,Tex-Mex,Económico (QSR),CAD_00138
-139,El Tarasco Mexican Food,Tex-Mex,Económico (QSR),CAD_00139
-140,Eldon Drive In,Otros / Regional,Estándar,CAD_00140
-141,Elevation Burger,Burgers & Grill,Económico (QSR),CAD_00141
-142,Ernie's All American Burger,Burgers & Grill,Económico (QSR),CAD_00142
-143,Everest,Otros / Regional,Estándar,CAD_00143
-144,Exxon,Otros / Regional,Estándar,CAD_00144
-145,Fab Wings N Burgers,Burgers & Grill,Económico (QSR),CAD_00145
-146,Fallguys Burger Company,Burgers & Grill,Económico (QSR),CAD_00146
-147,Famous Dave's,Otros / Regional,Estándar,CAD_00147
-148,Farmer Boys,Otros / Regional,Estándar,CAD_00148
-149,Fatburger,Burgers & Grill,Económico (QSR),CAD_00149
-150,Fazoli's,Otros / Regional,Estándar,CAD_00150
-151,Firehouse Subs,Sandwiches & Subs,Fast Casual,CAD_00151
-152,Fitness 19,Otros / Regional,Estándar,CAD_00152
-153,Five Guys,Burgers & Grill,Fast Casual,CAD_00153
-154,Flash Foods / McDonald's,Burgers & Grill,Económico (QSR),CAD_00154
-155,Flip Burger Bar,Burgers & Grill,Económico (QSR),CAD_00155
-156,Food 4 Less,Otros / Regional,Estándar,CAD_00156
-157,Foster's Freeze,Otros / Regional,Estándar,CAD_00157
-158,Fred's Store,Otros / Regional,Estándar,CAD_00158
-159,Freddy's Steakburger,Burgers & Grill,Económico (QSR),CAD_00159
-160,Fresh City,Otros / Regional,Estándar,CAD_00160
-161,Frisch's Big Boy,Otros / Regional,Estándar,CAD_00161
-162,Froots,Otros / Regional,Estándar,CAD_00162
-163,Frugal's,Otros / Regional,Estándar,CAD_00163
-164,Fuku,Otros / Regional,Estándar,CAD_00164
-165,Furr's,Otros / Regional,Estándar,CAD_00165
-166,Gabby's Burgers & Fries,Burgers & Grill,Económico (QSR),CAD_00166
-167,Garden Catering,Otros / Regional,Estándar,CAD_00167
-168,Garden Fast Food,Otros / Regional,Estándar,CAD_00168
-169,Geno's Fast Break,Otros / Regional,Estándar,CAD_00169
-170,George's Gyros Spot,Otros / Regional,Estándar,CAD_00170
-171,Gianni's Pizza,Pizza & Italian,Económico (QSR),CAD_00171
-172,Gold Star Chili,Otros / Regional,Estándar,CAD_00172
-173,Golden Chick,Otros / Regional,Estándar,CAD_00173
-174,Good Times Burgers & Frozen Custard,Burgers & Grill,Económico (QSR),CAD_00174
-175,Goodcents Deli Fresh Subs,Sandwiches & Subs,Económico (QSR),CAD_00175
-176,Grandy's,Otros / Regional,Estándar,CAD_00176
-177,Granny's Drive-In,Otros / Regional,Estándar,CAD_00177
-178,Great Steak,Otros / Regional,Estándar,CAD_00178
-179,Great Steak & Potato Co,Otros / Regional,Estándar,CAD_00179
-180,Great Steak And Potato Co,Otros / Regional,Estándar,CAD_00180
-181,Greek Oven Pizza and Wings,Pizza & Italian,Económico (QSR),CAD_00181
-182,Greyhound,Otros / Regional,Estándar,CAD_00182
-183,Gyros Kings,Otros / Regional,Estándar,CAD_00183
-184,Hamburger King,Burgers & Grill,Económico (QSR),CAD_00184
-185,Handy's Lunch,Otros / Regional,Estándar,CAD_00185
-186,Hardee's,Burgers & Grill,Económico (QSR),CAD_00186
-187,Hardee's / Red Burrito,Burgers & Grill,Económico (QSR),CAD_00187
-188,Hardee's / Red Burrito / Dough Boys,Burgers & Grill,Económico (QSR),CAD_00188
-189,Hegenburgers,Burgers & Grill,Económico (QSR),CAD_00189
-190,Hermosa,Otros / Regional,Estándar,CAD_00190
-191,Home Town Buffet,Otros / Regional,Estándar,CAD_00191
-192,Hot Dog Heaven,Otros / Regional,Estándar,CAD_00192
-193,Hot Dog On A Stick,Otros / Regional,Estándar,CAD_00193
-194,Hub City Express,Otros / Regional,Estándar,CAD_00194
-195,Hunam Garden,Otros / Regional,Estándar,CAD_00195
-196,Hungry Andy's,Otros / Regional,Estándar,CAD_00196
-197,Iceberg Drive Inn,Otros / Regional,Estándar,CAD_00197
-198,In-A-Tub,Otros / Regional,Estándar,CAD_00198
-199,In-N-Out Burger,Burgers & Grill,Económico (QSR),CAD_00199
-200,Integrated Therapy Specialists: Arnold D Larson,Otros / Regional,Estándar,CAD_00200
-201,Isabella's Pizzeria,Otros / Regional,Estándar,CAD_00201
-202,Islands Restaurant,Otros / Regional,Estándar,CAD_00202
-203,Italian Pizzeria Restaurant,Otros / Regional,Estándar,CAD_00203
-204,Ivar's Seafood Bar,Asian & Seafood,Fast Casual,CAD_00204
-205,J J Fish and Chicken,Chicken & Wings,Económico (QSR),CAD_00205
-206,JCW's,Otros / Regional,Estándar,CAD_00206
-207,Jack Pirtles Chicken,Chicken & Wings,Económico (QSR),CAD_00207
-208,Jack in the Box,Burgers & Grill,Económico (QSR),CAD_00208
-209,Jack's,Otros / Regional,Estándar,CAD_00209
-210,Jacks Grocery,Otros / Regional,Estándar,CAD_00210
-211,Jamba Juice,"Coffee, Bakery & Ice Cream",Económico (QSR),CAD_00211
-212,Jason's Deli,Sandwiches & Subs,Fast Casual,CAD_00212
-213,Jersey Jacks Eatery,Otros / Regional,Estándar,CAD_00213
-214,Jersey Mike's Subs,Sandwiches & Subs,Fast Casual,CAD_00214
-215,Jim Bob's Chicken Fingers,Chicken & Wings,Económico (QSR),CAD_00215
-216,Jim's Coney Island,Otros / Regional,Estándar,CAD_00216
-217,Jimmy John's,Sandwiches & Subs,Económico (QSR),CAD_00217
-218,Jimmy John's Gourmet Sandwiches,Sandwiches & Subs,Económico (QSR),CAD_00218
-219,Johnny Rockets,Otros / Regional,Estándar,CAD_00219
-220,Jollibee,Otros / Regional,Estándar,CAD_00220
-221,Jolly's Drive-In,Otros / Regional,Estándar,CAD_00221
-222,KFC,Chicken & Wings,Económico (QSR),CAD_00222
-223,KFC - Kentucky Fried Chicken,Chicken & Wings,Económico (QSR),CAD_00223
-224,KFC / A&W,Burgers & Grill,Económico (QSR),CAD_00224
-225,KFC / Taco Bell,Tex-Mex,Económico (QSR),CAD_00225
-226,Kam's Chop Suey,Otros / Regional,Estándar,CAD_00226
-227,Kasa's Pizza,Pizza & Italian,Económico (QSR),CAD_00227
-228,Kennedy Fried Chicken & Pizza,Pizza & Italian,Económico (QSR),CAD_00228
-229,Kenny's Drive-In,Otros / Regional,Estándar,CAD_00229
-230,Kentucky Fried Chicken,Chicken & Wings,Económico (QSR),CAD_00230
-231,Kerby's Koney Island,Otros / Regional,Estándar,CAD_00231
-232,Kettle Restaurant,Otros / Regional,Estándar,CAD_00232
-233,Kim Lee Fast Food,Otros / Regional,Estándar,CAD_00233
-234,King Grill,Otros / Regional,Estándar,CAD_00234
-235,Kings Contrivance Jewelers,Otros / Regional,Estándar,CAD_00235
-236,Krystal,Otros / Regional,Estándar,CAD_00236
-237,Kum & Go,Otros / Regional,Estándar,CAD_00237
-238,L&L Hawaiian Barbecue,Otros / Regional,Estándar,CAD_00238
-239,Lanesplitter Pizza & Pub,Pizza & Italian,Económico (QSR),CAD_00239
-240,Lee's Famous Recipe Chicken,Chicken & Wings,Económico (QSR),CAD_00240
-241,Lee's Oriental Martial Arts,Otros / Regional,Estándar,CAD_00241
-242,Lenny's Sub Shop,Sandwiches & Subs,Económico (QSR),CAD_00242
-243,Lime Ricky World,Otros / Regional,Estándar,CAD_00243
-244,Lion's Choice,Otros / Regional,Estándar,CAD_00244
-245,Little Caesar's Pizza Smithfield,Pizza & Italian,Económico (QSR),CAD_00245
-246,Little Caesars Pizza,Pizza & Italian,Económico (QSR),CAD_00246
-247,Loco Moco Drive-Inn,Otros / Regional,Estándar,CAD_00247
-248,LocoL,Otros / Regional,Estándar,CAD_00248
-249,Long John Silver's,Asian & Seafood,Fast Casual,CAD_00249
-250,Long John Silver's / A&W,Burgers & Grill,Económico (QSR),CAD_00250
-251,Long John Silver/ A&W,Burgers & Grill,Económico (QSR),CAD_00251
-252,Los Verdes,Otros / Regional,Estándar,CAD_00252
-253,Love's,Otros / Regional,Estándar,CAD_00253
-254,Luby's,Otros / Regional,Estándar,CAD_00254
-255,Lukes on Harlem,Otros / Regional,Estándar,CAD_00255
-256,Luna Corner Pizza,Pizza & Italian,Económico (QSR),CAD_00256
-257,Luxor Food Court,Otros / Regional,Estándar,CAD_00257
-258,"MOOYAH Burgers, Fries & Shakes",Burgers & Grill,Económico (QSR),CAD_00258
-259,Madison Street Subs,Sandwiches & Subs,Económico (QSR),CAD_00259
-260,Maria's Fry Bread & Mexican Food,Tex-Mex,Económico (QSR),CAD_00260
-261,Mario's Natural Roman Pizza,Pizza & Italian,Económico (QSR),CAD_00261
-262,Maui Tacos,Tex-Mex,Económico (QSR),CAD_00262
-263,Mayfair Boardwalk Grill,Otros / Regional,Estándar,CAD_00263
-264,Mazatlan Mexican Restaurant,Tex-Mex,Económico (QSR),CAD_00264
-265,McDonald's,Burgers & Grill,Económico (QSR),CAD_00265
-266,McDonald's of Mililani Mauka,Burgers & Grill,Económico (QSR),CAD_00266
-267,McDonalds @ Old Atlanta,Burgers & Grill,Económico (QSR),CAD_00267
-268,McLaren's Pantry,Otros / Regional,Estándar,CAD_00268
-269,Mcalister's Deli,Sandwiches & Subs,Fast Casual,CAD_00269
-270,Mcdonald's #25557,Burgers & Grill,Económico (QSR),CAD_00270
-271,Mcdonald's - Walmart,Burgers & Grill,Económico (QSR),CAD_00271
-272,Meatheads,Otros / Regional,Estándar,CAD_00272
-273,Mickey's Gyros & Ribs,Otros / Regional,Estándar,CAD_00273
-274,Milo's Hamburgers,Burgers & Grill,Económico (QSR),CAD_00274
-275,Mocha Express,Otros / Regional,Estándar,CAD_00275
-276,Moe's Original Bar B Que,Tex-Mex,Fast Casual,CAD_00276
-277,Moe's Southwest Grill,Tex-Mex,Fast Casual,CAD_00277
-278,Mr Char-Burger,Burgers & Grill,Económico (QSR),CAD_00278
-279,Mr Hero,Otros / Regional,Estándar,CAD_00279
-280,Music City Subs,Sandwiches & Subs,Económico (QSR),CAD_00280
-281,Nathan's Famous,Otros / Regional,Estándar,CAD_00281
-282,Nick's Burgers,Burgers & Grill,Económico (QSR),CAD_00282
-283,Nick's Gyros,Otros / Regional,Estándar,CAD_00283
-284,Nielsen's Frozen Custard,Otros / Regional,Estándar,CAD_00284
-285,Nino's Pizza,Pizza & Italian,Económico (QSR),CAD_00285
-286,Noodles & Company,Asian & Seafood,Fast Casual,CAD_00286
-287,Northeastern State University,Otros / Regional,Estándar,CAD_00287
-288,Ny Chicken Fish,Chicken & Wings,Económico (QSR),CAD_00288
-289,OMG! Rotisserie,Otros / Regional,Estándar,CAD_00289
-290,Old Country Buffet,Otros / Regional,Estándar,CAD_00290
-291,Omega Drive-In,Otros / Regional,Estándar,CAD_00291
-292,Omelette House,Otros / Regional,Estándar,CAD_00292
-293,Original Tracks,Otros / Regional,Estándar,CAD_00293
-294,Osgood's,Otros / Regional,Estándar,CAD_00294
-295,P. Terry's,Otros / Regional,Estándar,CAD_00295
-296,Pacific Rim,Otros / Regional,Estándar,CAD_00296
-297,Paesano's,Otros / Regional,Estándar,CAD_00297
-298,Pal's Sudden Service,Otros / Regional,Estándar,CAD_00298
-299,Panda,Otros / Regional,Estándar,CAD_00299
-300,Panda Express,Asian & Seafood,Fast Casual,CAD_00300
-301,Panera Bread,Sandwiches & Subs,Fast Casual,CAD_00301
-302,Papa Gino's,Otros / Regional,Estándar,CAD_00302
-303,Papa John's,Pizza & Italian,Económico (QSR),CAD_00303
-304,Papa John's Pizza,Pizza & Italian,Económico (QSR),CAD_00304
-305,Papagus Gyros,Otros / Regional,Estándar,CAD_00305
-306,Pei Wei,Asian & Seafood,Fast Casual,CAD_00306
-307,Peking Wok,Asian & Seafood,Fast Casual,CAD_00307
-308,Penguin Point,Otros / Regional,Estándar,CAD_00308
-309,Penn Station East Coast Subs,Sandwiches & Subs,Económico (QSR),CAD_00309
-310,Pete's Burgers,Burgers & Grill,Económico (QSR),CAD_00310
-311,Petro's Chili & Chips,Otros / Regional,Estándar,CAD_00311
-312,Pick Up Stix,Otros / Regional,Estándar,CAD_00312
-313,Pita Pit,Otros / Regional,Estándar,CAD_00313
-314,Pizza Barn,Pizza & Italian,Económico (QSR),CAD_00314
-315,Pizza Express,Pizza & Italian,Económico (QSR),CAD_00315
-316,Pizza Factory,Pizza & Italian,Económico (QSR),CAD_00316
-317,Pizza Hut,Pizza & Italian,Económico (QSR),CAD_00317
-318,Pizza Hut Wingstreet,Pizza & Italian,Económico (QSR),CAD_00318
-319,Pizza One,Pizza & Italian,Económico (QSR),CAD_00319
-320,Pizza Primetime,Pizza & Italian,Económico (QSR),CAD_00320
-321,Pollo Campero,Chicken & Wings,Económico (QSR),CAD_00321
-322,Pollo Tropical,Chicken & Wings,Económico (QSR),CAD_00322
-323,Pop-A-Nugget,Otros / Regional,Estándar,CAD_00323
-324,Popeye's,Chicken & Wings,Económico (QSR),CAD_00324
-325,Popeye's Chicken,Chicken & Wings,Económico (QSR),CAD_00325
-326,Popeye's Chicken & Biscuits,Chicken & Wings,Económico (QSR),CAD_00326
-327,Popeyes Chicken and Biscuits,Chicken & Wings,Económico (QSR),CAD_00327
-328,Popeyes Louisiana Kitchen,Chicken & Wings,Económico (QSR),CAD_00328
-329,Port Of Subs,Sandwiches & Subs,Económico (QSR),CAD_00329
-330,Portillo's,Otros / Regional,Estándar,CAD_00330
-331,QDOBA Mexican Eats,Tex-Mex,Fast Casual,CAD_00331
-332,Qdoba Mexican Grill,Tex-Mex,Fast Casual,CAD_00332
-333,Quiznos,Sandwiches & Subs,Económico (QSR),CAD_00333
-334,Quiznos Sub,Sandwiches & Subs,Económico (QSR),CAD_00334
-335,Rafael's,Otros / Regional,Estándar,CAD_00335
-336,Rahway Chicken & Burger Inc,Burgers & Grill,Económico (QSR),CAD_00336
-337,Raising Cane's,Chicken & Wings,Fast Casual,CAD_00337
-338,Raising Cane's Chicken Fingers,Chicken & Wings,Fast Casual,CAD_00338
-339,Rally's,Burgers & Grill,Económico (QSR),CAD_00339
-340,Rally's Hamburgers,Burgers & Grill,Económico (QSR),CAD_00340
-341,Rally's Springfield,Burgers & Grill,Económico (QSR),CAD_00341
-342,Rancher's Roast Beef Inc.,Otros / Regional,Estándar,CAD_00342
-343,Rapid Ray's,Otros / Regional,Estándar,CAD_00343
-344,Red Robin Gourmet Burgers,Burgers & Grill,Económico (QSR),CAD_00344
-345,Redbox,Otros / Regional,Estándar,CAD_00345
-346,Regal Cinemas Tikahtnu  16 IMAX & RPX,Otros / Regional,Estándar,CAD_00346
-347,Rich's Mighty Fine Burgers Grub,Burgers & Grill,Económico (QSR),CAD_00347
-348,Richie's Restaurant,Otros / Regional,Estándar,CAD_00348
-349,Rocky's,Otros / Regional,Estándar,CAD_00349
-350,Roly Poly,Otros / Regional,Estándar,CAD_00350
-351,Round Table Pizza,Pizza & Italian,Económico (QSR),CAD_00351
-352,Roy Rogers,Otros / Regional,Estándar,CAD_00352
-353,Royal Buffet,Otros / Regional,Estándar,CAD_00353
-354,Rubio's,Tex-Mex,Fast Casual,CAD_00354
-355,Rubio's Coastal Grill,Tex-Mex,Fast Casual,CAD_00355
-356,Runza,Otros / Regional,Estándar,CAD_00356
-357,Rush's,Otros / Regional,Estándar,CAD_00357
-358,Ryan's,Otros / Regional,Estándar,CAD_00358
-359,SONIC Drive In,Burgers & Grill,Económico (QSR),CAD_00359
-360,Saladworks,Otros / Regional,Estándar,CAD_00360
-361,Sammy Carry-Out,Otros / Regional,Estándar,CAD_00361
-362,Samurai Sam's,Otros / Regional,Estándar,CAD_00362
-363,Sarku Japan,Otros / Regional,Estándar,CAD_00363
-364,Sbarro,Pizza & Italian,Económico (QSR),CAD_00364
-365,Schlotzsky's,Sandwiches & Subs,Económico (QSR),CAD_00365
-366,Sconecutter,Otros / Regional,Estándar,CAD_00366
-367,Scoopers,Otros / Regional,Estándar,CAD_00367
-368,Seaside Eatery,Otros / Regional,Estándar,CAD_00368
-369,Sensenig Poultry LLC,Otros / Regional,Estándar,CAD_00369
-370,Sheetz,Otros / Regional,Estándar,CAD_00370
-371,Shepard's Drive-In,Otros / Regional,Estándar,CAD_00371
-372,Shloma Inc,Otros / Regional,Estándar,CAD_00372
-373,Shoney's on the Go,Otros / Regional,Estándar,CAD_00373
-374,ShopRite,Otros / Regional,Estándar,CAD_00374
-375,Shot Tower Inn,Otros / Regional,Estándar,CAD_00375
-376,Siam To Go,Otros / Regional,Estándar,CAD_00376
-377,Simmies Arirang Hill Cheese Steak,Otros / Regional,Estándar,CAD_00377
-378,Skyline Chili,Otros / Regional,Estándar,CAD_00378
-379,Slim Chickens,Chicken & Wings,Económico (QSR),CAD_00379
-380,Smashburger,Burgers & Grill,Fast Casual,CAD_00380
-381,Smoothie King,"Coffee, Bakery & Ice Cream",Económico (QSR),CAD_00381
-382,Snack Shack,Otros / Regional,Estándar,CAD_00382
-383,Sonic,Burgers & Grill,Económico (QSR),CAD_00383
-384,Sonic Drive-in (trailer),Burgers & Grill,Económico (QSR),CAD_00384
-385,Soulfish Grill,Otros / Regional,Estándar,CAD_00385
-386,South-A-Philly Steaks and Hoagies,Otros / Regional,Estándar,CAD_00386
-387,Spangle's,Otros / Regional,Estándar,CAD_00387
-388,St Louis Original Hamburgers,Burgers & Grill,Económico (QSR),CAD_00388
-389,Starbucks,"Coffee, Bakery & Ice Cream",Económico (QSR),CAD_00389
-390,Stars Drive-In,Otros / Regional,Estándar,CAD_00390
-391,Steak 'n Shake,Burgers & Grill,Económico (QSR),CAD_00391
-392,Steak Escape,Otros / Regional,Estándar,CAD_00392
-393,Steak-out,Otros / Regional,Estándar,CAD_00393
-394,Stripes Store #2276,Otros / Regional,Estándar,CAD_00394
-395,Strongwater Spirits & Botanicals,Otros / Regional,Estándar,CAD_00395
-396,Subway,Sandwiches & Subs,Económico (QSR),CAD_00396
-397,Subway (johnson) @ Jonesboro,Sandwiches & Subs,Económico (QSR),CAD_00397
-398,Subway - Bell's Ferry,Sandwiches & Subs,Económico (QSR),CAD_00398
-399,Subway - Roland Park,Sandwiches & Subs,Económico (QSR),CAD_00399
-400,Subway Citgo of Quarryville,Sandwiches & Subs,Económico (QSR),CAD_00400
-401,Subway Guitars,Sandwiches & Subs,Económico (QSR),CAD_00401
-402,Subway Sandwiches,Sandwiches & Subs,Económico (QSR),CAD_00402
-403,Subway Sandwiches and Salads,Sandwiches & Subs,Económico (QSR),CAD_00403
-404,Sunrise Cafe,Otros / Regional,Estándar,CAD_00404
-405,Taco Bell,Tex-Mex,Económico (QSR),CAD_00405
-406,Taco Bell/Pizza Hut Express,Tex-Mex,Económico (QSR),CAD_00406
-407,Taco Bueno,Tex-Mex,Económico (QSR),CAD_00407
-408,Taco Cabana,Tex-Mex,Económico (QSR),CAD_00408
-409,Taco Casa,Tex-Mex,Económico (QSR),CAD_00409
-410,Taco Del Mar,Tex-Mex,Económico (QSR),CAD_00410
-411,Taco Delight,Tex-Mex,Económico (QSR),CAD_00411
-412,Taco John's,Tex-Mex,Económico (QSR),CAD_00412
-413,Taco Local,Tex-Mex,Económico (QSR),CAD_00413
-414,Taco Mayo,Tex-Mex,Económico (QSR),CAD_00414
-415,Taco Time,Tex-Mex,Económico (QSR),CAD_00415
-416,Taqueria,Otros / Regional,Estándar,CAD_00416
-417,Tasty Carryout,Otros / Regional,Estándar,CAD_00417
-418,Teddy's Bigger Burgers,Burgers & Grill,Económico (QSR),CAD_00418
-419,Tellers Tap Room & Kitchen,Otros / Regional,Estándar,CAD_00419
-420,The Agora,Otros / Regional,Estándar,CAD_00420
-421,The Biscuit Factory,Otros / Regional,Estándar,CAD_00421
-422,The Break Away Sports Cafe,Otros / Regional,Estándar,CAD_00422
-423,The Chicken Place,Chicken & Wings,Económico (QSR),CAD_00423
-424,The Flame Broiler,Otros / Regional,Estándar,CAD_00424
-425,The Great Steak & Potato Co.,Otros / Regional,Estándar,CAD_00425
-426,The Halal Guys,Otros / Regional,Estándar,CAD_00426
-427,The Honeybaked Ham Company,Otros / Regional,Estándar,CAD_00427
-428,The People Connection,Otros / Regional,Estándar,CAD_00428
-429,The Pita Pit,Otros / Regional,Estándar,CAD_00429
-430,The Pizza Pipe Line,Pizza & Italian,Económico (QSR),CAD_00430
-431,The Press Club,Otros / Regional,Estándar,CAD_00431
-432,Thrasher's French Fries,Otros / Regional,Estándar,CAD_00432
-433,Thunder Ridge Ampride,Otros / Regional,Estándar,CAD_00433
-434,Tina's Carryout Restaurant,Otros / Regional,Estándar,CAD_00434
-435,Tom & Jerry's,Otros / Regional,Estándar,CAD_00435
-436,Tom's Drive In,Otros / Regional,Estándar,CAD_00436
-437,Tom's Grill,Otros / Regional,Estándar,CAD_00437
-438,Tommy's Sub Shop,Sandwiches & Subs,Económico (QSR),CAD_00438
-439,Topper's Pizza,Pizza & Italian,Económico (QSR),CAD_00439
-440,Travelcenters of America,Otros / Regional,Estándar,CAD_00440
-441,Tropical Smoothie Cafe,"Coffee, Bakery & Ice Cream",Económico (QSR),CAD_00441
-442,Tubby's Grilled Submarines,Sandwiches & Subs,Económico (QSR),CAD_00442
-443,Tudor's Biscuit World,Otros / Regional,Estándar,CAD_00443
-444,Twisters,Otros / Regional,Estándar,CAD_00444
-445,Vista Drive In,Otros / Regional,Estándar,CAD_00445
-446,Waffle House,Otros / Regional,Estándar,CAD_00446
-447,Wendy Two Two Eight,Burgers & Grill,Económico (QSR),CAD_00447
-448,Wendy's,Burgers & Grill,Económico (QSR),CAD_00448
-449,Wetzel's Pretzels,"Coffee, Bakery & Ice Cream",Económico (QSR),CAD_00449
-450,Whataburger,Burgers & Grill,Económico (QSR),CAD_00450
-451,White Castle,Burgers & Grill,Económico (QSR),CAD_00451
-452,White Manna Hamburgers,Burgers & Grill,Económico (QSR),CAD_00452
-453,Wienerschnitzel,Otros / Regional,Estándar,CAD_00453
-454,Windmill Gourmet Fast Foods,Otros / Regional,Estándar,CAD_00454
-455,Wings And Philly,Chicken & Wings,Económico (QSR),CAD_00455
-456,Wings N' More Wings,Chicken & Wings,Económico (QSR),CAD_00456
-457,Wingstop,Chicken & Wings,Fast Casual,CAD_00457
-458,Wingstreet,Chicken & Wings,Económico (QSR),CAD_00458
-459,Woody's Sloppy Dogs,Otros / Regional,Estándar,CAD_00459
-460,World Wrapps,Otros / Regional,Estándar,CAD_00460
-461,Wu's Fine Chinese Cuisine,Otros / Regional,Estándar,CAD_00461
-462,Yellow Cab Pizza Co.,Pizza & Italian,Económico (QSR),CAD_00462
-463,Yoshinoya,Otros / Regional,Estándar,CAD_00463
-464,Your Healthy Habit,Burgers & Grill,Fast Casual,CAD_00464
-465,Yum Brands Inc,Otros / Regional,Estándar,CAD_00465
-466,Zaxby's,Chicken & Wings,Económico (QSR),CAD_00466
-467,Zip's Hamburgers And Fish,Burgers & Grill,Económico (QSR),CAD_00467
-468,Ziti's Italian Express,Otros / Regional,Estándar,CAD_00468
+cadena_id,nombre_cadena,categoria_principal
+1,31st Avenue Gyro,Otros / Regional
+2,7-11,Otros / Regional
+3,7-Eleven,Otros / Regional
+4,A & W Family Restaurant,Otros / Regional
+5,A&W,Burgers & Grill
+6,A&W All-American Food,Burgers & Grill
+7,A&W All-American Foods,Burgers & Grill
+8,A&W Restaurant,Burgers & Grill
+9,A&W/Long John Silvers,Burgers & Grill
+10,AJ's Hotdogs & Gyros,Otros / Regional
+11,Ama Ristorante,Otros / Regional
+12,Amigos/Kings Classic,Otros / Regional
+13,Aprisa Mexican Cuisine,Tex-Mex
+14,Arby's,Sandwiches & Subs
+15,Arby's Antigo,Sandwiches & Subs
+16,Arctic Circle,Otros / Regional
+17,Au Bon Pain,Otros / Regional
+18,Auntie Anne's,"Coffee, Bakery & Ice Cream"
+19,B K,Otros / Regional
+20,B Z Breakfast Burgers Beyond,Burgers & Grill
+21,B. Good,Otros / Regional
+22,BGR - The Burger Joint,Burgers & Grill
+23,BIG & little's Restaurant,Otros / Regional
+24,Back Yard Burgers,Burgers & Grill
+25,Bad Daddys Burger Bar,Burgers & Grill
+26,Baja Fresh,Tex-Mex
+27,Baja Fresh Mexican Grill,Tex-Mex
+28,Baker's Drive Thru,Otros / Regional
+29,Ball State Lafollette Dining,Otros / Regional
+30,Bamboo Bistro,Otros / Regional
+31,Baskin-Robbins,"Coffee, Bakery & Ice Cream"
+32,Bb&t,Otros / Regional
+33,Ben & Jerry's,Otros / Regional
+34,Bills Place,Otros / Regional
+35,Blake's Lotaburger,Burgers & Grill
+36,Blimpie,Sandwiches & Subs
+37,Blimpie Subs & Sandwiches,Sandwiches & Subs
+38,Blondies,Otros / Regional
+39,Bob Evans,Otros / Regional
+40,Bob Evans Restaurant,Otros / Regional
+41,Bobby's Burger Palace,Burgers & Grill
+42,Bojangles' Famous Chicken 'n Biscuits,Chicken & Wings
+43,Boston Chowda Company,Otros / Regional
+44,Boston Market,Otros / Regional
+45,Boston Market 381,Otros / Regional
+46,Braum's,Otros / Regional
+47,Braum's Ice Cream & Dairy Store,Otros / Regional
+48,Bravo Tacos,Tex-Mex
+49,Breadeaux Pizza,Pizza & Italian
+50,Brixton's,Otros / Regional
+51,Buds Chicken & Seafood,Chicken & Wings
+52,Burger King,Burgers & Grill
+53,Burger Time,Burgers & Grill
+54,Burger's Landing,Burgers & Grill
+55,Burgerville,Burgers & Grill
+56,"Burgerville, USA",Burgers & Grill
+57,Bush's Chicken,Chicken & Wings
+58,Cafe Rio,Otros / Regional
+59,Capriotti's Sandwich Shop,Sandwiches & Subs
+60,Capt Crab's Take-Away,Otros / Regional
+61,Captain D's,Asian & Seafood
+62,Captain D's Seafood,Asian & Seafood
+63,Car's Late Night Delivery,Sandwiches & Subs
+64,Carl's / Green Burrito,Burgers & Grill
+65,Carl's Jr.,Burgers & Grill
+66,Carl's Jr. / Green Burrito,Burgers & Grill
+67,Char-Grill,Otros / Regional
+68,Charcoal Delights,Sandwiches & Subs
+69,Charkies,Otros / Regional
+70,Charley's Grilled Subs,Sandwiches & Subs
+71,Charleys Philly Steaks,Sandwiches & Subs
+72,Charlie Browns,Otros / Regional
+73,Charlie's Chicken,Chicken & Wings
+74,Checker's Drive-in Restaurant,Otros / Regional
+75,Checker's Hamburgers,Burgers & Grill
+76,Checkers,Burgers & Grill
+77,Checkers Burgers and Fries,Burgers & Grill
+78,Cherry Hill Drive In Ice Cream,Otros / Regional
+79,Chicago Union Station Food Court,Otros / Regional
+80,Chick-fil-A,Chicken & Wings
+81,Chick-fil-a Magnolia Mall,Chicken & Wings
+82,Chick-fil-a Orange Avenue,Chicken & Wings
+83,Chick-fil-a Superstition Springs Center,Chicken & Wings
+84,Chick-fil-a Truett's Luau,Chicken & Wings
+85,Chicken Express,Chicken & Wings
+86,Chicken House,Chicken & Wings
+87,Chickenow,Chicken & Wings
+88,China Buddha Inn II,Asian & Seafood
+89,China King,Asian & Seafood
+90,China King Restaurant,Asian & Seafood
+91,Chipotle Mexican Grill,Tex-Mex
+92,Chris' Drive-In,Otros / Regional
+93,Chuck Wagon,Otros / Regional
+94,Church's Chicken,Chicken & Wings
+95,Cinnabon,"Coffee, Bakery & Ice Cream"
+96,Circle Drive In,Otros / Regional
+97,City Bites,Otros / Regional
+98,Cody's Cafe,Otros / Regional
+99,Comilao Lanches Bakery,Otros / Regional
+100,Convergence Zone,Otros / Regional
+101,Cook Out,Otros / Regional
+102,Coop DeVille,Otros / Regional
+103,Costa Vida,Otros / Regional
+104,Costa Vida Fresh Mexican Grill,Tex-Mex
+105,Cousins Subs,Sandwiches & Subs
+106,Cousins Subs of Green Bay - Oneida St. & Ramada Way,Sandwiches & Subs
+107,Crispy Chicken & Seafood,Chicken & Wings
+108,Crown Fried Chicken,Chicken & Wings
+109,Crystal Restaurant,Otros / Regional
+110,Culver's,Burgers & Grill
+111,Cusinera,Otros / Regional
+112,Custard Hut & Pizza,Pizza & Italian
+113,Cypress Best,Otros / Regional
+114,D'Angelo Grilled Sandwiches,Sandwiches & Subs
+115,DQ Grill & Chill,Otros / Regional
+116,DQ Grill & Chill / Orange Julius,Otros / Regional
+117,DQ Woodlands,Otros / Regional
+118,Dairy Cheer,Otros / Regional
+119,Dairy Freeze,Otros / Regional
+120,Dairy Isle,Otros / Regional
+121,Dairy Queen,"Coffee, Bakery & Ice Cream"
+122,Dairy Queen - Round Rock,"Coffee, Bakery & Ice Cream"
+123,Dairy Queen Grill & Chill,"Coffee, Bakery & Ice Cream"
+124,Dairy Queen Grill & Chill / Orange Julius,"Coffee, Bakery & Ice Cream"
+125,Dan's Seafood & Chicken,Chicken & Wings
+126,Dawg House Grill,Otros / Regional
+127,Del Taco,Tex-Mex
+128,Denton's,Otros / Regional
+129,Dewey's Pizza,Pizza & Italian
+130,Dino's Gyros,Otros / Regional
+131,Domino's Pizza,Pizza & Italian
+132,Don & Millie's,Otros / Regional
+133,Dual - Carls / Grn Burrito 1100654,Tex-Mex
+134,Dunkin' Donuts,"Coffee, Bakery & Ice Cream"
+135,Eagan's Drive-In,Otros / Regional
+136,Einstein Bros Bagels,"Coffee, Bakery & Ice Cream"
+137,El Paragua Restaurant,Otros / Regional
+138,El Pollo Loco,Tex-Mex
+139,El Tarasco Mexican Food,Tex-Mex
+140,Eldon Drive In,Otros / Regional
+141,Elevation Burger,Burgers & Grill
+142,Ernie's All American Burger,Burgers & Grill
+143,Everest,Otros / Regional
+144,Exxon,Otros / Regional
+145,Fab Wings N Burgers,Burgers & Grill
+146,Fallguys Burger Company,Burgers & Grill
+147,Famous Dave's,Otros / Regional
+148,Farmer Boys,Otros / Regional
+149,Fatburger,Burgers & Grill
+150,Fazoli's,Otros / Regional
+151,Firehouse Subs,Sandwiches & Subs
+152,Fitness 19,Otros / Regional
+153,Five Guys,Burgers & Grill
+154,Flash Foods / McDonald's,Burgers & Grill
+155,Flip Burger Bar,Burgers & Grill
+156,Food 4 Less,Otros / Regional
+157,Foster's Freeze,Otros / Regional
+158,Fred's Store,Otros / Regional
+159,Freddy's Steakburger,Burgers & Grill
+160,Fresh City,Otros / Regional
+161,Frisch's Big Boy,Otros / Regional
+162,Froots,Otros / Regional
+163,Frugal's,Otros / Regional
+164,Fuku,Otros / Regional
+165,Furr's,Otros / Regional
+166,Gabby's Burgers & Fries,Burgers & Grill
+167,Garden Catering,Otros / Regional
+168,Garden Fast Food,Otros / Regional
+169,Geno's Fast Break,Otros / Regional
+170,George's Gyros Spot,Otros / Regional
+171,Gianni's Pizza,Pizza & Italian
+172,Gold Star Chili,Otros / Regional
+173,Golden Chick,Otros / Regional
+174,Good Times Burgers & Frozen Custard,Burgers & Grill
+175,Goodcents Deli Fresh Subs,Sandwiches & Subs
+176,Grandy's,Otros / Regional
+177,Granny's Drive-In,Otros / Regional
+178,Great Steak,Otros / Regional
+179,Great Steak & Potato Co,Otros / Regional
+180,Great Steak And Potato Co,Otros / Regional
+181,Greek Oven Pizza and Wings,Pizza & Italian
+182,Greyhound,Otros / Regional
+183,Gyros Kings,Otros / Regional
+184,Hamburger King,Burgers & Grill
+185,Handy's Lunch,Otros / Regional
+186,Hardee's,Burgers & Grill
+187,Hardee's / Red Burrito,Burgers & Grill
+188,Hardee's / Red Burrito / Dough Boys,Burgers & Grill
+189,Hegenburgers,Burgers & Grill
+190,Hermosa,Otros / Regional
+191,Home Town Buffet,Otros / Regional
+192,Hot Dog Heaven,Otros / Regional
+193,Hot Dog On A Stick,Otros / Regional
+194,Hub City Express,Otros / Regional
+195,Hunam Garden,Otros / Regional
+196,Hungry Andy's,Otros / Regional
+197,Iceberg Drive Inn,Otros / Regional
+198,In-A-Tub,Otros / Regional
+199,In-N-Out Burger,Burgers & Grill
+200,Isabella's Pizzeria,Otros / Regional
+201,Islands Restaurant,Otros / Regional
+202,Italian Pizzeria Restaurant,Otros / Regional
+203,Ivar's Seafood Bar,Asian & Seafood
+204,J J Fish and Chicken,Chicken & Wings
+205,JCW's,Otros / Regional
+206,Jack Pirtles Chicken,Chicken & Wings
+207,Jack in the Box,Burgers & Grill
+208,Jack's,Otros / Regional
+209,Jacks Grocery,Otros / Regional
+210,Jamba Juice,"Coffee, Bakery & Ice Cream"
+211,Jason's Deli,Sandwiches & Subs
+212,Jersey Jacks Eatery,Otros / Regional
+213,Jersey Mike's Subs,Sandwiches & Subs
+214,Jim Bob's Chicken Fingers,Chicken & Wings
+215,Jim's Coney Island,Otros / Regional
+216,Jimmy John's,Sandwiches & Subs
+217,Jimmy John's Gourmet Sandwiches,Sandwiches & Subs
+218,Johnny Rockets,Otros / Regional
+219,Jollibee,Otros / Regional
+220,Jolly's Drive-In,Otros / Regional
+221,KFC,Chicken & Wings
+222,KFC - Kentucky Fried Chicken,Chicken & Wings
+223,KFC / A&W,Burgers & Grill
+224,KFC / Taco Bell,Tex-Mex
+225,Kam's Chop Suey,Otros / Regional
+226,Kasa's Pizza,Pizza & Italian
+227,Kennedy Fried Chicken & Pizza,Pizza & Italian
+228,Kenny's Drive-In,Otros / Regional
+229,Kentucky Fried Chicken,Chicken & Wings
+230,Kerby's Koney Island,Otros / Regional
+231,Kettle Restaurant,Otros / Regional
+232,Kim Lee Fast Food,Otros / Regional
+233,King Grill,Otros / Regional
+234,Kings Contrivance Jewelers,Otros / Regional
+235,Krystal,Otros / Regional
+236,Kum & Go,Otros / Regional
+237,L&L Hawaiian Barbecue,Otros / Regional
+238,Lanesplitter Pizza & Pub,Pizza & Italian
+239,Lee's Famous Recipe Chicken,Chicken & Wings
+240,Lee's Oriental Martial Arts,Otros / Regional
+241,Lenny's Sub Shop,Sandwiches & Subs
+242,Lime Ricky World,Otros / Regional
+243,Lion's Choice,Otros / Regional
+244,Little Caesar's Pizza Smithfield,Pizza & Italian
+245,Little Caesars Pizza,Pizza & Italian
+246,Loco Moco Drive-Inn,Otros / Regional
+247,LocoL,Otros / Regional
+248,Long John Silver's,Asian & Seafood
+249,Long John Silver's / A&W,Burgers & Grill
+250,Long John Silver/ A&W,Burgers & Grill
+251,Los Verdes,Otros / Regional
+252,Love's,Otros / Regional
+253,Luby's,Otros / Regional
+254,Lukes on Harlem,Otros / Regional
+255,Luna Corner Pizza,Pizza & Italian
+256,"MOOYAH Burgers, Fries & Shakes",Burgers & Grill
+257,Madison Street Subs,Sandwiches & Subs
+258,Maria's Fry Bread & Mexican Food,Tex-Mex
+259,Mario's Natural Roman Pizza,Pizza & Italian
+260,Maui Tacos,Tex-Mex
+261,Mayfair Boardwalk Grill,Otros / Regional
+262,Mazatlan Mexican Restaurant,Tex-Mex
+263,McDonald's,Burgers & Grill
+264,McDonald's of Mililani Mauka,Burgers & Grill
+265,McDonalds @ Old Atlanta,Burgers & Grill
+266,McLaren's Pantry,Otros / Regional
+267,Mcalister's Deli,Sandwiches & Subs
+268,Mcdonald's #25557,Burgers & Grill
+269,Mcdonald's - Walmart,Burgers & Grill
+270,Meatheads,Otros / Regional
+271,Mickey's Gyros & Ribs,Otros / Regional
+272,Milo's Hamburgers,Burgers & Grill
+273,Mocha Express,Otros / Regional
+274,Moe's Original Bar B Que,Tex-Mex
+275,Moe's Southwest Grill,Tex-Mex
+276,Mr Char-Burger,Burgers & Grill
+277,Mr Hero,Otros / Regional
+278,Music City Subs,Sandwiches & Subs
+279,Nathan's Famous,Otros / Regional
+280,Nick's Burgers,Burgers & Grill
+281,Nick's Gyros,Otros / Regional
+282,Nielsen's Frozen Custard,Otros / Regional
+283,Nino's Pizza,Pizza & Italian
+284,Noodles & Company,Asian & Seafood
+285,Northeastern State University,Otros / Regional
+286,Ny Chicken Fish,Chicken & Wings
+287,OMG! Rotisserie,Otros / Regional
+288,Old Country Buffet,Otros / Regional
+289,Omega Drive-In,Otros / Regional
+290,Omelette House,Otros / Regional
+291,Original Tracks,Otros / Regional
+292,Osgood's,Otros / Regional
+293,P. Terry's,Otros / Regional
+294,Pacific Rim,Otros / Regional
+295,Paesano's,Otros / Regional
+296,Pal's Sudden Service,Otros / Regional
+297,Panda,Otros / Regional
+298,Panda Express,Asian & Seafood
+299,Panera Bread,Sandwiches & Subs
+300,Papa Gino's,Otros / Regional
+301,Papa John's,Pizza & Italian
+302,Papa John's Pizza,Pizza & Italian
+303,Papagus Gyros,Otros / Regional
+304,Pei Wei,Asian & Seafood
+305,Peking Wok,Asian & Seafood
+306,Penguin Point,Otros / Regional
+307,Penn Station East Coast Subs,Sandwiches & Subs
+308,Pete's Burgers,Burgers & Grill
+309,Petro's Chili & Chips,Otros / Regional
+310,Pick Up Stix,Otros / Regional
+311,Pita Pit,Otros / Regional
+312,Pizza Barn,Pizza & Italian
+313,Pizza Express,Pizza & Italian
+314,Pizza Factory,Pizza & Italian
+315,Pizza Hut,Pizza & Italian
+316,Pizza Hut Wingstreet,Pizza & Italian
+317,Pizza One,Pizza & Italian
+318,Pizza Primetime,Pizza & Italian
+319,Pollo Campero,Chicken & Wings
+320,Pollo Tropical,Chicken & Wings
+321,Pop-A-Nugget,Otros / Regional
+322,Popeye's,Otros / Regional
+323,Popeye's Chicken,Chicken & Wings
+324,Popeye's Chicken & Biscuits,Chicken & Wings
+325,Popeyes Chicken and Biscuits,Chicken & Wings
+326,Popeyes Louisiana Kitchen,Chicken & Wings
+327,Port Of Subs,Sandwiches & Subs
+328,Portillo's,Otros / Regional
+329,QDOBA Mexican Eats,Tex-Mex
+330,Qdoba Mexican Grill,Tex-Mex
+331,Quiznos,Sandwiches & Subs
+332,Quiznos Sub,Sandwiches & Subs
+333,Rafael's,Otros / Regional
+334,Rahway Chicken & Burger Inc,Burgers & Grill
+335,Raising Cane's,Chicken & Wings
+336,Raising Cane's Chicken Fingers,Chicken & Wings
+337,Rally's,Burgers & Grill
+338,Rally's Hamburgers,Burgers & Grill
+339,Rally's Springfield,Burgers & Grill
+340,Rancher's Roast Beef Inc.,Otros / Regional
+341,Rapid Ray's,Otros / Regional
+342,Red Robin Gourmet Burgers,Burgers & Grill
+343,Redbox,Otros / Regional
+344,Regal Cinemas Tikahtnu  16 IMAX & RPX,Otros / Regional
+345,Rich's Mighty Fine Burgers Grub,Burgers & Grill
+346,Richie's Restaurant,Otros / Regional
+347,Rocky's,Otros / Regional
+348,Roly Poly,Otros / Regional
+349,Round Table Pizza,Pizza & Italian
+350,Roy Rogers,Otros / Regional
+351,Royal Buffet,Otros / Regional
+352,Rubio's,Tex-Mex
+353,Rubio's Coastal Grill,Tex-Mex
+354,Runza,Otros / Regional
+355,Rush's,Otros / Regional
+356,Ryan's,Otros / Regional
+357,SONIC Drive In,Burgers & Grill
+358,Saladworks,Otros / Regional
+359,Sammy Carry-Out,Otros / Regional
+360,Samurai Sam's,Otros / Regional
+361,Sarku Japan,Otros / Regional
+362,Sbarro,Pizza & Italian
+363,Schlotzsky's,Sandwiches & Subs
+364,Sconecutter,Otros / Regional
+365,Scoopers,Otros / Regional
+366,Seaside Eatery,Otros / Regional
+367,Sensenig Poultry LLC,Otros / Regional
+368,Sheetz,Otros / Regional
+369,Shepard's Drive-In,Otros / Regional
+370,Shloma Inc,Otros / Regional
+371,Shoney's on the Go,Otros / Regional
+372,ShopRite,Otros / Regional
+373,Shot Tower Inn,Otros / Regional
+374,Siam To Go,Otros / Regional
+375,Simmies Arirang Hill Cheese Steak,Otros / Regional
+376,Skyline Chili,Otros / Regional
+377,Slim Chickens,Chicken & Wings
+378,Smashburger,Burgers & Grill
+379,Smoothie King,"Coffee, Bakery & Ice Cream"
+380,Snack Shack,Otros / Regional
+381,Sonic,Burgers & Grill
+382,Sonic Drive-in (trailer),Burgers & Grill
+383,Soulfish Grill,Otros / Regional
+384,South-A-Philly Steaks and Hoagies,Otros / Regional
+385,Spangle's,Otros / Regional
+386,St Louis Original Hamburgers,Burgers & Grill
+387,Starbucks,"Coffee, Bakery & Ice Cream"
+388,Stars Drive-In,Otros / Regional
+389,Steak 'n Shake,Burgers & Grill
+390,Steak Escape,Otros / Regional
+391,Steak-out,Otros / Regional
+392,Stripes Store #2276,Otros / Regional
+393,Strongwater Spirits & Botanicals,Otros / Regional
+394,Subway,Sandwiches & Subs
+395,Subway (johnson) @ Jonesboro,Sandwiches & Subs
+396,Subway - Bell's Ferry,Sandwiches & Subs
+397,Subway - Roland Park,Sandwiches & Subs
+398,Subway Citgo of Quarryville,Sandwiches & Subs
+399,Subway Guitars,Sandwiches & Subs
+400,Subway Sandwiches,Sandwiches & Subs
+401,Subway Sandwiches and Salads,Sandwiches & Subs
+402,Sunrise Cafe,Otros / Regional
+403,Taco Bell,Tex-Mex
+404,Taco Bell/Pizza Hut Express,Tex-Mex
+405,Taco Bueno,Tex-Mex
+406,Taco Cabana,Tex-Mex
+407,Taco Casa,Tex-Mex
+408,Taco Del Mar,Tex-Mex
+409,Taco Delight,Tex-Mex
+410,Taco John's,Tex-Mex
+411,Taco Local,Tex-Mex
+412,Taco Mayo,Tex-Mex
+413,Taco Time,Tex-Mex
+414,Taqueria,Otros / Regional
+415,Tasty Carryout,Otros / Regional
+416,Teddy's Bigger Burgers,Burgers & Grill
+417,Tellers Tap Room & Kitchen,Otros / Regional
+418,The Agora,Otros / Regional
+419,The Biscuit Factory,Otros / Regional
+420,The Break Away Sports Cafe,Otros / Regional
+421,The Chicken Place,Chicken & Wings
+422,The Flame Broiler,Otros / Regional
+423,The Great Steak & Potato Co.,Otros / Regional
+424,The Halal Guys,Otros / Regional
+425,The Honeybaked Ham Company,Otros / Regional
+426,The People Connection,Otros / Regional
+427,The Pita Pit,Otros / Regional
+428,The Pizza Pipe Line,Pizza & Italian
+429,The Press Club,Otros / Regional
+430,Thrasher's French Fries,Otros / Regional
+431,Thunder Ridge Ampride,Otros / Regional
+432,Tina's Carryout Restaurant,Otros / Regional
+433,Tom & Jerry's,Otros / Regional
+434,Tom's Drive In,Otros / Regional
+435,Tom's Grill,Otros / Regional
+436,Tommy's Sub Shop,Sandwiches & Subs
+437,Topper's Pizza,Pizza & Italian
+438,Travelcenters of America,Otros / Regional
+439,Tropical Smoothie Cafe,"Coffee, Bakery & Ice Cream"
+440,Tubby's Grilled Submarines,Sandwiches & Subs
+441,Tudor's Biscuit World,Otros / Regional
+442,Twisters,Otros / Regional
+443,Vista Drive In,Otros / Regional
+444,Waffle House,Otros / Regional
+445,Wendy Two Two Eight,Burgers & Grill
+446,Wendy's,Burgers & Grill
+447,Wetzel's Pretzels,"Coffee, Bakery & Ice Cream"
+448,Whataburger,Burgers & Grill
+449,White Castle,Burgers & Grill
+450,White Manna Hamburgers,Burgers & Grill
+451,Wienerschnitzel,Otros / Regional
+452,Windmill Gourmet Fast Foods,Otros / Regional
+453,Wings And Philly,Chicken & Wings
+454,Wings N' More Wings,Chicken & Wings
+455,Wingstop,Chicken & Wings
+456,Wingstreet,Chicken & Wings
+457,Woody's Sloppy Dogs,Otros / Regional
+458,World Wrapps,Otros / Regional
+459,Wu's Fine Chinese Cuisine,Otros / Regional
+460,Yellow Cab Pizza Co.,Pizza & Italian
+461,Yoshinoya,Otros / Regional
+462,Your Healthy Habit,Burgers & Grill
+463,Yum Brands Inc,Otros / Regional
+464,Zaxby's,Chicken & Wings
+465,Zip's Hamburgers And Fish,Burgers & Grill
+466,Ziti's Italian Express,Otros / Regional
