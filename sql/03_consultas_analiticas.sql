@@ -1,6 +1,6 @@
 -- ============================================================================
 -- Trabajo integrador ae4 de gestión avanzada de bases de datos (2026)
--- Script 02: verificación, indicadores y consultas analíticas del negocio
+-- Script 03: verificación, indicadores y consultas analíticas del negocio
 -- ============================================================================
 
 -- ----------------------------------------------------------------------------
