@@ -1,7 +1,6 @@
--- ============================================================================
+
 -- Trabajo integrador ae4 de gestión avanzada de bases de datos (2026)
 -- Script 02: carga de dimensiones de negocio y tabla de hechos desde archivos csv
--- ============================================================================
 
 -- Limpieza previa de las tablas de hechos y dimensiones de negocio antes de cargar
 TRUNCATE TABLE fact_locales_consumo, dim_geografia, dim_cadena RESTART IDENTITY CASCADE;

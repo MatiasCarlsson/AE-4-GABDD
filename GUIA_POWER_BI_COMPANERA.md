@@ -119,8 +119,8 @@ DIVIDE(Numerador, [Poblacion_Total_Estados], 0)
 ## 5. Diseño del Dashboard: Filtros, Tarjetas y las 4 Visualizaciones
 
 ### A. Los 2 Filtros Interactivos (Segmentadores / Slicers)
-1. **Filtro 1 — Región Censal:** campo `dim_geografia[census_region]`.
-2. **Filtro 2 — Cadena de Fast Food (o Categoría):** campo `dim_cadena[nombre_cadena]` (y opcionalmente `dim_cadena[categoria_principal]`).
+1. **Filtro 1, Región Censal:** campo `dim_geografia[census_region]`.
+2. **Filtro 2, Cadena de Fast Food (o Categoría):** campo `dim_cadena[nombre_cadena]` (y opcionalmente `dim_cadena[categoria_principal]`).
 
 ### B. Las 3 Tarjetas de KPIs (Fila Superior)
 1. **Tarjeta Principal Destacada (KPI 1):** `[KPI_1_DLFF_Cada_100k]` $\rightarrow$ Título: `KPI 1 (Principal): Densidad de Locales (DLFF cada 100k hab.)` (`2,96`).

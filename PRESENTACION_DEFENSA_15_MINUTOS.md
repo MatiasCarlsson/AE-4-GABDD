@@ -1,8 +1,8 @@
 # Guión y Estructura de la Defensa Oral (15 Minutos)
-## Trabajo Integrador AE4 — Gestión Avanzada de Bases de Datos (2026)
+## Trabajo Integrador AE4, Gestión Avanzada de Bases de Datos (2026)
 ### “Oferta Comercial de Fast Food, Consumo Calórico y Prevalencia de Obesidad en EE. UU.”
 
-- **Modalidad:** Exposición grupal (2 o 3 integrantes) — **Duración total:** 15 minutos + preguntas individuales.
+- **Modalidad:** Exposición grupal (2 o 3 integrantes), **Duración total:** 15 minutos + preguntas individuales.
 - **Hilo conductor evaluado por la cátedra:**
   *Preguntas de Negocio y KPIs → Fuentes y ETL en Python/pandas → Modelo Estrella en PostgreSQL (`dw_fastfood`) → Dashboard en Power BI → Hallazgos y Decisión.*
 
@@ -33,7 +33,7 @@
   - **P3:** ¿Cómo se distribuye la cuota de mercado (`PMC`) de las principales cadenas según las 4 regiones censales?
   - **P4:** ¿Qué regiones superan en los relevamientos 2024 las `900 kcal` diarias de *fast food* y cuántas sucursales operan en ellas?
 - **KPIs:**
-  - **KPI 1 (Principal — `DLFF`):** `2,96` locales cada 100.000 habitantes.
+  - **KPI 1 (Principal, `DLFF`):** `2,96` locales cada 100.000 habitantes.
   - **KPI 2 (`PMC`):** *McDonald's* lidera con `21,29%` de participación nacional.
   - **KPI 3 (`TPCD`):** `36,13%` de consumo diario ponderado (con `32,60%` de obesidad adulta nacional).
 

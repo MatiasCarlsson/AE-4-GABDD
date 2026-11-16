@@ -1,19 +1,14 @@
--- ============================================================================
+
 -- Trabajo integrador ae4 de gestión avanzada de bases de datos (2026)
 -- Script 03: verificación, indicadores y consultas analíticas del negocio
--- ============================================================================
 
--- ----------------------------------------------------------------------------
 -- Verificación de la cantidad de registros en las 4 tablas físicas del data warehouse
--- ----------------------------------------------------------------------------
 SELECT 'dim_tiempo' AS tabla, COUNT(*) AS filas FROM dim_tiempo
 UNION ALL SELECT 'dim_geografia', COUNT(*) FROM dim_geografia
 UNION ALL SELECT 'dim_cadena', COUNT(*) FROM dim_cadena
 UNION ALL SELECT 'fact_locales_consumo', COUNT(*) FROM fact_locales_consumo;
 
--- ----------------------------------------------------------------------------
 -- Resumen nacional de los 3 indicadores clave (dlff, pmc de la cadena líder y tpcd)
--- ----------------------------------------------------------------------------
 WITH resumen_estatal AS (
     SELECT
         g.province,
@@ -45,10 +40,8 @@ SELECT
     ROUND(SUM(r.tasa_obesidad_estado * r.poblacion_estado) / SUM(r.poblacion_estado), 2) AS tasa_obesidad_nacional_ponderada_pct
 FROM resumen_estatal r;
 
--- ----------------------------------------------------------------------------
 -- Consulta 1 para responder la pregunta de negocio 1:
 -- ¿cuáles son los 5 estados con mayor densidad de locales cada 100.000 habitantes y cómo se comparan con el promedio nacional?
--- ----------------------------------------------------------------------------
 WITH estados AS (
     SELECT
         g.province,
@@ -81,10 +74,8 @@ CROSS JOIN promedio_nacional p
 ORDER BY e.dlff_estado DESC
 LIMIT 5;
 
--- ----------------------------------------------------------------------------
 -- Consulta 2 para responder la pregunta de negocio 2:
 -- ¿existe relación entre la densidad regional de restaurantes y el porcentaje de consumo diario y obesidad?
--- ----------------------------------------------------------------------------
 WITH estados AS (
     SELECT
         g.census_region,
@@ -111,10 +102,8 @@ FROM estados
 GROUP BY census_region
 ORDER BY dlff_regional_cada_100k DESC;
 
--- ----------------------------------------------------------------------------
 -- Consulta 3 para responder la pregunta de negocio 3:
 -- ¿cómo se distribuye la cuota de mercado (pmc) de las principales cadenas según las 4 regiones censales?
--- ----------------------------------------------------------------------------
 WITH top_cadenas AS (
     SELECT cadena_id
     FROM fact_locales_consumo
@@ -145,10 +134,8 @@ JOIN totales_region tr ON g.census_region = tr.census_region
 GROUP BY c.nombre_cadena, c.categoria_principal, g.census_region, tr.total_locales_region
 ORDER BY c.nombre_cadena, locales_cadena_en_region DESC;
 
--- ----------------------------------------------------------------------------
 -- Consulta 4 para responder la pregunta de negocio 4 (vinculada con dim_tiempo):
 -- ¿qué regiones presentan en los relevamientos 2024 una ingesta calórica diaria promedio superior a 900 kcal y cuántas sucursales operan en ellas?
--- ----------------------------------------------------------------------------
 WITH estados_tiempo AS (
     SELECT
         g.census_region,

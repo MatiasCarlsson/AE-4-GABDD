@@ -1,7 +1,6 @@
--- ============================================================================
+
 -- Trabajo integrador ae4 de gestión avanzada de bases de datos (2026)
 -- Script 01: creación del data warehouse en esquema estrella y carga de dim_tiempo
--- ============================================================================
 
 -- Se eliminan las tablas previas (incluyendo las de versiones anteriores) para recrear desde cero
 DROP TABLE IF EXISTS fact_locales_consumo CASCADE;
@@ -11,10 +10,7 @@ DROP TABLE IF EXISTS dim_ubicacion CASCADE;
 DROP TABLE IF EXISTS dim_cadena CASCADE;
 DROP TABLE IF EXISTS dim_tiempo CASCADE;
 
--- ============================================================================
 -- 1. Creación de las dimensiones
--- ============================================================================
-
 -- Dimensión tiempo obligatoria con fecha, día, mes, nombre del mes, trimestre y año
 CREATE TABLE dim_tiempo (
     tiempo_id   SERIAL PRIMARY KEY,
@@ -44,10 +40,8 @@ CREATE TABLE dim_cadena (
     categoria_principal  VARCHAR(100) NOT NULL
 );
 
--- ============================================================================
 -- 2. Creación de la tabla de hechos
 -- Granularidad: un local de comida rápida vinculado a su ubicación, cadena y corte temporal
--- ============================================================================
 
 CREATE TABLE fact_locales_consumo (
     hecho_id                      SERIAL PRIMARY KEY,
@@ -62,9 +56,7 @@ CREATE TABLE fact_locales_consumo (
     tasa_obesidad_pct             NUMERIC(6,2) NOT NULL
 );
 
--- ============================================================================
 -- 3. Carga de dim_tiempo con todos los días del año 2024 (366 filas por año bisiesto)
--- ============================================================================
 
 INSERT INTO dim_tiempo (fecha, dia, mes, nombre_mes, trimestre, anio)
 SELECT
@@ -76,9 +68,7 @@ SELECT
     EXTRACT(YEAR FROM fecha)
 FROM generate_series('2024-01-01'::date, '2024-12-31'::date, '1 day') AS fecha;
 
--- ============================================================================
 -- 4. Índices sobre las claves foráneas para optimizar las consultas analíticas
--- ============================================================================
 
 CREATE INDEX idx_fact_tiempo ON fact_locales_consumo(tiempo_id);
 CREATE INDEX idx_fact_geografia ON fact_locales_consumo(geografia_id);

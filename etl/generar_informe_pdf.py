@@ -50,9 +50,11 @@ html_body = re.sub(
     r'<td\1 style="border: 0.75pt solid #000000; padding: 2.5px 4px; font-size: 7.5pt;">',
     html_body,
 )
-html_body = html_body.replace(
-    "<img ",
-    '<img width="480" ',
+img_b64 = base64.b64encode(IMG_PATH.read_bytes()).decode("ascii")
+html_body = re.sub(
+    r'<img\s+src="sql/diagrama_estrella_dw\.jpg"\s+alt="([^"]*)"\s*/?>',
+    f'<p style="text-align: center; margin: 6px 0;"><img src="data:image/jpeg;base64,{img_b64}" alt="\\1" width="480" /></p>',
+    html_body,
 )
 
 full_html = f"""<!DOCTYPE html>
@@ -82,4 +84,6 @@ full_html = f"""<!DOCTYPE html>
 
 HTML_PATH.write_text(full_html, encoding="utf-8")
 subprocess.run(["libreoffice", "--headless", "--convert-to", "pdf", str(HTML_PATH), "--outdir", str(BASE_DIR)], check=True)
+if HTML_PATH.exists():
+    HTML_PATH.unlink()
 print(f"Informe en pdf generado correctamente en: {str(PDF_PATH).lower()}")
