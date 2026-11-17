@@ -244,9 +244,9 @@ export default function DatabaseView({
           </div>
         </div>
 
-        <div className="ed-panel card-navy">
+        <div className="ed-panel">
           <div className="mini-toolbar">
-            <div className="segmented-btns" style={{ background: 'rgba(255,255,255,0.08)', borderColor: 'rgba(255,255,255,0.16)' }}>
+            <div className="segmented-btns">
               {([
                 ['ddl', '01_creacion.sql'],
                 ['dml', '02_carga.sql'],
@@ -258,14 +258,25 @@ export default function DatabaseView({
                   key={key}
                   type="button"
                   className={`seg-btn ${codeTab === key ? 'active' : ''}`}
-                  style={{ color: codeTab === key ? '#fff' : '#CBD5E1' }}
                   onClick={() => setCodeTab(key)}
                 >
                   {label}
                 </button>
               ))}
             </div>
-            <button type="button" className="hdr-btn" onClick={handleCopy}>{copied ? '✓ Copiado' : 'Copiar'}</button>
+            <button
+              type="button"
+              className="seg-btn"
+              onClick={handleCopy}
+              style={{
+                background: copied ? 'var(--violet-600)' : 'var(--surface-muted)',
+                color: copied ? '#fff' : 'var(--ink-900)',
+                border: `1px solid ${copied ? 'var(--violet-600)' : 'var(--border-light)'}`,
+                padding: '7px 14px',
+              }}
+            >
+              {copied ? '✓ Copiado' : 'Copiar'}
+            </button>
           </div>
           <pre className="code-snippet" style={{ height: 430, overflowY: 'auto', fontSize: 12 }}>{CODE_REPO[codeTab]}</pre>
         </div>

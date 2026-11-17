@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import type { EChartsOption } from 'echarts';
 import EChartBox from './EChartBox';
+import { FilterDropdown, type FilterOption } from './FilterDropdown';
 import {
   CUBE_DATA,
   ESTADOS_DATA,
@@ -26,6 +27,40 @@ const CATEGORIES = [
   'Coffee, Bakery & Ice Cream',
 ];
 
+const REGION_OPTIONS: readonly FilterOption[] = [
+  { value: 'ALL', label: 'Todas las Regiones (4)' },
+  { value: 'Midwest', label: 'Midwest' },
+  { value: 'South', label: 'South' },
+  { value: 'West', label: 'West' },
+  { value: 'Northeast', label: 'Northeast' },
+];
+
+const STATE_OPTIONS: readonly FilterOption[] = [
+  { value: 'ALL', label: 'Todos los Estados (51)' },
+  ...[...ESTADOS_DATA]
+    .sort((a, b) => a.state_name.localeCompare(b.state_name))
+    .map((s) => ({ value: s.province, label: `${s.state_name} (${s.province})` })),
+];
+
+const CATEGORY_OPTIONS: readonly FilterOption[] = [
+  { value: 'ALL', label: 'Todas las Categorías (8)' },
+  ...CATEGORIES.map((c) => ({ value: c, label: c })),
+];
+
+const CHAIN_OPTIONS: readonly FilterOption[] = [
+  { value: 'ALL', label: 'Todas las Cadenas (466)' },
+  ...TOP_CHAINS.map((c) => ({ value: c, label: c })),
+  { value: 'Otras Marcas (454)', label: 'Otras Marcas (454)' },
+];
+
+const QUARTER_OPTIONS: readonly FilterOption[] = [
+  { value: 'ALL', label: 'Todos (T1–T4 2024)' },
+  { value: '1', label: 'T1 (2024-03-31)' },
+  { value: '2', label: 'T2 (2024-06-30)' },
+  { value: '3', label: 'T3 (2024-09-30)' },
+  { value: '4', label: 'T4 (2024-12-31)' },
+];
+
 export default function DashboardView({ onBackToDeck }: DashboardViewProps) {
   const [regionFilter, setRegionFilter] = useState<'ALL' | CensusRegion>('ALL');
   const [stateFilter, setStateFilter] = useState<string>('ALL');
@@ -38,10 +73,9 @@ export default function DashboardView({ onBackToDeck }: DashboardViewProps) {
   const [p4Mode, setP4Mode] = useState<'region' | 'trimestre'>('region');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const statesSortedAlpha = useMemo(
-    () => [...ESTADOS_DATA].sort((a, b) => a.state_name.localeCompare(b.state_name)),
-    []
-  );
+  const handleRegionChange = useCallback((value: string) => {
+    setRegionFilter(value as 'ALL' | CensusRegion);
+  }, []);
 
   /* Motor DAX derivado durante render (sin useEffect redundantes) */
   const computed = useMemo(() => {
@@ -503,60 +537,45 @@ export default function DashboardView({ onBackToDeck }: DashboardViewProps) {
 
       {/* 5 Segmentadores */}
       <div className="slicers-bar" role="region" aria-label="Segmentadores">
-        <div className="slicer-group">
-          <label className="slicer-label" htmlFor="slicerRegion">1. Región Censal</label>
-          <select id="slicerRegion" className="slicer-select" value={regionFilter} onChange={(e) => setRegionFilter(e.target.value as 'ALL' | CensusRegion)}>
-            <option value="ALL">Todas las Regiones (4)</option>
-            <option value="Midwest">Midwest</option>
-            <option value="South">South</option>
-            <option value="West">West</option>
-            <option value="Northeast">Northeast</option>
-          </select>
-        </div>
+        <FilterDropdown
+          id="slicerRegion"
+          label="1. Región Censal"
+          value={regionFilter}
+          options={REGION_OPTIONS}
+          onChange={handleRegionChange}
+        />
 
-        <div className="slicer-group">
-          <label className="slicer-label" htmlFor="slicerState">2. Estado / Jurisdicción</label>
-          <select id="slicerState" className="slicer-select" value={stateFilter} onChange={(e) => setStateFilter(e.target.value)}>
-            <option value="ALL">Todos los Estados (51)</option>
-            {statesSortedAlpha.map((s) => (
-              <option key={s.province} value={s.province}>
-                {s.state_name} ({s.province})
-              </option>
-            ))}
-          </select>
-        </div>
+        <FilterDropdown
+          id="slicerState"
+          label="2. Estado / Jurisdicción"
+          value={stateFilter}
+          options={STATE_OPTIONS}
+          onChange={setStateFilter}
+        />
 
-        <div className="slicer-group">
-          <label className="slicer-label" htmlFor="slicerCategory">3. Categoría</label>
-          <select id="slicerCategory" className="slicer-select" value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
-            <option value="ALL">Todas las Categorías (8)</option>
-            {CATEGORIES.map((c) => (
-              <option key={c} value={c}>{c}</option>
-            ))}
-          </select>
-        </div>
+        <FilterDropdown
+          id="slicerCategory"
+          label="3. Categoría"
+          value={categoryFilter}
+          options={CATEGORY_OPTIONS}
+          onChange={setCategoryFilter}
+        />
 
-        <div className="slicer-group">
-          <label className="slicer-label" htmlFor="slicerChain">4. Cadena Líder</label>
-          <select id="slicerChain" className="slicer-select" value={chainFilter} onChange={(e) => setChainFilter(e.target.value)}>
-            <option value="ALL">Todas las Cadenas (466)</option>
-            {TOP_CHAINS.map((c) => (
-              <option key={c} value={c}>{c}</option>
-            ))}
-            <option value="Otras Marcas (454)">Otras Marcas (454)</option>
-          </select>
-        </div>
+        <FilterDropdown
+          id="slicerChain"
+          label="4. Cadena Líder"
+          value={chainFilter}
+          options={CHAIN_OPTIONS}
+          onChange={setChainFilter}
+        />
 
-        <div className="slicer-group">
-          <label className="slicer-label" htmlFor="slicerQuarter">5. Trimestre 2024</label>
-          <select id="slicerQuarter" className="slicer-select" value={quarterFilter} onChange={(e) => setQuarterFilter(e.target.value)}>
-            <option value="ALL">Todos (T1–T4 2024)</option>
-            <option value="1">T1 (2024-03-31)</option>
-            <option value="2">T2 (2024-06-30)</option>
-            <option value="3">T3 (2024-09-30)</option>
-            <option value="4">T4 (2024-12-31)</option>
-          </select>
-        </div>
+        <FilterDropdown
+          id="slicerQuarter"
+          label="5. Trimestre 2024"
+          value={quarterFilter}
+          options={QUARTER_OPTIONS}
+          onChange={setQuarterFilter}
+        />
 
         <button type="button" className="hdr-btn" onClick={resetFilters} style={{ background: 'var(--navy-900)', color: '#fff', border: 'none', height: 40, padding: '0 16px' }}>
           &#x21BA; Limpiar

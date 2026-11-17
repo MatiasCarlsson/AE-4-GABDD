@@ -140,7 +140,7 @@ export default function PresentationDeck({
           currentSlide={currentSlide}
           hero
           etapa="01 / 18 • Universidad de la Cuenca del Plata • Ingeniería en Sistemas"
-          speaker="Hannah Bojanovich & Matías Viana Carlsson"
+          speaker="Oradora: Hannah"
           showSpeakers={showSpeakers}
         >
           <div className="hero-aura" aria-hidden="true" />
@@ -190,7 +190,7 @@ export default function PresentationDeck({
           index={1}
           currentSlide={currentSlide}
           etapa="02 / 18 • Propósito y Pregunta Disparadora"
-          speaker="Hannah & Matías (Bloque Inicial)"
+          speaker="Oradora: Hannah"
           showSpeakers={showSpeakers}
           title={
             <>
@@ -262,7 +262,7 @@ export default function PresentationDeck({
           index={2}
           currentSlide={currentSlide}
           etapa="03 / 18 • Etapa 3.1 • Contexto y Problemática"
-          speaker="Oradora: Hannah (Bloque 1)"
+          speaker="Oradora: Hannah"
           showSpeakers={showSpeakers}
           title="¿Por qué contar solo locales distorsiona el análisis?"
           lead="Sin relativizar por población, los estados más poblados aparentan saturación cuando su disponibilidad real por habitante es mínima."
@@ -309,7 +309,7 @@ export default function PresentationDeck({
           index={3}
           currentSlide={currentSlide}
           etapa="04 / 18 • Etapa 3.1 • Preguntas de Negocio e Indicadores"
-          speaker="Oradora: Hannah (Bloque 1)"
+          speaker="Orador: Matías"
           showSpeakers={showSpeakers}
           title="4 Preguntas de Investigación y 3 KPIs Matemáticos"
           lead="Cada pregunta justifica una tabla del Esquema Estrella y se traduce en un visual del tablero."
@@ -372,7 +372,7 @@ export default function PresentationDeck({
           index={4}
           currentSlide={currentSlide}
           etapa="05 / 18 • Etapa 3.2 • Fuentes de Datos y Merge"
-          speaker="Orador: Matías (Bloque 2)"
+          speaker="Orador: Matías"
           showSpeakers={showSpeakers}
           title={<>Integración de 2 Fuentes Heterogéneas por <code>province</code></>}
           lead="El padrón georreferenciado externo se complementa con indicadores censales y epidemiológicos estatales de 2024."
@@ -418,7 +418,7 @@ export default function PresentationDeck({
           index={5}
           currentSlide={currentSlide}
           etapa="06 / 18 • Etapa 3.3 • Pipeline ETL en Python y pandas"
-          speaker="Orador: Matías (Bloque 2)"
+          speaker="Orador: Matías"
           showSpeakers={showSpeakers}
           title="Pipeline ETL: 5 Reglas de Limpieza y Auditoría Automática"
           lead={<>Reparación reproducible sin edición manual de archivos crudos (<code>etl/etl_fastfood_dw.py</code>).</>}
@@ -465,7 +465,7 @@ export default function PresentationDeck({
           index={6}
           currentSlide={currentSlide}
           etapa="07 / 18 • Etapa 3.4 • Data Warehouse en PostgreSQL"
-          speaker="Orador: Matías (Bloque 3)"
+          speaker="Orador: Matías"
           showSpeakers={showSpeakers}
           title={<>Esquema Estrella (<code>dw_fastfood</code>): 3 Dimensiones y 1 Hecho Central</>}
           lead="Integridad referencial mediante claves foráneas indexadas con B-Tree y separación de métricas aditivas vs. semi-aditivas."
@@ -532,7 +532,7 @@ export default function PresentationDeck({
           index={7}
           currentSlide={currentSlide}
           etapa="08 / 18 • Etapa 3.3 / 3.4 • Clasificación en dim_cadena"
-          speaker="Orador: Matías (Bloque 2/3)"
+          speaker="Orador: Matías"
           showSpeakers={showSpeakers}
           title="Anatomía de la Oferta: 466 Marcas en 8 Categorías"
           lead={<>El rubro <em>Burgers &amp; Grill</em> domina más de la mitad de todo el parque físico analizado.</>}
@@ -575,7 +575,7 @@ export default function PresentationDeck({
           index={8}
           currentSlide={currentSlide}
           etapa="09 / 18 • Etapa 3.5 • Power BI Desktop y Medidas DAX"
-          speaker="Oradora: Hannah (Bloque 4)"
+          speaker="Oradora: Hannah"
           showSpeakers={showSpeakers}
           title={<>Modelado en Power BI: Relaciones <code>1:*</code> e Iteradores DAX</>}
           lead="Cálculo exacto de densidades y tasas ponderadas sin duplicar la población estatal por ciudad."
@@ -619,7 +619,7 @@ RETURN DIVIDE(SumaPonderada, PoblacionPonderada, 0)
           index={9}
           currentSlide={currentSlide}
           etapa="10 / 18 • Etapa 3.5 • Pregunta de Negocio 1 (KPI 1 DLFF)"
-          speaker="Oradora: Hannah (Bloque 4)"
+          speaker="Oradora: Hannah"
           showSpeakers={showSpeakers}
           title={<>P1: Top 5 Estados por Densidad (<code>DLFF</code>) vs. Media (<code>2,96</code>)</>}
           lead="South Dakota, Kentucky, New Mexico, Wyoming y Vermont superan en más del doble la media nacional."
@@ -656,7 +656,7 @@ RETURN DIVIDE(SumaPonderada, PoblacionPonderada, 0)
           index={10}
           currentSlide={currentSlide}
           etapa="11 / 18 • Etapa 3.5 • Pregunta de Negocio 2 (Correlación Regional)"
-          speaker="Oradora: Hannah (Bloque 4)"
+          speaker="Oradora: Hannah"
           showSpeakers={showSpeakers}
           title={<>P2: Densidad Regional (<code>DLFF</code>) vs. Consumo Diario y Obesidad</>}
           lead={<>Las regiones <em>Midwest</em> (<code>3,97</code>) y <em>South</em> (<code>3,25</code>) superan la media nacional y coinciden con las mayores tasas de consumo diario y obesidad.</>}
@@ -700,7 +700,7 @@ RETURN DIVIDE(SumaPonderada, PoblacionPonderada, 0)
           index={11}
           currentSlide={currentSlide}
           etapa="12 / 18 • Etapa 3.5 • Pregunta de Negocio 3 (KPI 2 PMC %)"
-          speaker="Oradora: Hannah (Bloque 4)"
+          speaker="Oradora: Hannah"
           showSpeakers={showSpeakers}
           title={<>P3 (Parte A): Cuota de Mercado (<code>PMC %</code>) del Top 8 por Región</>}
           lead={<>Las 8 marcas líderes concentran el <strong>72,35 % del mercado nacional</strong>, encabezadas por McDonald's (<code>21,29%</code>) y Burger King (<code>11,65%</code>).</>}
@@ -719,7 +719,7 @@ RETURN DIVIDE(SumaPonderada, PoblacionPonderada, 0)
           index={12}
           currentSlide={currentSlide}
           etapa="13 / 18 • Etapa 3.5 • Patrones Competitivos Regionales"
-          speaker="Oradora: Hannah (Bloque 4)"
+          speaker="Oradora: Hannah"
           showSpeakers={showSpeakers}
           title="P3 (Parte B): Consolidación en el Este y Especialización Regional"
           lead="Distribución de la cuota nacional (PMC %) y región dominante de las 8 cadenas principales (Sección 7.3 del Informe)."
@@ -766,7 +766,7 @@ RETURN DIVIDE(SumaPonderada, PoblacionPonderada, 0)
           index={13}
           currentSlide={currentSlide}
           etapa="14 / 18 • Etapa 3.5 • Pregunta de Negocio 4 (dim_tiempo 2024)"
-          speaker="Oradora: Hannah (Bloque 4)"
+          speaker="Oradora: Hannah"
           showSpeakers={showSpeakers}
           title={<>P4: Regiones por Encima de <code>900 kcal/día</code> en 2024</>}
           lead={<>South y Midwest superan de forma persistente el límite de 900 kcal en los 4 trimestres de 2024 y concentran el <strong>68,87 % de las sucursales</strong>.</>}
@@ -810,7 +810,7 @@ RETURN DIVIDE(SumaPonderada, PoblacionPonderada, 0)
           index={14}
           currentSlide={currentSlide}
           etapa="15 / 18 • Etapa 3.6 • Trazabilidad Completa del Proyecto"
-          speaker="Hannah & Matías (Bloque 5)"
+          speaker="Orador: Matías"
           showSpeakers={showSpeakers}
           title="Hilo Conductor Verificable: De las Preguntas a la Decisión"
           lead="Coherencia de punta a punta entre reglas ETL, tablas del esquema estrella, SQL/DAX y visualización."
@@ -838,7 +838,7 @@ RETURN DIVIDE(SumaPonderada, PoblacionPonderada, 0)
           index={15}
           currentSlide={currentSlide}
           etapa="16 / 18 • Etapa 3.6 • Análisis Integrado Multivariado"
-          speaker="Hannah & Matías (Bloque 5)"
+          speaker="Oradora: Hannah"
           showSpeakers={showSpeakers}
           title="5 Estados de Triple Alerta vs. 4 Plazas de Oportunidad"
           lead={<>Cruce simultáneo de densidad (<code>DLFF</code>), hábito diario (<code>TPCD</code>), calorías y obesidad adulta.</>}
@@ -877,7 +877,7 @@ RETURN DIVIDE(SumaPonderada, PoblacionPonderada, 0)
           index={16}
           currentSlide={currentSlide}
           etapa="17 / 18 • Etapa 3.6 • Recomendaciones y Limitaciones"
-          speaker="Hannah & Matías (Bloque 5)"
+          speaker="Orador: Matías"
           showSpeakers={showSpeakers}
           title="3 Recomendaciones Estratégicas y 4 Limitaciones Metodológicas"
           lead="Síntesis ejecutiva para cadenas comerciales, industria alimentaria y organismos de salud pública (Secciones 7.5 y 8 del Informe)."
@@ -917,7 +917,7 @@ RETURN DIVIDE(SumaPonderada, PoblacionPonderada, 0)
           hero
           centered
           etapa="18 / 18 • Cierre del Trabajo Integrador AE4 GABD (2026)"
-          speaker="Matías & Hannah"
+          speaker="Oradores: Hannah y Matías"
           showSpeakers={showSpeakers}
         >
           <div style={{ maxWidth: 860, margin: '8px 0' }}>
