@@ -6,6 +6,7 @@ import {
   ESTADOS_DATA,
   P3_MATRIX,
   REGION_COLORS,
+  REGION_REPORT_METRICS,
   TOP_CHAINS,
   type CensusRegion,
 } from '../data/ae4Data';
@@ -90,9 +91,16 @@ export default function DashboardView({ onBackToDeck }: DashboardViewProps) {
     let weightedObSum = 0;
     let kcalSum = 0;
 
+    const noSubFilter = categoryFilter === 'ALL' && chainFilter === 'ALL';
+    const isMacroReportView = noSubFilter && stateFilter === 'ALL' && quarterFilter === 'ALL';
+
     const enrichedStates = activeStates.map((s) => {
-      const filteredLoc = locByProv[s.province] || 0;
-      const filteredDlff = s.pop > 0 ? +((filteredLoc * 100000) / s.pop).toFixed(2) : 0;
+      const filteredLoc = noSubFilter ? s.loc : (locByProv[s.province] || 0);
+      const filteredDlff = noSubFilter
+        ? s.dlff
+        : s.pop > 0
+          ? +((filteredLoc * 100000) / s.pop).toFixed(2)
+          : 0;
       totalPop += s.pop;
       weightedTpcdSum += s.tpcd * s.pop;
       weightedObSum += s.ob * s.pop;
@@ -100,30 +108,85 @@ export default function DashboardView({ onBackToDeck }: DashboardViewProps) {
       return { ...s, filteredLoc, filteredDlff };
     });
 
-    const kpi1Dlff = totalPop > 0 ? (totalLocales * 100000) / totalPop : 0;
-    const kpi3Tpcd = totalPop > 0 ? weightedTpcdSum / totalPop : 0;
-    const kpiOb = totalPop > 0 ? weightedObSum / totalPop : 0;
-    const meanKcal = activeStates.length > 0 ? kcalSum / activeStates.length : 0;
+    if (noSubFilter) {
+      totalLocales = enrichedStates.reduce((acc, s) => acc + s.filteredLoc, 0);
+    }
+
+    const reportMeta = isMacroReportView ? REGION_REPORT_METRICS[regionFilter] : null;
+    if (reportMeta) {
+      totalPop = reportMeta.pop;
+      totalLocales = reportMeta.loc;
+    }
+
+    const kpi1Dlff = reportMeta
+      ? reportMeta.dlff
+      : totalPop > 0
+        ? (totalLocales * 100000) / totalPop
+        : 0;
+    const kpi3Tpcd = reportMeta
+      ? reportMeta.tpcd
+      : totalPop > 0
+        ? weightedTpcdSum / totalPop
+        : 0;
+    const kpiOb = reportMeta
+      ? reportMeta.ob
+      : totalPop > 0
+        ? weightedObSum / totalPop
+        : 0;
+    const meanKcal = reportMeta
+      ? reportMeta.kcal
+      : activeStates.length > 0
+        ? kcalSum / activeStates.length
+        : 0;
 
     let topChainName = 'Sin locales';
     let topChainCount = 0;
-    Object.entries(chainTotals).forEach(([k, v]) => {
-      if (k !== 'Otras Marcas (454)' && v > topChainCount) {
-        topChainName = k;
-        topChainCount = v;
+    let kpi2Pmc = 0;
+
+    if (isMacroReportView && regionFilter === 'ALL') {
+      topChainName = "McDonald's";
+      topChainCount = 2109;
+      kpi2Pmc = 21.29;
+    } else if (isMacroReportView && regionFilter !== 'ALL') {
+      topChainName = "McDonald's";
+      kpi2Pmc = P3_MATRIX.pcts[regionFilter][0] ?? 21.29;
+      topChainCount = Math.round((kpi2Pmc * totalLocales) / 100);
+    } else if (chainFilter !== 'ALL' && stateFilter === 'ALL' && quarterFilter === 'ALL' && categoryFilter === 'ALL') {
+      const idx = P3_MATRIX.chains.indexOf(chainFilter);
+      if (idx !== -1) {
+        topChainName = chainFilter;
+        if (regionFilter === 'ALL') {
+          kpi2Pmc = P3_MATRIX.nationalPmc[idx] ?? 0;
+          topChainCount = P3_MATRIX.nationalLoc[idx] ?? 0;
+          totalLocales = topChainCount;
+        } else {
+          kpi2Pmc = P3_MATRIX.pcts[regionFilter][idx] ?? 0;
+          topChainCount = Math.round((kpi2Pmc * REGION_REPORT_METRICS[regionFilter].loc) / 100);
+          totalLocales = topChainCount;
+        }
       }
-    });
-    if (topChainCount === 0 && chainTotals['Otras Marcas (454)']) {
-      topChainName = 'Otras Marcas (454)';
-      topChainCount = chainTotals['Otras Marcas (454)'];
     }
-    const kpi2Pmc = totalLocales > 0 ? (topChainCount * 100) / totalLocales : 0;
+
+    if (kpi2Pmc === 0) {
+      Object.entries(chainTotals).forEach(([k, v]) => {
+        if (k !== 'Otras Marcas (454)' && v > topChainCount) {
+          topChainName = k;
+          topChainCount = v;
+        }
+      });
+      if (topChainCount === 0 && chainTotals['Otras Marcas (454)']) {
+        topChainName = 'Otras Marcas (454)';
+        topChainCount = chainTotals['Otras Marcas (454)'];
+      }
+      kpi2Pmc = totalLocales > 0 ? (topChainCount * 100) / totalLocales : 0;
+    }
 
     const over900States = enrichedStates.filter((s) => s.kcal > 900);
     const over900Loc = over900States.reduce((acc, s) => acc + s.filteredLoc, 0);
-    const over900Pct = totalLocales > 0 ? ((over900Loc * 100) / totalLocales).toFixed(1).replace('.', ',') : '0,0';
+    const over900Pct = totalLocales > 0 ? ((over900Loc * 100) / totalLocales).toFixed(2).replace('.', ',') : '0,00';
 
     return {
+      isMacroReportView,
       activeStatesCount: activeStates.length,
       totalLocales,
       totalPop,
@@ -294,6 +357,14 @@ export default function DashboardView({ onBackToDeck }: DashboardViewProps) {
   const p3Option = useMemo<EChartsOption>(() => {
     const regions: CensusRegion[] = ['Midwest', 'Northeast', 'South', 'West'];
     const top8 = P3_MATRIX.chains;
+    const getChainRegPct = (rg: CensusRegion, chainName: string) => {
+      if (computed.isMacroReportView) {
+        const idx = top8.indexOf(chainName);
+        return idx !== -1 ? (P3_MATRIX.pcts[rg][idx] ?? 0) : 0;
+      }
+      return +(((computed.regChainCounts[rg][chainName] || 0) * 100) / (computed.regTotals[rg] || 1)).toFixed(2);
+    };
+
     if (p3Mode === 'grouped') {
       const chainsRev = [...top8].reverse();
       return {
@@ -306,7 +377,7 @@ export default function DashboardView({ onBackToDeck }: DashboardViewProps) {
           name: rg,
           type: 'bar' as const,
           itemStyle: { color: REGION_COLORS[rg], borderRadius: [0, 3, 3, 0] },
-          data: chainsRev.map((c) => +(((computed.regChainCounts[rg][c] || 0) * 100) / (computed.regTotals[rg] || 1)).toFixed(2)),
+          data: chainsRev.map((c) => getChainRegPct(rg, c)),
         })),
       };
     }
@@ -323,18 +394,26 @@ export default function DashboardView({ onBackToDeck }: DashboardViewProps) {
         type: 'bar' as const,
         stack: 'pmc',
         itemStyle: { color: palette[i] ?? '#7C3AED' },
-        data: regions.map((rg) => +(((computed.regChainCounts[rg][c] || 0) * 100) / (computed.regTotals[rg] || 1)).toFixed(2)),
+        data: regions.map((rg) => getChainRegPct(rg, c)),
       })),
     };
-  }, [computed.regChainCounts, computed.regTotals, p3Mode]);
+  }, [computed.isMacroReportView, computed.regChainCounts, computed.regTotals, p3Mode]);
 
   const p4Option = useMemo<EChartsOption>(() => {
-    const order = p4Mode === 'region' ? ['South', 'Midwest', 'West', 'Northeast'] : ['1', '2', '3', '4'];
+    const order = p4Mode === 'region' ? (['South', 'Midwest', 'West', 'Northeast'] as const) : (['1', '2', '3', '4'] as const);
     const rows = order
       .map((k) => {
         const sub = computed.enrichedStates.filter((s) =>
           p4Mode === 'region' ? s.census_region === k : String(s.trimestre) === k
         );
+        if (p4Mode === 'region' && computed.isMacroReportView) {
+          const rm = REGION_REPORT_METRICS[k as CensusRegion];
+          return {
+            label: k,
+            kcal: sub.length > 0 ? rm.kcal : 0,
+            loc: sub.reduce((a, b) => a + b.filteredLoc, 0),
+          };
+        }
         return {
           label: p4Mode === 'region' ? k : `T${k} 2024`,
           kcal: sub.length > 0 ? +(sub.reduce((a, b) => a + b.kcal, 0) / sub.length).toFixed(1) : 0,

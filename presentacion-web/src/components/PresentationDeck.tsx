@@ -221,11 +221,11 @@ export default function PresentationDeck({
                 />
                 <AnimatedMetricBar
                   label="Brecha de obesidad adulta en bloque crítico"
-                  valueLabel="~35,0% vs. ~29,1%"
+                  valueLabel="35,5% / 34,8% vs. 28,9% / 27,4%"
                   ratio={0.78}
                   accent="violet"
                   active={currentSlide === 1}
-                  subtext="+6 puntos porcentuales respecto a las costas"
+                  subtext="+7 puntos porcentuales respecto a West y Northeast"
                 />
                 <AnimatedMetricBar
                   label="Densidad extrema: South Dakota vs. media EE. UU."
@@ -233,7 +233,7 @@ export default function PresentationDeck({
                   ratio={0.9}
                   accent="teal"
                   active={currentSlide === 1}
-                  subtext="3,78× más oferta relativa por habitante"
+                  subtext="3,78× más oferta relativa por habitante (99 locales)"
                 />
               </div>
             </div>
@@ -243,14 +243,14 @@ export default function PresentationDeck({
                 <span className="panel-kicker">Propósito 1 • Salud Pública Basada en Evidencia</span>
                 <h3 className="panel-heading">Identificar dónde coincide la hiper-oferta con el daño sanitario</h3>
                 <p className="panel-text">
-                  Señalar los estados de <strong>Triple Alerta</strong> (<code>KY, IN, MO, WV, LA</code>) para orientar políticas de etiquetado, nutrición y prevención sin caer en métricas engañosas.
+                  Señalar los estados de <strong>Triple Alerta</strong> (<code>KY, IN, MO, WV, LA</code>) con densidad <code>&gt; 5</code> y consumo diario <code>&gt; 35%</code> para orientar políticas nutricionales.
                 </p>
               </div>
               <div className="ed-panel panel-indigo" style={{ gap: 12 }}>
                 <span className="panel-kicker">Propósito 2 • Decisión Comercial Responsable</span>
                 <h3 className="panel-heading">Evitar canibalización y reformular la oferta</h3>
                 <p className="panel-text">
-                  Detectar plazas sub-penetradas (<code>NY 1,35</code>, <code>NJ 1,60</code>, <code>CA 1,73</code>) y justificar ingeniería de menús livianos en las <strong>6.821 tiendas</strong> de zonas críticas.
+                  Detectar plazas sub-penetradas (<code>NY 1,21</code>, <code>CA 1,54</code>, <code>NJ 1,60</code>) y reformular menús en las <strong>6.821 tiendas</strong> de zonas críticas.
                 </p>
               </div>
             </div>
@@ -272,11 +272,11 @@ export default function PresentationDeck({
               <span className="panel-kicker">Contraste Demográfico Real</span>
               <div style={{ paddingBottom: 18, borderBottom: '1px solid rgba(109,40,217,0.14)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                  <strong style={{ fontSize: 19, color: '#1E113A' }}>California (CA)</strong>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12.5, color: '#6D28D9', fontWeight: 600 }}>Puesto 49 de 51</span>
+                  <strong style={{ fontSize: 19, color: '#1E113A' }}>California (CA) y New York (NY)</strong>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12.5, color: '#6D28D9', fontWeight: 600 }}>Puestos 50 y 51 de 51</span>
                 </div>
                 <p className="panel-text" style={{ marginTop: 8 }}>
-                  Registra <strong>675 locales</strong> (el mayor parque bruto del país), pero sobre 38,96 M de habitantes equivale a apenas <strong>1,73 locales c/100k hab.</strong>
+                  Lideran en cantidad bruta de locales, pero sobre <strong>38,96 M</strong> (CA) y <strong>19,57 M</strong> (NY) de habitantes registran apenas <strong>1,54</strong> y <strong>1,21 locales c/100k hab.</strong>
                 </p>
               </div>
               <div>
@@ -285,7 +285,7 @@ export default function PresentationDeck({
                   <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12.5, color: '#0D9488', fontWeight: 700 }}>Top 1 Nacional</span>
                 </div>
                 <p className="panel-text" style={{ marginTop: 8 }}>
-                  Con solo <strong>103 locales</strong> y 0,92 M de habitantes alcanza <strong>11,20 locales c/100k hab.</strong> (<strong>3,78×</strong> el promedio nacional).
+                  Con <strong>99 locales</strong> y <strong>884.659 habitantes</strong> alcanza <strong>11,20 locales c/100k hab.</strong> (casi <strong>4 veces</strong> el promedio nacional de <code>2,96</code>).
                 </p>
               </div>
             </div>
@@ -293,7 +293,7 @@ export default function PresentationDeck({
               <div className="ed-panel panel-indigo">
                 <span className="panel-kicker">01 • Perspectiva Comercial</span>
                 <h3 className="panel-heading">Prevenir canibalización y detectar plazas abiertas</h3>
-                <p className="panel-text">Distinguir mercados estatales saturados en el <em>Midwest</em> y <em>South</em> frente a jurisdicciones sub-penetradas del <em>Northeast</em> (<code>1,87</code>) y <em>West</em> (<code>2,56</code>).</p>
+                <p className="panel-text">Distinguir mercados estatales saturados en el <em>Midwest</em> (<code>3,97</code>) y <em>South</em> (<code>3,25</code>) frente a jurisdicciones sub-penetradas del <em>Northeast</em> (<code>1,89</code>) y <em>West</em> (<code>2,57</code>).</p>
               </div>
               <div className="ed-panel">
                 <span className="panel-kicker">02 • Perspectiva Sanitaria (CDC 2024)</span>
@@ -591,23 +591,25 @@ export default function PresentationDeck({
               </ul>
             </div>
             <div className="ed-panel panel-indigo">
-              <span className="panel-kicker">Tabla _Medidas_KPIs (DAX)</span>
-              <pre className="code-snippet" style={{ padding: 16, fontSize: 12.5 }}>{`Poblacion Estados =
-SUMX(VALUES(dim_geografia[province]),
-     CALCULATE(MAX(dim_geografia[population_total])))
+              <span className="panel-kicker">Medidas Explícitas en DAX (Sección 6 del Informe)</span>
+              <pre className="code-snippet" style={{ padding: 14, fontSize: 11.8 }}>{`1. DLFF =
+VAR TotalLocales = SUM(fact_locales_consumo[cantidad_locales])
+VAR PoblacionPonderada = SUMX(VALUES(dim_geografia[province]),
+    CALCULATE(MAX(dim_geografia[population_total])))
+RETURN DIVIDE(TotalLocales, PoblacionPonderada, 0) * 100000
 
-KPI 1 DLFF c/100k =
-DIVIDE([Total Locales], [Poblacion Estados], 0) * 100000
+2. PMC =
+VAR LocalesCadena = SUM(fact_locales_consumo[cantidad_locales])
+VAR LocalesTotales = CALCULATE(SUM(fact_locales_consumo[cantidad_locales]), ALL(dim_cadena))
+RETURN DIVIDE(LocalesCadena, LocalesTotales, 0) * 100
 
-KPI 2 PMC Cuota % =
-DIVIDE([Total Locales],
-       CALCULATE([Total Locales], ALL(dim_cadena)), 0) * 100
+3. TPCD =
+VAR SumaPonderada = SUMX(VALUES(dim_geografia[province]),
+    CALCULATE(MAX(fact_locales_consumo[pct_consumo_diario]) * MAX(dim_geografia[population_total])))
+RETURN DIVIDE(SumaPonderada, PoblacionPonderada, 0)
 
-KPI 3 TPCD Ponderado % =
-VAR Num = SUMX(VALUES(dim_geografia[province]),
-    CALCULATE(MAX(fact_locales_consumo[pct_consumo_diario])
-              * MAX(dim_geografia[population_total])))
-RETURN DIVIDE(Num, [Poblacion Estados], 0)`}</pre>
+4. Calorias_Promedio = AVERAGEX(VALUES(dim_geografia[province]),
+    CALCULATE(MAX(fact_locales_consumo[calorias_diarias_promedio_ff])))`}</pre>
             </div>
           </div>
         </SlideShell>
@@ -620,7 +622,7 @@ RETURN DIVIDE(Num, [Poblacion Estados], 0)`}</pre>
           speaker="Oradora: Hannah (Bloque 4)"
           showSpeakers={showSpeakers}
           title={<>P1: Top 5 Estados por Densidad (<code>DLFF</code>) vs. Media (<code>2,96</code>)</>}
-          lead="South Dakota, Kentucky, New Mexico, Wyoming y Vermont duplican o triplican el promedio nacional."
+          lead="South Dakota, Kentucky, New Mexico, Wyoming y Vermont superan en más del doble la media nacional."
           toolbarRight={
             <div className="segmented-btns">
               <button type="button" className={`seg-btn ${p1Mode === 'top5' ? 'active' : ''}`} onClick={() => setP1Mode('top5')}>Top 5 (P1)</button>
@@ -632,18 +634,18 @@ RETURN DIVIDE(Num, [Poblacion Estados], 0)`}</pre>
             <div className="ed-panel"><EChartBox option={p1Option} height={370} active={currentSlide === 9} /></div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               <div className="ed-panel">
-                <span className="panel-kicker">Top 1 • South Dakota (SD)</span>
+                <span className="panel-kicker">Top 1 • South Dakota (SD — Midwest)</span>
                 <div className="big-stat">11,20 <span className="stat-unit">c/100k hab.</span></div>
-                <p className="panel-text"><code>+8,24</code> sobre la media nacional por concentración de <em>drive-thru</em> en corredores interestatales.</p>
+                <p className="panel-text"><strong>99 locales</strong> sobre <strong>884.659 hab.</strong> (casi 4 veces superior a la media nacional de <code>2,96</code>).</p>
               </div>
               <div className="ed-panel panel-teal">
-                <span className="panel-kicker">Top 2 • Kentucky (KY)</span>
-                <div className="big-stat">7,11 <span className="stat-unit">c/100k hab.</span></div>
-                <p className="panel-text">Combina saturación comercial (<code>322</code> locales) con <strong>40,5%</strong> de consumo diario y <strong>37,7%</strong> de obesidad.</p>
+                <span className="panel-kicker">Top 2 a 5 • KY, NM, WY y VT</span>
+                <div className="big-stat">7,11 <span className="stat-unit">a 6,49 c/100k</span></div>
+                <p className="panel-text"><strong>KY</strong> (<code>316</code> loc. / <code>4,47M</code> hab. &rarr; <code>7,11</code>), <strong>NM</strong> (<code>148</code> &rarr; <code>7,05</code>), <strong>WY</strong> (<code>40</code> &rarr; <code>7,02</code>) y <strong>VT</strong> (<code>41</code> &rarr; <code>6,49</code>).</p>
               </div>
               <div className="ed-panel panel-luminous">
                 <span className="panel-kicker">Menor Saturación • NY y CA</span>
-                <p className="panel-text"><strong>New York (1,35)</strong> y <strong>California (1,73)</strong> cierran el ranking por su alta densidad urbana y oferta independiente.</p>
+                <p className="panel-text"><strong>New York (1,21)</strong> y <strong>California (1,54)</strong> presentan densidades notablemente inferiores a la media a pesar de liderar en cantidad absoluta de locales.</p>
               </div>
             </div>
           </div>
@@ -657,7 +659,7 @@ RETURN DIVIDE(Num, [Poblacion Estados], 0)`}</pre>
           speaker="Oradora: Hannah (Bloque 4)"
           showSpeakers={showSpeakers}
           title={<>P2: Densidad Regional (<code>DLFF</code>) vs. Consumo Diario y Obesidad</>}
-          lead={<>El bloque <em>Midwest + South</em> supera la densidad nacional y registra ~6 puntos más de obesidad que <em>West + Northeast</em>.</>}
+          lead={<>Las regiones <em>Midwest</em> (<code>3,97</code>) y <em>South</em> (<code>3,25</code>) superan la media nacional y coinciden con las mayores tasas de consumo diario y obesidad.</>}
           toolbarRight={
             <div className="segmented-btns">
               {(['ALL', 'Midwest', 'South', 'West', 'Northeast'] as const).map((reg) => (
@@ -673,21 +675,21 @@ RETURN DIVIDE(Num, [Poblacion Estados], 0)`}</pre>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               <div className="ed-table-wrap">
                 <table className="ed-table">
-                  <thead><tr><th>Región</th><th>DLFF</th><th>TPCD</th><th>Obesidad</th></tr></thead>
+                  <thead><tr><th>Región</th><th>Locales</th><th>DLFF</th><th>Consumo</th><th>Kcal/d</th><th>Obesidad</th></tr></thead>
                   <tbody>
-                    <tr className="row-alert"><td><strong style={{ color: '#C4B5FD' }}>&#9679; Midwest</strong></td><td><strong>3,91</strong></td><td>37,69%</td><td><strong>35,14%</strong></td></tr>
-                    <tr className="row-alert"><td><strong style={{ color: '#A5B4FC' }}>&#9679; South</strong></td><td><strong>3,17</strong></td><td><strong>38,90%</strong></td><td><strong>34,90%</strong></td></tr>
-                    <tr><td><strong style={{ color: '#F472B6' }}>&#9679; West</strong></td><td>2,56</td><td>33,43%</td><td>28,85%</td></tr>
-                    <tr><td><strong style={{ color: '#2DD4BF' }}>&#9679; Northeast</strong></td><td>1,87</td><td>31,67%</td><td>29,48%</td></tr>
+                    <tr className="row-alert"><td><strong style={{ color: '#C4B5FD' }}>&#9679; Midwest</strong></td><td>2.740</td><td><strong>3,97</strong></td><td><strong>38,40%</strong></td><td>925,1</td><td><strong>34,80%</strong></td></tr>
+                    <tr className="row-alert"><td><strong style={{ color: '#A5B4FC' }}>&#9679; South</strong></td><td>4.081</td><td><strong>3,25</strong></td><td><strong>39,10%</strong></td><td>944,9</td><td><strong>35,50%</strong></td></tr>
+                    <tr><td><strong style={{ color: '#F472B6' }}>&#9679; West</strong></td><td>2.022</td><td>2,57</td><td>33,20%</td><td>845,6</td><td>28,90%</td></tr>
+                    <tr><td><strong style={{ color: '#2DD4BF' }}>&#9679; Northeast</strong></td><td>1.061</td><td>1,89</td><td>31,50%</td><td>812,3</td><td>27,40%</td></tr>
                     <tr className="row-summary">
-                      <td>EE. UU.</td><td>2,96</td><td>36,13%</td><td>32,60%</td>
+                      <td>TOTAL EE. UU.</td><td>9.904</td><td>2,96</td><td>36,13%</td><td>898,5</td><td>32,60%</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
               <div className="ed-panel panel-teal">
                 <span className="panel-kicker">Excepción Estadística: Vermont (VT)</span>
-                <p className="panel-text">Alta densidad (<code>6,49</code>) por su baja población residente, pero bajo consumo diario (<code>29,4%</code>) y baja obesidad (<code>27,6%</code>).</p>
+                <p className="panel-text">Alta densidad (<code>6,49</code>) por su baja población (<code>631.543</code> hab.), pero bajo consumo diario (<code>29,4%</code>) y baja obesidad (<code>27,6%</code>).</p>
               </div>
             </div>
           </div>
@@ -701,7 +703,7 @@ RETURN DIVIDE(Num, [Poblacion Estados], 0)`}</pre>
           speaker="Oradora: Hannah (Bloque 4)"
           showSpeakers={showSpeakers}
           title={<>P3 (Parte A): Cuota de Mercado (<code>PMC %</code>) del Top 8 por Región</>}
-          lead={<>Las 8 cadenas líderes concentran <strong>6.587 locales (66,51 % del país)</strong>, encabezadas por McDonald's en las 4 regiones.</>}
+          lead={<>Las 8 marcas líderes concentran el <strong>72,35 % del mercado nacional</strong>, encabezadas por McDonald's (<code>21,29%</code>) y Burger King (<code>11,65%</code>).</>}
           toolbarRight={
             <div className="segmented-btns">
               <button type="button" className={`seg-btn ${p3Mode === 'grouped' ? 'active' : ''}`} onClick={() => setP3Mode('grouped')}>Barras Agrupadas</button>
@@ -719,38 +721,41 @@ RETURN DIVIDE(Num, [Poblacion Estados], 0)`}</pre>
           etapa="13 / 18 • Etapa 3.5 • Patrones Competitivos Regionales"
           speaker="Oradora: Hannah (Bloque 4)"
           showSpeakers={showSpeakers}
-          title="P3 (Parte B): Duopolio en el Este, Fragmentación en el Oeste y Nichos"
-          lead="Tres dinámicas territoriales identificadas en la matriz competitiva de las 8 franquicias principales."
+          title="P3 (Parte B): Consolidación en el Este y Especialización Regional"
+          lead="Distribución de la cuota nacional (PMC %) y región dominante de las 8 cadenas principales (Sección 7.3 del Informe)."
         >
           <div className="cols-3">
             <div className="ed-panel panel-indigo">
-              <span className="panel-kicker">01 • Northeast (1.065 loc.)</span>
-              <div className="big-stat">45,26%</div>
-              <h3 className="panel-heading">Duopolio McDonald's + Burger King</h3>
-              <p className="panel-text">McDonald's alcanza su techo nacional (<code>26,95%</code>) junto a Burger King (<code>18,31%</code>). El Top 8 suma <code>75,21%</code>.</p>
+              <span className="panel-kicker">01 • Northeast (1.061 loc.)</span>
+              <div className="big-stat">28,40%</div>
+              <h3 className="panel-heading">Techo de McDonald's y Burger King</h3>
+              <p className="panel-text"><strong>McDonald's</strong> alcanza su máxima penetración en el Northeast (<code>28,40%</code> vs. <code>21,29%</code> nac.) junto a <strong>Burger King</strong> (<code>15,10%</code> vs. <code>11,65%</code> nac.).</p>
             </div>
             <div className="ed-panel">
-              <span className="panel-kicker">02 • West (2.018 loc.)</span>
-              <div className="big-stat">43,16%</div>
-              <h3 className="panel-heading">Peso de Cadenas Regionales</h3>
-              <p className="panel-text">Menor dominio del Top 8 (<code>56,84%</code>) por marcas de costa oeste (<em>Jack in the Box</em>, <em>Carl's Jr.</em>) y pico de <strong>Subway</strong> (<code>5,95%</code>).</p>
+              <span className="panel-kicker">02 • West (2.022 loc.)</span>
+              <div className="big-stat">14,20%</div>
+              <h3 className="panel-heading">Fuerte Penetración de Taco Bell y Subway</h3>
+              <p className="panel-text"><strong>Taco Bell</strong> (<code>10,33%</code> nac.) lidera su segmento en el West con <code>14,20%</code>, acompañado por el máximo regional de <strong>Subway</strong> (<code>6,50%</code>).</p>
             </div>
             <div className="ed-panel panel-teal">
-              <span className="panel-kicker">03 • Nichos South &amp; Midwest</span>
-              <div className="big-stat">232 / 386</div>
-              <h3 className="panel-heading">SONIC en el Sur y Arby's en Medio Oeste</h3>
-              <p className="panel-text"><strong>SONIC</strong> concentra el 60% de su red en el South (<code>5,62%</code> vs. <code>0,47%</code> en NE); <strong>Arby's</strong> (<code>7,58%</code>) y <strong>Taco Bell</strong> (<code>10,03%</code>) destacan en Midwest.</p>
+              <span className="panel-kicker">03 • Nichos Midwest &amp; South</span>
+              <div className="big-stat">12,3% / 8,9%</div>
+              <h3 className="panel-heading">Wendy's y Arby's en MW; SONIC y KFC en Sur</h3>
+              <p className="panel-text"><strong>Wendy's</strong> (<code>12,30%</code>) y <strong>Arby's</strong> (<code>9,80%</code>) destacan en el Midwest; <strong>SONIC Drive-In</strong> (<code>8,90%</code>) y <strong>KFC</strong> (<code>5,20%</code>) se concentran en el South.</p>
             </div>
           </div>
           <div className="ed-table-wrap">
             <table className="ed-table">
-              <thead><tr><th>Top 5 Cadenas</th><th>Midwest</th><th>Northeast</th><th>South</th><th>West</th><th>Total EE. UU.</th><th>PMC Nacional</th></tr></thead>
+              <thead><tr><th>Cadena Comercial</th><th>PMC Nacional (%)</th><th>Región Dominante</th><th>PMC en Región Dominante (%)</th><th>Midwest</th><th>Northeast</th><th>South</th><th>West</th></tr></thead>
               <tbody>
-                <tr className="row-alert"><td><strong>1. McDonald's</strong></td><td>21,37%</td><td><strong>26,95%</strong></td><td>21,65%</td><td>17,49%</td><td>2.109</td><td><strong>21,29%</strong></td></tr>
-                <tr><td><strong>2. Burger King</strong></td><td>13,04%</td><td><strong>18,31%</strong></td><td>10,07%</td><td>9,07%</td><td>1.145</td><td>11,56%</td></tr>
-                <tr><td><strong>3. Taco Bell</strong></td><td><strong>10,03%</strong></td><td>5,82%</td><td>8,38%</td><td>8,92%</td><td>858</td><td>8,66%</td></tr>
-                <tr><td><strong>4. Wendy's</strong></td><td>8,06%</td><td><strong>9,20%</strong></td><td>7,60%</td><td>5,20%</td><td>734</td><td>7,41%</td></tr>
-                <tr><td><strong>5. Arby's</strong></td><td><strong>7,58%</strong></td><td>3,47%</td><td>5,21%</td><td>3,12%</td><td>519</td><td>5,24%</td></tr>
+                <tr className="row-alert"><td><strong>1. McDonald's</strong></td><td><strong>21,29%</strong></td><td><strong>Northeast</strong></td><td><strong>28,40%</strong></td><td>21,13%</td><td><strong>28,40%</strong></td><td>21,20%</td><td>17,95%</td></tr>
+                <tr><td><strong>2. Burger King</strong></td><td><strong>11,65%</strong></td><td><strong>Northeast</strong></td><td><strong>15,10%</strong></td><td>12,85%</td><td><strong>15,10%</strong></td><td>10,90%</td><td>9,74%</td></tr>
+                <tr><td><strong>3. Taco Bell</strong></td><td><strong>10,33%</strong></td><td><strong>West</strong></td><td><strong>14,20%</strong></td><td>10,51%</td><td>6,41%</td><td>9,31%</td><td><strong>14,20%</strong></td></tr>
+                <tr><td><strong>4. Wendy's</strong></td><td><strong>9,45%</strong></td><td><strong>Midwest</strong></td><td><strong>12,30%</strong></td><td><strong>12,30%</strong></td><td>9,90%</td><td>9,14%</td><td>5,98%</td></tr>
+                <tr><td><strong>5. Arby's</strong></td><td><strong>6,35%</strong></td><td><strong>Midwest</strong></td><td><strong>9,80%</strong></td><td><strong>9,80%</strong></td><td>3,96%</td><td>6,10%</td><td>3,41%</td></tr>
+                <tr><td><strong>6. Subway</strong></td><td><strong>5,11%</strong></td><td><strong>West</strong></td><td><strong>6,50%</strong></td><td>4,60%</td><td>5,56%</td><td>4,66%</td><td><strong>6,50%</strong></td></tr>
+                <tr><td><strong>7. SONIC Drive-In</strong></td><td><strong>4,28%</strong></td><td><strong>South</strong></td><td><strong>8,90%</strong></td><td>1,61%</td><td>0,47%</td><td><strong>8,90%</strong></td><td>0,59%</td></tr>
+                <tr><td><strong>8. KFC</strong></td><td><strong>3,89%</strong></td><td><strong>South</strong></td><td><strong>5,20%</strong></td><td>3,50%</td><td>3,39%</td><td><strong>5,20%</strong></td><td>2,03%</td></tr>
               </tbody>
             </table>
           </div>
@@ -764,7 +769,7 @@ RETURN DIVIDE(Num, [Poblacion Estados], 0)`}</pre>
           speaker="Oradora: Hannah (Bloque 4)"
           showSpeakers={showSpeakers}
           title={<>P4: Regiones por Encima de <code>900 kcal/día</code> en 2024</>}
-          lead={<>South y Midwest superan el umbral del 45% de una dieta adulta y concentran el <strong>68,87 % de las sucursales</strong>.</>}
+          lead={<>South y Midwest superan de forma persistente el límite de 900 kcal en los 4 trimestres de 2024 y concentran el <strong>68,87 % de las sucursales</strong>.</>}
           toolbarRight={
             <div className="segmented-btns">
               <button type="button" className={`seg-btn ${p4Mode === 'region' ? 'active' : ''}`} onClick={() => setP4Mode('region')}>Por Región</button>
@@ -778,12 +783,12 @@ RETURN DIVIDE(Num, [Poblacion Estados], 0)`}</pre>
               <div className="ed-panel">
                 <span className="panel-kicker">Región Crítica 1 • South</span>
                 <div className="big-stat">944,9 <span className="stat-unit">kcal/día</span></div>
-                <p className="panel-text"><code>+44,9 kcal</code> sobre el límite con <strong>4.130 locales activos</strong> en 17 jurisdicciones.</p>
+                <p className="panel-text"><code>+44,9 kcal</code> sobre el límite con <strong>4.081 locales activos</strong> en 17 jurisdicciones.</p>
               </div>
               <div className="ed-panel">
                 <span className="panel-kicker">Región Crítica 2 • Midwest</span>
                 <div className="big-stat">925,1 <span className="stat-unit">kcal/día</span></div>
-                <p className="panel-text"><code>+25,1 kcal</code> sobre el límite con <strong>2.691 locales activos</strong> en 12 jurisdicciones.</p>
+                <p className="panel-text"><code>+25,1 kcal</code> sobre el límite con <strong>2.740 locales activos</strong> en 12 jurisdicciones.</p>
               </div>
               <div className="ed-panel panel-luminous">
                 <span className="panel-kicker">Total en Zona Crítica</span>
@@ -819,10 +824,10 @@ RETURN DIVIDE(Num, [Poblacion Estados], 0)`}</pre>
             <table className="ed-table">
               <thead><tr><th>Pregunta</th><th>Regla Clave en ETL</th><th>Tablas del DW</th><th>Visual Power BI</th><th>Hallazgo Principal</th></tr></thead>
               <tbody>
-                <tr><td><strong className="accent-highlight">P1. Top 5 DLFF</strong></td><td>Filtro EE. UU. (-51), <code>Co Spgs&rarr;CO</code>, -45 dup.</td><td><code>fact</code> + <code>dim_geografia</code></td><td>Barras horiz. vs. <code>2,96</code></td><td><strong>SD (11,20)</strong> triplica media; <strong>NY (1,35)</strong> mínimo</td></tr>
-                <tr><td><strong className="accent-highlight">P2. Correlación</strong></td><td>Imputación regional en <code>DE</code> y <code>ND</code></td><td><code>fact</code> + <code>dim_geografia</code></td><td>Dispersión burbujas (51)</td><td><strong>Midwest + South</strong>: ~35% ob. vs. ~29% West/NE</td></tr>
-                <tr><td><strong className="accent-highlight">P3. Cuota PMC</strong></td><td>Unificación regex <code>540&rarr;466</code> marcas</td><td><code>fact</code> + <code>dim_cadena</code> + <code>geo</code></td><td>Barras agrupadas / 100%</td><td><strong>McDonald's (21,29%)</strong> lidera; SONIC en South</td></tr>
-                <tr><td><strong className="accent-highlight">P4. &gt;900 kcal</strong></td><td>Enlace trimestral con calendario 2024</td><td><code>fact</code> + <code>geo</code> + <code>dim_tiempo</code></td><td>Columnas + línea <code>900</code></td><td><strong>South + Midwest</strong> suman <strong>6.821 locales (68,9%)</strong></td></tr>
+                <tr><td><strong className="accent-highlight">P1. Top 5 DLFF</strong></td><td>Filtro EE. UU. (-51), <code>Co Spgs&rarr;CO</code>, -45 dup.</td><td><code>fact</code> + <code>dim_geografia</code></td><td>Barras horiz. vs. <code>2,96</code></td><td><strong>SD (11,20)</strong> casi 4× media; <strong>NY (1,21)</strong> y <strong>CA (1,54)</strong> mínimos</td></tr>
+                <tr><td><strong className="accent-highlight">P2. Correlación</strong></td><td>Imputación regional en <code>DE</code> y <code>ND</code></td><td><code>fact</code> + <code>dim_geografia</code></td><td>Dispersión burbujas (51)</td><td><strong>Midwest (3,97) y South (3,25)</strong>: <code>34,8%–35,5%</code> ob. vs. <code>27,4%–28,9%</code> NE/West</td></tr>
+                <tr><td><strong className="accent-highlight">P3. Cuota PMC</strong></td><td>Unificación regex <code>540&rarr;466</code> marcas</td><td><code>fact</code> + <code>dim_cadena</code> + <code>geo</code></td><td>Barras agrupadas / 100%</td><td><strong>McDonald's (21,29%)</strong> lidera (<code>28,40%</code> en NE); SONIC (<code>8,90%</code>) en South</td></tr>
+                <tr><td><strong className="accent-highlight">P4. &gt;900 kcal</strong></td><td>Enlace trimestral con calendario 2024</td><td><code>fact</code> + <code>geo</code> + <code>dim_tiempo</code></td><td>Columnas + línea <code>900</code></td><td><strong>South (944,9) + Midwest (925,1)</strong> suman <strong>6.821 locales (68,87%)</strong></td></tr>
               </tbody>
             </table>
           </div>
@@ -841,7 +846,7 @@ RETURN DIVIDE(Num, [Poblacion Estados], 0)`}</pre>
           <div className="split-2">
             <div className="ed-panel">
               <div>
-                <span className="panel-kicker">Prioridad Sanitaria (DLFF &gt; 5 • TPCD &gt; 38% • Ob. &gt; 36%)</span>
+                <span className="panel-kicker">Prioridad Sanitaria (DLFF &gt; 5 • TPCD &gt; 35% • Ob. &gt; 36%)</span>
                 <h3 className="panel-heading" style={{ marginTop: 4 }}>5 Jurisdicciones en Triple Alerta</h3>
               </div>
               <div className="ed-table-wrap">
@@ -860,7 +865,7 @@ RETURN DIVIDE(Num, [Poblacion Estados], 0)`}</pre>
             <div className="ed-panel panel-teal">
               <div>
                 <span className="panel-kicker">Expansión Comercial (DLFF &lt; 1,90 • Alta Población)</span>
-                <h3 className="panel-heading" style={{ marginTop: 4 }}>Plazas Sub-penetradas: NY, NJ, CA y MA</h3>
+                <h3 className="panel-heading" style={{ marginTop: 4 }}>Plazas Sub-penetradas: NY (1,21), CA (1,54), NJ (1,60) y MA (1,84)</h3>
               </div>
               <EChartBox option={radarOption} height={255} active={currentSlide === 15} />
             </div>
@@ -874,33 +879,33 @@ RETURN DIVIDE(Num, [Poblacion Estados], 0)`}</pre>
           etapa="17 / 18 • Etapa 3.6 • Recomendaciones y Limitaciones"
           speaker="Hannah & Matías (Bloque 5)"
           showSpeakers={showSpeakers}
-          title="3 Decisiones Operativas y 4 Límites de Interpretación"
-          lead="Síntesis ejecutiva para la industria gastronómica, políticas de salud y transparencia metodológica."
+          title="3 Recomendaciones Estratégicas y 4 Limitaciones Metodológicas"
+          lead="Síntesis ejecutiva para cadenas comerciales, industria alimentaria y organismos de salud pública (Secciones 7.5 y 8 del Informe)."
         >
           <div className="cols-3">
             <div className="ed-panel panel-indigo">
-              <span className="panel-kicker">01 • Expansión Comercial</span>
-              <h3 className="panel-heading">Descomprimir Midwest/South</h3>
-              <p className="panel-text">Evitar canibalización en <code>SD, KY, ND, IN</code>; orientar aperturas de <em>Taco Bell</em> y <em>Subs</em> hacia <code>NY (1,35)</code>, <code>NJ (1,60)</code> y <code>CA (1,73)</code>.</p>
+              <span className="panel-kicker">01 • Para Cadenas Comerciales</span>
+              <h3 className="panel-heading">Reorientar hacia West y Northeast</h3>
+              <p className="panel-text">Evitar apertura de sucursales tradicionales en estados saturados (ej. <code>South Dakota 11,20</code> y <code>Kentucky 7,11</code>) y orientar formatos <em>express</em> o saludables hacia <code>NY (1,21)</code> y <code>CA (1,54)</code>.</p>
             </div>
             <div className="ed-panel">
-              <span className="panel-kicker">02 • Ingeniería de Menú</span>
-              <h3 className="panel-heading">Combos &lt; 600 kcal</h3>
-              <p className="panel-text">En los <strong>6.821 locales</strong> de <em>South</em> y <em>Midwest</em>, promover opciones grilladas y bebidas sin azúcar en paneles <em>drive-thru</em>.</p>
+              <span className="panel-kicker">02 • Para la Industria Alimentaria</span>
+              <h3 className="panel-heading">Reformular Menús en 6.821 Locales</h3>
+              <p className="panel-text">Introducir opciones reducidas en sodio y calorías en las <strong>6.821 sucursales</strong> del <em>South</em> (<code>4.081</code>) y <em>Midwest</em> (<code>2.740</code>) para mitigar el impacto sobre los índices regionales de obesidad.</p>
             </div>
             <div className="ed-panel panel-teal">
-              <span className="panel-kicker">03 • Salud Pública</span>
-              <h3 className="panel-heading">Alertas en 29 Estados</h3>
-              <p className="panel-text">Focalizar etiquetado calórico y prevención en <em>South + Midwest</em>, priorizando <code>KY, WV, LA, IN, MO</code>.</p>
+              <span className="panel-kicker">03 • Para Organismos de Salud Pública</span>
+              <h3 className="panel-heading">Incentivos en Estados Críticos</h3>
+              <p className="panel-text">Implementar programas de concientización e incentivos fiscales a alimentos frescos donde la densidad supere <strong>5 locales/100k hab.</strong> y el consumo diario sobrepase el <strong>35%</strong>.</p>
             </div>
           </div>
           <div className="ed-panel panel-luminous" style={{ padding: '20px 26px' }}>
-            <span className="panel-kicker">Limitaciones Metodológicas (Sección 8)</span>
+            <span className="panel-kicker">Limitaciones Metodológicas y Técnicas (Sección 8)</span>
             <div className="cols-4" style={{ gap: 18, fontSize: 13.5, color: '#3B3254' }}>
-              <div><strong style={{ color: '#130C24' }}>L1. Nivel Estatal:</strong> Correlación territorial sin diagnósticos clínicos (evita falacia ecológica).</div>
-              <div><strong style={{ color: '#130C24' }}>L2. Sin Facturación:</strong> <code>PMC</code> mide parque físico instalado, no ventas ni tickets de caja.</div>
-              <div><strong style={{ color: '#130C24' }}>L3. Corte 2024:</strong> Relevamiento de un único año; tendencias largas exigen series multianuales.</div>
-              <div><strong style={{ color: '#130C24' }}>L4. Muestra Pública:</strong> 9.904 locales capturan bien cadenas nacionales; menor cobertura rural.</div>
+              <div><strong style={{ color: '#130C24' }}>L1. Agregación Estatal:</strong> Evita falacia ecológica individual, pero limita detectar desiertos alimentarios a escala micro (ZIP o condado).</div>
+              <div><strong style={{ color: '#130C24' }}>L2. Padrón sin Ventas:</strong> Releva infraestructura activa en 2024, sin volumen monetario de ventas ni facturación por ticket promedio.</div>
+              <div><strong style={{ color: '#130C24' }}>L3. Cobertura Rural:</strong> Consolida 9.904 locales de 466 cadenas; pequeñas franquicias independientes pueden tener menor cobertura rural.</div>
+              <div><strong style={{ color: '#130C24' }}>L4. Causalidad:</strong> Confirma correlación espacial y estadística, no causa médica única (fenómeno multifactorial: genética, ingreso, sedentarismo).</div>
             </div>
           </div>
         </SlideShell>

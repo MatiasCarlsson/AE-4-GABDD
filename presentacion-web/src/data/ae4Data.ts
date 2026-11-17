@@ -54,8 +54,8 @@ export const ESTADOS_DATA: StateRecord[] = [
     "census_region": "Midwest",
     "trimestre": 2,
     "fecha": "2024-06-30",
-    "pop": 919318,
-    "loc": 103,
+    "pop": 884659,
+    "loc": 99,
     "kcal": 918.0,
     "tpcd": 37.2,
     "ob": 35.1,
@@ -70,8 +70,8 @@ export const ESTADOS_DATA: StateRecord[] = [
     "census_region": "South",
     "trimestre": 2,
     "fecha": "2024-06-30",
-    "pop": 4526154,
-    "loc": 322,
+    "pop": 4467673,
+    "loc": 316,
     "kcal": 962.0,
     "tpcd": 40.5,
     "ob": 37.7,
@@ -86,8 +86,8 @@ export const ESTADOS_DATA: StateRecord[] = [
     "census_region": "West",
     "trimestre": 4,
     "fecha": "2024-12-31",
-    "pop": 2114371,
-    "loc": 149,
+    "pop": 2096829,
+    "loc": 148,
     "kcal": 872.0,
     "tpcd": 35.6,
     "ob": 32.8,
@@ -102,8 +102,8 @@ export const ESTADOS_DATA: StateRecord[] = [
     "census_region": "West",
     "trimestre": 3,
     "fecha": "2024-09-30",
-    "pop": 584057,
-    "loc": 41,
+    "pop": 577737,
+    "loc": 40,
     "kcal": 850.0,
     "tpcd": 33.6,
     "ob": 31.1,
@@ -118,8 +118,8 @@ export const ESTADOS_DATA: StateRecord[] = [
     "census_region": "Northeast",
     "trimestre": 2,
     "fecha": "2024-06-30",
-    "pop": 647464,
-    "loc": 42,
+    "pop": 631543,
+    "loc": 41,
     "kcal": 802.0,
     "tpcd": 29.4,
     "ob": 27.6,
@@ -327,14 +327,14 @@ export const ESTADOS_DATA: StateRecord[] = [
     "trimestre": 4,
     "fecha": "2024-12-31",
     "pop": 11785935,
-    "loc": 540,
+    "loc": 568,
     "kcal": 940.0,
     "tpcd": 38.9,
     "ob": 36.6,
     "cities": 152,
     "zips": 243,
-    "dlff": 4.58,
-    "rank": 18
+    "dlff": 4.82,
+    "rank": 15
   },
   {
     "province": "SC",
@@ -519,13 +519,13 @@ export const ESTADOS_DATA: StateRecord[] = [
     "trimestre": 2,
     "fecha": "2024-06-30",
     "pop": 12549689,
-    "loc": 358,
+    "loc": 383,
     "kcal": 915.0,
     "tpcd": 36.8,
     "ob": 33.4,
     "cities": 148,
     "zips": 202,
-    "dlff": 2.85,
+    "dlff": 3.05,
     "rank": 30
   },
   {
@@ -567,13 +567,13 @@ export const ESTADOS_DATA: StateRecord[] = [
     "trimestre": 2,
     "fecha": "2024-06-30",
     "pop": 5877610,
-    "loc": 162,
+    "loc": 178,
     "kcal": 795.0,
     "tpcd": 29.5,
     "ob": 25.0,
     "cities": 42,
     "zips": 93,
-    "dlff": 2.76,
+    "dlff": 3.03,
     "rank": 33
   },
   {
@@ -583,13 +583,13 @@ export const ESTADOS_DATA: StateRecord[] = [
     "trimestre": 3,
     "fecha": "2024-09-30",
     "pop": 7431344,
-    "loc": 203,
+    "loc": 233,
     "kcal": 868.0,
     "tpcd": 35.2,
     "ob": 31.3,
     "cities": 45,
     "zips": 115,
-    "dlff": 2.73,
+    "dlff": 3.14,
     "rank": 34
   },
   {
@@ -631,13 +631,13 @@ export const ESTADOS_DATA: StateRecord[] = [
     "trimestre": 4,
     "fecha": "2024-12-31",
     "pop": 7812880,
-    "loc": 206,
+    "loc": 241,
     "kcal": 836.0,
     "tpcd": 32.5,
     "ob": 29.6,
     "cities": 64,
     "zips": 102,
-    "dlff": 2.64,
+    "dlff": 3.08,
     "rank": 37
   },
   {
@@ -743,13 +743,13 @@ export const ESTADOS_DATA: StateRecord[] = [
     "trimestre": 3,
     "fecha": "2024-09-30",
     "pop": 12961683,
-    "loc": 281,
+    "loc": 306,
     "kcal": 852.0,
     "tpcd": 33.6,
     "ob": 33.1,
     "cities": 133,
     "zips": 175,
-    "dlff": 2.17,
+    "dlff": 2.36,
     "rank": 44
   },
   {
@@ -759,13 +759,13 @@ export const ESTADOS_DATA: StateRecord[] = [
     "trimestre": 2,
     "fecha": "2024-06-30",
     "pop": 22610726,
-    "loc": 468,
+    "loc": 450,
     "kcal": 918.0,
     "tpcd": 36.5,
     "ob": 30.1,
     "cities": 124,
     "zips": 284,
-    "dlff": 2.07,
+    "dlff": 1.99,
     "rank": 45
   },
   {
@@ -775,13 +775,13 @@ export const ESTADOS_DATA: StateRecord[] = [
     "trimestre": 4,
     "fecha": "2024-12-31",
     "pop": 30503301,
-    "loc": 624,
+    "loc": 599,
     "kcal": 954.0,
     "tpcd": 39.8,
     "ob": 35.5,
     "cities": 210,
     "zips": 399,
-    "dlff": 2.05,
+    "dlff": 1.96,
     "rank": 46
   },
   {
@@ -817,22 +817,6 @@ export const ESTADOS_DATA: StateRecord[] = [
     "rank": 48
   },
   {
-    "province": "CA",
-    "state_name": "California",
-    "census_region": "West",
-    "trimestre": 1,
-    "fecha": "2024-03-31",
-    "pop": 38965193,
-    "loc": 675,
-    "kcal": 838.0,
-    "tpcd": 33.8,
-    "ob": 28.1,
-    "cities": 259,
-    "zips": 421,
-    "dlff": 1.73,
-    "rank": 49
-  },
-  {
     "province": "NJ",
     "state_name": "New Jersey",
     "census_region": "Northeast",
@@ -846,6 +830,22 @@ export const ESTADOS_DATA: StateRecord[] = [
     "cities": 96,
     "zips": 99,
     "dlff": 1.6,
+    "rank": 49
+  },
+  {
+    "province": "CA",
+    "state_name": "California",
+    "census_region": "West",
+    "trimestre": 1,
+    "fecha": "2024-03-31",
+    "pop": 38965193,
+    "loc": 600,
+    "kcal": 838.0,
+    "tpcd": 33.8,
+    "ob": 28.1,
+    "cities": 259,
+    "zips": 421,
+    "dlff": 1.54,
     "rank": 50
   },
   {
@@ -855,13 +855,13 @@ export const ESTADOS_DATA: StateRecord[] = [
     "trimestre": 1,
     "fecha": "2024-03-31",
     "pop": 19571216,
-    "loc": 265,
+    "loc": 237,
     "kcal": 824.0,
     "tpcd": 31.4,
     "ob": 28.0,
     "cities": 121,
     "zips": 186,
-    "dlff": 1.35,
+    "dlff": 1.21,
     "rank": 51
   }
 ];
@@ -1102,15 +1102,27 @@ export const CAT_TABLE6: CategoryStat[] = [
   { cat: 'Coffee, Bakery & Ice Cream', marcas: 14, locales: 106, pct: 1.07, top: "Dairy Queen, Dunkin', Starbucks" },
 ];
 
+export const REGION_REPORT_METRICS: Record<'ALL' | CensusRegion, { loc: number; dlff: number; tpcd: number; kcal: number; ob: number; pop: number }> = {
+  ALL:       { loc: 9904, dlff: 2.96, tpcd: 36.13, kcal: 898.5, ob: 32.60, pop: 334914895 },
+  Midwest:   { loc: 2740, dlff: 3.97, tpcd: 38.40, kcal: 925.1, ob: 34.80, pop: 69017632 },
+  South:     { loc: 4081, dlff: 3.25, tpcd: 39.10, kcal: 944.9, ob: 35.50, pop: 125569231 },
+  West:      { loc: 2022, dlff: 2.57, tpcd: 33.20, kcal: 845.6, ob: 28.90, pop: 78677043 },
+  Northeast: { loc: 1061, dlff: 1.89, tpcd: 31.50, kcal: 812.3, ob: 27.40, pop: 56137566 },
+};
+
 export const P3_MATRIX = {
-  chains: ["McDonald's", 'Burger King', 'Taco Bell', "Wendy's", "Arby's", 'KFC', 'Subway', 'SONIC Drive In'],
+  chains: ["McDonald's", 'Burger King', 'Taco Bell', "Wendy's", "Arby's", 'Subway', 'SONIC Drive In', 'KFC'],
+  nationalPmc: [21.29, 11.65, 10.33, 9.45, 6.35, 5.11, 4.28, 3.89],
+  nationalLoc: [2109, 1154, 1023, 936, 629, 506, 424, 385],
+  dominantRegion: ['Northeast', 'Northeast', 'West', 'Midwest', 'Midwest', 'West', 'South', 'South'] as CensusRegion[],
+  dominantPmc: [28.40, 15.10, 14.20, 12.30, 9.80, 6.50, 8.90, 5.20],
   pcts: {
-    Midwest:   [21.37, 13.04, 10.03, 8.06, 7.58, 4.53, 3.27, 2.97],
-    Northeast: [26.95, 18.31,  5.82, 9.20, 3.47, 5.82, 5.16, 0.47],
-    South:     [21.65, 10.07,  8.38, 7.60, 5.21, 4.21, 3.41, 5.62],
-    West:      [17.49,  9.07,  8.92, 5.20, 3.12, 3.67, 5.95, 3.42],
+    Midwest:   [21.13, 12.85, 10.51, 12.30, 9.80, 4.60, 1.61, 3.50],
+    Northeast: [28.40, 15.10,  6.41,  9.90, 3.96, 5.56, 0.47, 3.39],
+    South:     [21.20, 10.90,  9.31,  9.14, 6.10, 4.66, 8.90, 5.20],
+    West:      [17.95,  9.74, 14.20,  5.98, 3.41, 6.50, 0.59, 2.03],
   } as Record<CensusRegion, number[]>,
-  restoPct: { Midwest: 29.13, Northeast: 24.79, South: 33.85, West: 43.16 } as Record<CensusRegion, number>,
+  restoPct: { Midwest: 23.70, Northeast: 26.81, South: 24.59, West: 39.60 } as Record<CensusRegion, number>,
 };
 
 export const DB_DICTIONARY: Record<string, TableDictMeta> = {
@@ -1178,6 +1190,6 @@ export const CODE_REPO: Record<string, string> = {
   ddl: "-- Trabajo integrador ae4 de gestión avanzada de bases de datos (2026)\n-- Script 01: creación del data warehouse en esquema estrella y carga de dim_tiempo\n\n-- Se eliminan las tablas previas (incluyendo las de versiones anteriores) para recrear desde cero\nDROP TABLE IF EXISTS fact_locales_consumo CASCADE;\nDROP TABLE IF EXISTS fact_ventas CASCADE;\nDROP TABLE IF EXISTS dim_geografia CASCADE;\nDROP TABLE IF EXISTS dim_ubicacion CASCADE;\nDROP TABLE IF EXISTS dim_cadena CASCADE;\nDROP TABLE IF EXISTS dim_tiempo CASCADE;\n\n-- 1. Creación de las dimensiones\n-- Dimensión tiempo obligatoria con fecha, día, mes, nombre del mes, trimestre y año\nCREATE TABLE dim_tiempo (\n    tiempo_id   SERIAL PRIMARY KEY,\n    fecha       DATE UNIQUE NOT NULL,\n    dia         INTEGER NOT NULL,\n    mes         INTEGER NOT NULL,\n    nombre_mes  VARCHAR(20) NOT NULL,\n    trimestre   INTEGER NOT NULL,\n    anio        INTEGER NOT NULL\n);\n\n-- Dimensión geografía con estado, región censal, ciudad, código postal y población estatal\nCREATE TABLE dim_geografia (\n    geografia_id      SERIAL PRIMARY KEY,\n    province          VARCHAR(2) NOT NULL,\n    state_name        VARCHAR(100) NOT NULL,\n    census_region     VARCHAR(50) NOT NULL,\n    city              VARCHAR(120) NOT NULL,\n    postal_code       VARCHAR(10) NOT NULL,\n    population_total  BIGINT NOT NULL\n);\n\n-- Dimensión cadena con nombre normalizado de la franquicia y categoría principal\nCREATE TABLE dim_cadena (\n    cadena_id            SERIAL PRIMARY KEY,\n    nombre_cadena        VARCHAR(150) UNIQUE NOT NULL,\n    categoria_principal  VARCHAR(100) NOT NULL\n);\n\n-- 2. Creación de la tabla de hechos\n-- Granularidad: un local de comida rápida vinculado a su ubicación, cadena y corte temporal\n\nCREATE TABLE fact_locales_consumo (\n    hecho_id                      SERIAL PRIMARY KEY,\n    tiempo_id                     INTEGER NOT NULL REFERENCES dim_tiempo(tiempo_id),\n    geografia_id                  INTEGER NOT NULL REFERENCES dim_geografia(geografia_id),\n    cadena_id                     INTEGER NOT NULL REFERENCES dim_cadena(cadena_id),\n    latitude                      NUMERIC(10,6) NOT NULL,\n    longitude                     NUMERIC(10,6) NOT NULL,\n    cantidad_locales              INTEGER NOT NULL DEFAULT 1,\n    calorias_diarias_promedio_ff  NUMERIC(8,2) NOT NULL,\n    pct_consumo_diario            NUMERIC(6,2) NOT NULL,\n    tasa_obesidad_pct             NUMERIC(6,2) NOT NULL\n);\n\n-- 3. Carga de dim_tiempo con todos los días del año 2024 (366 filas por año bisiesto)\n\nINSERT INTO dim_tiempo (fecha, dia, mes, nombre_mes, trimestre, anio)\nSELECT\n    fecha::date,\n    EXTRACT(DAY FROM fecha),\n    EXTRACT(MONTH FROM fecha),\n    TRIM(TO_CHAR(fecha, 'Month')),\n    EXTRACT(QUARTER FROM fecha),\n    EXTRACT(YEAR FROM fecha)\nFROM generate_series('2024-01-01'::date, '2024-12-31'::date, '1 day') AS fecha;\n\n-- 4. Índices sobre las claves foráneas para optimizar las consultas analíticas\n\nCREATE INDEX idx_fact_tiempo ON fact_locales_consumo(tiempo_id);\nCREATE INDEX idx_fact_geografia ON fact_locales_consumo(geografia_id);\nCREATE INDEX idx_fact_cadena ON fact_locales_consumo(cadena_id);",
   dml: "-- Trabajo integrador ae4 de gestión avanzada de bases de datos (2026)\n-- Script 02: carga de dimensiones de negocio y tabla de hechos desde archivos csv\n\n-- Limpieza previa de las tablas de hechos y dimensiones de negocio antes de cargar\nTRUNCATE TABLE fact_locales_consumo, dim_geografia, dim_cadena RESTART IDENTITY CASCADE;\n\n-- Carga de la dimensión geografía desde el archivo csv procesado por el etl\n\\copy dim_geografia(geografia_id, province, state_name, census_region, city, postal_code, population_total) FROM 'datos/procesados/dim_geografia.csv' WITH (FORMAT csv, HEADER true, ENCODING 'UTF8');\n\n-- Carga de la dimensión cadena desde el archivo csv procesado por el etl\n\\copy dim_cadena(cadena_id, nombre_cadena, categoria_principal) FROM 'datos/procesados/dim_cadena.csv' WITH (FORMAT csv, HEADER true, ENCODING 'UTF8');\n\n-- Carga de la tabla de hechos desde el archivo csv procesado por el etl\n\\copy fact_locales_consumo(hecho_id, tiempo_id, geografia_id, cadena_id, latitude, longitude, cantidad_locales, calorias_diarias_promedio_ff, pct_consumo_diario, tasa_obesidad_pct) FROM 'datos/procesados/fact_locales_consumo.csv' WITH (FORMAT csv, HEADER true, ENCODING 'UTF8');\n\n-- Sincronización de las secuencias autonuméricas tras la carga masiva\nSELECT setval(pg_get_serial_sequence('dim_tiempo', 'tiempo_id'), (SELECT MAX(tiempo_id) FROM dim_tiempo));\nSELECT setval(pg_get_serial_sequence('dim_geografia', 'geografia_id'), (SELECT MAX(geografia_id) FROM dim_geografia));\nSELECT setval(pg_get_serial_sequence('dim_cadena', 'cadena_id'), (SELECT MAX(cadena_id) FROM dim_cadena));\nSELECT setval(pg_get_serial_sequence('fact_locales_consumo', 'hecho_id'), (SELECT MAX(hecho_id) FROM fact_locales_consumo));",
   queries: "-- Trabajo integrador ae4 de gestión avanzada de bases de datos (2026)\n-- Script 03: verificación, indicadores y consultas analíticas del negocio\n\n-- Verificación de la cantidad de registros en las 4 tablas físicas del data warehouse\nSELECT 'dim_tiempo' AS tabla, COUNT(*) AS filas FROM dim_tiempo\nUNION ALL SELECT 'dim_geografia', COUNT(*) FROM dim_geografia\nUNION ALL SELECT 'dim_cadena', COUNT(*) FROM dim_cadena\nUNION ALL SELECT 'fact_locales_consumo', COUNT(*) FROM fact_locales_consumo;\n\n-- Resumen nacional de los 3 indicadores clave (dlff, pmc de la cadena líder y tpcd)\nWITH resumen_estatal AS (\n    SELECT\n        g.province,\n        MAX(g.population_total) AS poblacion_estado,\n        SUM(f.cantidad_locales) AS locales_estado,\n        MAX(f.pct_consumo_diario) AS pct_consumo_estado,\n        MAX(f.tasa_obesidad_pct) AS tasa_obesidad_estado\n    FROM fact_locales_consumo f\n    JOIN dim_geografia g ON f.geografia_id = g.geografia_id\n    GROUP BY g.province\n),\ncadena_lider AS (\n    SELECT\n        c.nombre_cadena,\n        ROUND(SUM(f.cantidad_locales) * 100.0 / (SELECT SUM(cantidad_locales) FROM fact_locales_consumo), 2) AS pmc_lider_pct\n    FROM fact_locales_consumo f\n    JOIN dim_cadena c ON f.cadena_id = c.cadena_id\n    GROUP BY c.nombre_cadena\n    ORDER BY SUM(f.cantidad_locales) DESC\n    LIMIT 1\n)\nSELECT\n    SUM(r.locales_estado) AS total_locales_analizados,\n    SUM(r.poblacion_estado) AS poblacion_total_eeuu,\n    ROUND(SUM(r.locales_estado) * 100000.0 / SUM(r.poblacion_estado), 2) AS kpi1_dlff_nacional_cada_100k,\n    (SELECT nombre_cadena FROM cadena_lider) AS cadena_numero_1,\n    (SELECT pmc_lider_pct FROM cadena_lider) AS kpi2_pmc_cadena_lider_pct,\n    ROUND(SUM(r.pct_consumo_estado * r.poblacion_estado) / SUM(r.poblacion_estado), 2) AS kpi3_tpcd_nacional_ponderada_pct,\n    ROUND(SUM(r.tasa_obesidad_estado * r.poblacion_estado) / SUM(r.poblacion_estado), 2) AS tasa_obesidad_nacional_ponderada_pct\nFROM resumen_estatal r;\n\n-- Consulta 1 para responder la pregunta de negocio 1:\n-- ¿cuáles son los 5 estados con mayor densidad de locales cada 100.000 habitantes y cómo se comparan con el promedio nacional?\nWITH estados AS (\n    SELECT\n        g.province,\n        g.state_name,\n        g.census_region,\n        MAX(g.population_total) AS poblacion_estado,\n        SUM(f.cantidad_locales) AS cantidad_locales,\n        ROUND(SUM(f.cantidad_locales) * 100000.0 / MAX(g.population_total), 2) AS dlff_estado,\n        MAX(f.tasa_obesidad_pct) AS tasa_obesidad_pct\n    FROM fact_locales_consumo f\n    JOIN dim_geografia g ON f.geografia_id = g.geografia_id\n    GROUP BY g.province, g.state_name, g.census_region\n),\npromedio_nacional AS (\n    SELECT ROUND(SUM(cantidad_locales) * 100000.0 / SUM(poblacion_estado), 2) AS dlff_nacional\n    FROM estados\n)\nSELECT\n    e.province,\n    e.state_name,\n    e.census_region,\n    e.cantidad_locales,\n    e.poblacion_estado,\n    e.dlff_estado,\n    p.dlff_nacional,\n    ROUND(e.dlff_estado - p.dlff_nacional, 2) AS diferencia_vs_nacional,\n    e.tasa_obesidad_pct\nFROM estados e\nCROSS JOIN promedio_nacional p\nORDER BY e.dlff_estado DESC\nLIMIT 5;\n\n-- Consulta 2 para responder la pregunta de negocio 2:\n-- ¿existe relación entre la densidad regional de restaurantes y el porcentaje de consumo diario y obesidad?\nWITH estados AS (\n    SELECT\n        g.census_region,\n        g.province,\n        MAX(g.population_total) AS poblacion_estado,\n        SUM(f.cantidad_locales) AS locales_estado,\n        MAX(f.pct_consumo_diario) AS pct_consumo_estado,\n        MAX(f.calorias_diarias_promedio_ff) AS calorias_estado,\n        MAX(f.tasa_obesidad_pct) AS obesidad_estado\n    FROM fact_locales_consumo f\n    JOIN dim_geografia g ON f.geografia_id = g.geografia_id\n    GROUP BY g.census_region, g.province\n)\nSELECT\n    census_region,\n    COUNT(province) AS cantidad_estados,\n    SUM(locales_estado) AS total_locales,\n    SUM(poblacion_estado) AS poblacion_regional,\n    ROUND(SUM(locales_estado) * 100000.0 / SUM(poblacion_estado), 2) AS dlff_regional_cada_100k,\n    ROUND(SUM(pct_consumo_estado * poblacion_estado) / SUM(poblacion_estado), 2) AS tpcd_consumo_diario_pct,\n    ROUND(AVG(calorias_estado), 1) AS calorias_diarias_promedio_kcal,\n    ROUND(SUM(obesidad_estado * poblacion_estado) / SUM(poblacion_estado), 2) AS tasa_obesidad_ponderada_pct\nFROM estados\nGROUP BY census_region\nORDER BY dlff_regional_cada_100k DESC;\n\n-- Consulta 3 para responder la pregunta de negocio 3:\n-- ¿cómo se distribuye la cuota de mercado (pmc) de las principales cadenas según las 4 regiones censales?\nWITH top_cadenas AS (\n    SELECT cadena_id\n    FROM fact_locales_consumo\n    GROUP BY cadena_id\n    ORDER BY SUM(cantidad_locales) DESC\n    LIMIT 8\n),\ntotales_region AS (\n    SELECT\n        g.census_region,\n        SUM(f.cantidad_locales) AS total_locales_region\n    FROM fact_locales_consumo f\n    JOIN dim_geografia g ON f.geografia_id = g.geografia_id\n    GROUP BY g.census_region\n)\nSELECT\n    c.nombre_cadena,\n    c.categoria_principal,\n    g.census_region,\n    SUM(f.cantidad_locales) AS locales_cadena_en_region,\n    ROUND(SUM(f.cantidad_locales) * 100.0 / tr.total_locales_region, 2) AS pmc_en_region_pct,\n    ROUND(SUM(f.cantidad_locales) * 100.0 / (SELECT SUM(cantidad_locales) FROM fact_locales_consumo), 2) AS pmc_nacional_pct\nFROM fact_locales_consumo f\nJOIN top_cadenas tc ON f.cadena_id = tc.cadena_id\nJOIN dim_cadena c ON f.cadena_id = c.cadena_id\nJOIN dim_geografia g ON f.geografia_id = g.geografia_id\nJOIN totales_region tr ON g.census_region = tr.census_region\nGROUP BY c.nombre_cadena, c.categoria_principal, g.census_region, tr.total_locales_region\nORDER BY c.nombre_cadena, locales_cadena_en_region DESC;\n\n-- Consulta 4 para responder la pregunta de negocio 4 (vinculada con dim_tiempo):\n-- ¿qué regiones presentan en los relevamientos 2024 una ingesta calórica diaria promedio superior a 900 kcal y cuántas sucursales operan en ellas?\nWITH estados_tiempo AS (\n    SELECT\n        g.census_region,\n        g.province,\n        t.anio,\n        t.trimestre,\n        SUM(f.cantidad_locales) AS locales_estado,\n        MAX(f.calorias_diarias_promedio_ff) AS calorias_estado,\n        MAX(f.tasa_obesidad_pct) AS obesidad_estado\n    FROM fact_locales_consumo f\n    JOIN dim_geografia g ON f.geografia_id = g.geografia_id\n    JOIN dim_tiempo t ON f.tiempo_id = t.tiempo_id\n    GROUP BY g.census_region, g.province, t.anio, t.trimestre\n)\nSELECT\n    census_region,\n    anio,\n    COUNT(DISTINCT trimestre) AS trimestres_relevados,\n    SUM(locales_estado) AS sucursales_operativas,\n    ROUND(AVG(calorias_estado), 1) AS ingesta_calorica_diaria_kcal,\n    ROUND(AVG(obesidad_estado), 2) AS tasa_obesidad_promedio_pct\nFROM estados_tiempo\nGROUP BY census_region, anio\nHAVING AVG(calorias_estado) > 900\nORDER BY ingesta_calorica_diaria_kcal DESC;",
-  dax: "-- Medidas DAX (_Medidas_KPIs en Power BI Desktop)\nTotal Locales = SUM(fact_locales_consumo[cantidad_locales])\n\nPoblacion Total =\nSUMX(\n    VALUES(dim_geografia[province]),\n    CALCULATE(MAX(dim_geografia[population_total]))\n)\n\nKPI 1 DLFF Densidad c/100k =\nDIVIDE([Total Locales], [Poblacion Total], 0) * 100000\n\nKPI 2 PMC Cuota Mercado % =\nDIVIDE(\n    [Total Locales],\n    CALCULATE([Total Locales], ALL(dim_cadena), ALL(dim_geografia), ALL(dim_tiempo)),\n    0\n) * 100\n\nKPI 3 TPCD Consumo Diario % =\nVAR TablaEstados =\n    ADDCOLUMNS(\n        VALUES(dim_geografia[province]),\n        \"@Pob\", CALCULATE(MAX(dim_geografia[population_total])),\n        \"@Cons\", CALCULATE(AVERAGE(fact_locales_consumo[pct_consumo_diario]))\n    )\nRETURN\n    DIVIDE(SUMX(TablaEstados, [@Pob] * [@Cons]), SUMX(TablaEstados, [@Pob]), 0)",
+  dax: "-- Medidas DAX desarrolladas en Power BI Desktop (Sección 6 del Informe)\n\n-- 1. Densidad de Locales por cada 100k Habitantes (DLFF)\nDLFF =\nVAR TotalLocales = SUM(fact_locales_consumo[cantidad_locales])\nVAR PoblacionPonderada =\n    SUMX(\n        VALUES(dim_geografia[province]),\n        CALCULATE(MAX(dim_geografia[population_total]))\n    )\nRETURN\n    DIVIDE(TotalLocales, PoblacionPonderada, 0) * 100000\n\n-- 2. Participación de Mercado por Cadena (PMC)\nPMC =\nVAR LocalesCadena = SUM(fact_locales_consumo[cantidad_locales])\nVAR LocalesTotales = CALCULATE(SUM(fact_locales_consumo[cantidad_locales]), ALL(dim_cadena))\nRETURN\n    DIVIDE(LocalesCadena, LocalesTotales, 0) * 100\n\n-- 3. Tasa Promedio de Consumo Diario Ponderado (TPCD)\nTPCD =\nVAR SumaPonderada =\n    SUMX(\n        VALUES(dim_geografia[province]),\n        CALCULATE(\n            MAX(fact_locales_consumo[pct_consumo_diario]) *\n            MAX(dim_geografia[population_total])\n        )\n    )\nVAR PoblacionTotal =\n    SUMX(\n        VALUES(dim_geografia[province]),\n        CALCULATE(MAX(dim_geografia[population_total]))\n    )\nRETURN\n    DIVIDE(SumaPonderada, PoblacionTotal, 0)\n\n-- 4. Calorías Diarias Promedio (sin duplicar por local)\nCalorias_Promedio =\nAVERAGEX(\n    VALUES(dim_geografia[province]),\n    CALCULATE(MAX(fact_locales_consumo[calorias_diarias_promedio_ff]))\n)\n\n-- 5. Tasa de Obesidad Promedio (sin duplicar por local)\nObesidad_Promedio =\nAVERAGEX(\n    VALUES(dim_geografia[province]),\n    CALCULATE(MAX(fact_locales_consumo[tasa_obesidad_pct]))\n)",
   etl: "# Extracto principal de etl/comun.py y etl/etl_fastfood_dw.py\n# 1. Reparación estructural de 20 filas con comas internas en address\nsobrantes = len(campos) - 10\nif sobrantes > 0:\n    direccion = \", \".join(c.strip() for c in campos[: sobrantes + 1] if c.strip())\n    campos = [direccion] + campos[sobrantes + 1 :]\n\n# 2. Filtro geográfico EE. UU. (descarta 51 locales con longitud positiva)\nsuc = suc[suc[\"latitude\"].between(18.0, 72.0) & suc[\"longitude\"].between(-170.0, -65.0)]\n\n# 3. Unificación de 540 variantes a 466 cadenas por clave alfanumérica y moda\nsuc[\"clave_marca\"] = suc[\"name\"].str.lower().str.replace(r\"[^a-z0-9]\", \"\", regex=True)\nmoda_marca = suc.groupby(\"clave_marca\")[\"name\"].agg(lambda s: s.mode().iloc[0])\nsuc[\"nombre_cadena\"] = suc[\"clave_marca\"].map(moda_marca)\n\n# 4. Corrección 'Co Spgs' -> 'CO', ZIP a 5 dígitos y desduplicación (9.904 locales)\nsuc[\"province\"] = suc[\"province\"].str.strip().str.upper().replace({\"CO SPGS\": \"CO\"})\nsuc[\"postal_code\"] = suc[\"postalCode\"].astype(str).str[:5].str.zfill(5)\nsuc = suc.drop_duplicates(subset=[\"address\", \"city\", \"province\"])\n\n# 5. Imputación regional en Fuente 2 (DE y ND) y Merge many_to_one\ndem = dem.drop_duplicates(subset=[\"province\"])\ndem[\"avg_daily_ff_calories\"] = dem[\"avg_daily_ff_calories\"].fillna(\n    dem.groupby(\"census_region\")[\"avg_daily_ff_calories\"].transform(\"mean\").round(1)\n)\ndf = suc.merge(dem, on=\"province\", how=\"inner\", validate=\"many_to_one\")",
 };

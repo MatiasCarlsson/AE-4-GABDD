@@ -369,10 +369,10 @@ export function buildP4ChartOption(p4Mode: 'region' | 'trimestre'): EChartsOptio
   const items =
     p4Mode === 'region'
       ? [
-          { label: 'South', kcal: 944.9, loc: 4130 },
-          { label: 'Midwest', kcal: 925.1, loc: 2691 },
-          { label: 'West', kcal: 844.8, loc: 2018 },
-          { label: 'Northeast', kcal: 824.9, loc: 1065 },
+          { label: 'South', kcal: 944.9, loc: 4081 },
+          { label: 'Midwest', kcal: 925.1, loc: 2740 },
+          { label: 'West', kcal: 845.6, loc: 2022 },
+          { label: 'Northeast', kcal: 812.3, loc: 1061 },
         ]
       : [
           { label: 'T1 2024', kcal: 904.0, loc: 2464 },
@@ -490,11 +490,11 @@ export function buildRadarComparisonOption(): EChartsOption {
         data: [5.65, 40.46, 38.16],
       },
       {
-        name: '4 Oportunidad (NY, NJ, CA, MA)',
+        name: '4 Oportunidad (NY, CA, NJ, MA)',
         type: 'bar',
         barWidth: '32%',
         itemStyle: { color: '#2DD4BF', borderRadius: [5, 5, 0, 0] },
-        data: [1.63, 31.63, 28.03],
+        data: [1.55, 31.63, 28.03],
       },
     ],
   };
