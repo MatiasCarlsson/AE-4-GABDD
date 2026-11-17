@@ -1,0 +1,32 @@
+# Dependencias y entornos virtuales (reproducibles)
+.venv/
+venv/
+env/
+node_modules/
+presentacion-web/node_modules/
+.pnpm-store/
+
+# Artefactos de compilación y caché
+dist/
+presentacion-web/dist/
+*.tsbuildinfo
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+.pytest_cache/
+
+# Logs y archivos temporales
+*.log
+npm-debug.log*
+pnpm-debug.log*
+*.tmp
+*.bak
+
+# Empaquetados reproducibles
+*.zip
+
+# Sistema operativo e IDE
+.DS_Store
+Thumbs.db
+.vscode/
