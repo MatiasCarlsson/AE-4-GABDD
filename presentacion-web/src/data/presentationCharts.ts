@@ -82,10 +82,10 @@ export function buildP1ChartOption(p1Mode: 'top5' | 'compare'): EChartsOption {
     p1Mode === 'top5'
       ? [...top5].reverse().map((s) => ({ ...s, isMean: false }))
       : [
-          ...bot3.slice().reverse().map((s) => ({ ...s, isMean: false })),
-          { state_name: 'MEDIA EE. UU.', province: 'US', dlff: 2.96, loc: 9904, ob: 32.6, isMean: true },
-          ...top5.slice().reverse().map((s) => ({ ...s, isMean: false })),
-        ];
+        ...bot3.slice().reverse().map((s) => ({ ...s, isMean: false })),
+        { state_name: 'MEDIA EE. UU.', province: 'US', dlff: 2.96, loc: 9904, ob: 32.6, isMean: true },
+        ...top5.slice().reverse().map((s) => ({ ...s, isMean: false })),
+      ];
 
   return {
     tooltip: {
@@ -149,7 +149,6 @@ export function buildP2ChartOption(p2Region: 'ALL' | CensusRegion): EChartsOptio
   return {
     legend: {
       top: 2,
-      data: regions,
       icon: 'circle',
       itemWidth: 10,
       itemHeight: 10,
@@ -182,12 +181,12 @@ export function buildP2ChartOption(p2Region: 'ALL' | CensusRegion): EChartsOptio
         );
       },
     },
-    grid: { left: 52, right: 24, top: 44, bottom: 44 },
+    grid: { left: 54, right: 26, top: 46, bottom: 48 },
     xAxis: {
       type: 'value',
       name: 'Densidad DLFF (locales c/100k hab.)',
       nameLocation: 'middle',
-      nameGap: 26,
+      nameGap: 28,
       nameTextStyle: { color: DARK_MUTED, fontFamily: 'Fira Code', fontSize: 11.5 },
       axisLabel: { color: DARK_MUTED, fontFamily: 'Fira Code', fontSize: 11 },
       axisLine: { lineStyle: { color: DARK_GRID } },
@@ -198,13 +197,13 @@ export function buildP2ChartOption(p2Region: 'ALL' | CensusRegion): EChartsOptio
     yAxis: {
       type: 'value',
       name: 'TPCD (%)',
-      nameGap: 10,
+      nameGap: 12,
       nameTextStyle: { color: DARK_MUTED, fontFamily: 'Fira Code', fontSize: 11.5 },
       axisLabel: { color: DARK_MUTED, fontFamily: 'Fira Code', fontSize: 11 },
       axisLine: { lineStyle: { color: DARK_GRID } },
-      min: 28,
-      max: 44,
-      interval: 4,
+      min: 27,
+      max: 44.5,
+      interval: 3,
       splitLine: { lineStyle: { color: DARK_GRID, type: 'dashed' } },
     },
     series: [
@@ -223,8 +222,7 @@ export function buildP2ChartOption(p2Region: 'ALL' | CensusRegion): EChartsOptio
               xAxis: 2.96,
               label: {
                 formatter: 'Media DLFF: 2,96',
-                position: 'end',
-                distance: 4,
+                position: 'insideEndTop',
                 fontFamily: 'Fira Code',
                 fontSize: 10.5,
                 fontWeight: 600,
@@ -234,8 +232,8 @@ export function buildP2ChartOption(p2Region: 'ALL' | CensusRegion): EChartsOptio
             {
               yAxis: 36.13,
               label: {
-                formatter: 'Media TPCD: 36,1%',
-                position: 'insideEndBottom',
+                formatter: 'TPCD: 36,1%',
+                position: 'insideEndTop',
                 fontFamily: 'Fira Code',
                 fontSize: 10.5,
                 fontWeight: 600,
@@ -369,17 +367,17 @@ export function buildP4ChartOption(p4Mode: 'region' | 'trimestre'): EChartsOptio
   const items =
     p4Mode === 'region'
       ? [
-          { label: 'South', kcal: 944.9, loc: 4081 },
-          { label: 'Midwest', kcal: 925.1, loc: 2740 },
-          { label: 'West', kcal: 845.6, loc: 2022 },
-          { label: 'Northeast', kcal: 812.3, loc: 1061 },
-        ]
+        { label: 'South', kcal: 944.9, loc: 4081 },
+        { label: 'Midwest', kcal: 925.1, loc: 2740 },
+        { label: 'West', kcal: 845.6, loc: 2022 },
+        { label: 'Northeast', kcal: 812.3, loc: 1061 },
+      ]
       : [
-          { label: 'T1 2024', kcal: 904.0, loc: 2464 },
-          { label: 'T2 2024', kcal: 878.5, loc: 2615 },
-          { label: 'T3 2024', kcal: 896.2, loc: 2614 },
-          { label: 'T4 2024', kcal: 895.7, loc: 2211 },
-        ];
+        { label: 'T1 2024', kcal: 904.0, loc: 2464 },
+        { label: 'T2 2024', kcal: 878.5, loc: 2615 },
+        { label: 'T3 2024', kcal: 896.2, loc: 2614 },
+        { label: 'T4 2024', kcal: 895.7, loc: 2211 },
+      ];
 
   return {
     tooltip: {

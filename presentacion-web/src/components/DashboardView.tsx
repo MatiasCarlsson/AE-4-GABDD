@@ -276,7 +276,7 @@ export default function DashboardView({ onBackToDeck }: DashboardViewProps) {
   const p2Option = useMemo<EChartsOption>(() => {
     const regions: CensusRegion[] = ['Midwest', 'South', 'West', 'Northeast'];
     return {
-      legend: { top: 4, data: regions, icon: 'circle', itemWidth: 10, itemHeight: 10, textStyle: { fontWeight: 600, fontSize: 12.5 } },
+      legend: { top: 4, icon: 'circle', itemWidth: 10, itemHeight: 10, textStyle: { fontWeight: 600, fontSize: 12.5 } },
       tooltip: {
         backgroundColor: '#150D2A',
         borderColor: '#7C3AED',
@@ -317,8 +317,8 @@ export default function DashboardView({ onBackToDeck }: DashboardViewProps) {
             silent: true,
             lineStyle: { color: '#E11D48', width: 1.5, type: 'dashed' },
             data: [
-              { xAxis: 2.96, label: { formatter: 'Media: 2,96', position: 'end', distance: 4, fontSize: 10, color: '#E11D48' } },
-              { yAxis: 36.13, label: { formatter: 'TPCD: 36,1%', position: 'insideEndBottom', fontSize: 10, color: '#E11D48' } },
+              { xAxis: 2.96, label: { formatter: 'Media: 2,96', position: 'insideEndTop', fontSize: 10, color: '#E11D48' } },
+              { yAxis: 36.13, label: { formatter: 'TPCD: 36,1%', position: 'insideEndTop', fontSize: 10, color: '#E11D48' } },
             ],
           },
         },
