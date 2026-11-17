@@ -52,23 +52,63 @@ export default function SlideShell({
       });
 
       if (meta) {
-        tl.from(meta, { x: -20, opacity: 0, duration: 0.4, ease: 'power3.out', clearProps: 'transform,opacity' }, 0);
+        tl.from(
+          meta,
+          { x: -24, opacity: 0, duration: index === 0 ? 0.55 : 0.4, ease: 'power3.out', clearProps: 'transform,opacity' },
+          index === 0 ? 0.08 : 0
+        );
       }
       if (heading) {
         tl.from(
           heading,
-          { y: 24, opacity: 0, duration: 0.52, ease: 'power4.out', clearProps: 'transform,opacity' },
-          0.05
+          {
+            y: index === 0 ? 38 : 24,
+            opacity: 0,
+            duration: index === 0 ? 0.74 : 0.52,
+            ease: 'power4.out',
+            clearProps: 'transform,opacity',
+          },
+          index === 0 ? 0.14 : 0.05
         );
       }
       if (leadEl) {
         tl.from(
           leadEl,
-          { y: 16, opacity: 0, duration: 0.44, ease: 'power3.out', clearProps: 'transform,opacity' },
-          0.11
+          {
+            y: index === 0 ? 24 : 16,
+            opacity: 0,
+            duration: index === 0 ? 0.6 : 0.44,
+            ease: 'power3.out',
+            clearProps: 'transform,opacity',
+          },
+          index === 0 ? 0.28 : 0.11
         );
       }
-      if (cards.length > 0) {
+      if (index === 0) {
+        const statsStrip = el.querySelector('.hero-stats-strip');
+        const actionsRow = el.querySelector('.hero-actions-row');
+        if (statsStrip) {
+          tl.from(
+            statsStrip,
+            { scaleX: 0.92, y: 18, opacity: 0, duration: 0.65, ease: 'power3.out', clearProps: 'transform,opacity' },
+            0.34
+          );
+        }
+        if (cards.length > 0) {
+          tl.from(
+            cards,
+            { y: 26, opacity: 0, duration: 0.55, stagger: 0.08, ease: 'power3.out', clearProps: 'transform,opacity' },
+            0.4
+          );
+        }
+        if (actionsRow) {
+          tl.from(
+            actionsRow,
+            { y: 16, opacity: 0, duration: 0.5, ease: 'power3.out', clearProps: 'transform,opacity' },
+            0.58
+          );
+        }
+      } else if (cards.length > 0) {
         tl.from(
           cards,
           {

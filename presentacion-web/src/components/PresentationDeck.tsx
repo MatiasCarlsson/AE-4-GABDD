@@ -143,7 +143,8 @@ export default function PresentationDeck({
           speaker="Hannah Bojanovich & Matías Viana Carlsson"
           showSpeakers={showSpeakers}
         >
-          <div style={{ maxWidth: 1020, padding: '8px 0 4px' }}>
+          <div className="hero-aura" aria-hidden="true" />
+          <div style={{ maxWidth: 1020, padding: '8px 0 4px', position: 'relative' }}>
             <h1 className="slide-title" style={{ fontSize: 'clamp(2.4rem, 4.1vw, 3.8rem)', lineHeight: 1.07, letterSpacing: '-0.025em' }}>
               Oferta Comercial de Fast Food, Consumo Calórico y Obesidad Adulta en EE. UU.
             </h1>
@@ -154,26 +155,26 @@ export default function PresentationDeck({
           <div className="cols-4 hero-stats-strip">
             <div>
               <div className="hero-stat-label">Hechos Validados</div>
-              <div className="hero-stat-num" style={{ color: '#EDE9FE' }}><AnimatedStat target={9904} active={currentSlide === 0} /></div>
+              <div className="hero-stat-num" style={{ color: '#EDE9FE' }}><AnimatedStat target={9904} durationMs={1150} active={currentSlide === 0} /></div>
               <div className="hero-stat-sub">Sucursales geolocalizadas</div>
             </div>
             <div className="hero-stat-col">
               <div className="hero-stat-label">Cobertura Estatal</div>
-              <div className="hero-stat-num" style={{ color: '#FFFFFF' }}><AnimatedStat target={51} active={currentSlide === 0} /></div>
+              <div className="hero-stat-num" style={{ color: '#FFFFFF' }}><AnimatedStat target={51} durationMs={950} active={currentSlide === 0} /></div>
               <div className="hero-stat-sub">Estados + Washington D.C.</div>
             </div>
             <div className="hero-stat-col">
               <div className="hero-stat-label">Catálogo Unificado</div>
-              <div className="hero-stat-num" style={{ color: '#A5F3FC' }}><AnimatedStat target={466} active={currentSlide === 0} /></div>
+              <div className="hero-stat-num" style={{ color: '#A5F3FC' }}><AnimatedStat target={466} durationMs={1050} active={currentSlide === 0} /></div>
               <div className="hero-stat-sub">Cadenas en 8 rubros</div>
             </div>
             <div className="hero-stat-col">
               <div className="hero-stat-label">Censo + CDC 2024</div>
-              <div className="hero-stat-num" style={{ color: '#FFFFFF' }}><AnimatedStat target={334.9} decimals={1} suffix=" M" active={currentSlide === 0} /></div>
+              <div className="hero-stat-num" style={{ color: '#FFFFFF' }}><AnimatedStat target={334.9} decimals={1} durationMs={1150} suffix=" M" active={currentSlide === 0} /></div>
               <div className="hero-stat-sub">Población cubierta</div>
             </div>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
+          <div className="hero-actions-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
             <div style={{ fontSize: 14, color: '#C4B5FD' }}>
               <strong>Cátedra:</strong> Lic. Gabriel del Rosario • Lic. Marcos Portel • Ads. Victoria Fernández
             </div>

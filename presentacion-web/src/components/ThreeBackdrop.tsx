@@ -231,20 +231,75 @@ const ThreeBackdrop = memo(function ThreeBackdrop({
     const streamPoints = new THREE.Points(streamGeo, streamMat);
     orbitRing1.add(streamPoints);
 
-    /* AnimationMixer + AnimationClip (InterpolateSmooth) sobre coreGroup */
+    /* Anillo expansivo de entrada (shockwave) animado con LoopOnce */
+    const shockGeo = new THREE.TorusGeometry(4.2, 0.045, 12, 100);
+    const shockMat = new THREE.MeshBasicMaterial({
+      color: new THREE.Color('#5EEAD4'),
+      transparent: true,
+      opacity: prefersReducedMotion ? 0 : 0.9,
+      blending: THREE.AdditiveBlending,
+    });
+    const shockRing = new THREE.Mesh(shockGeo, shockMat);
+    shockRing.rotation.x = Math.PI * 0.34;
+    coreGroup.add(shockRing);
+
+    /* AnimationMixer + crossFadeTo: entrada cinematográfica (LoopOnce) -> órbita continua */
+    const introScaleTrack = new THREE.VectorKeyframeTrack(
+      '.scale',
+      [0, 0.95, 1.65],
+      [0.14, 0.14, 0.14, 1.13, 1.13, 1.13, 0.98, 0.98, 0.98]
+    );
+    introScaleTrack.setInterpolation(THREE.InterpolateSmooth);
+    const introRotTrack = new THREE.NumberKeyframeTrack('.rotation[y]', [0, 1.65], [-Math.PI * 1.15, 0]);
+    introRotTrack.setInterpolation(THREE.InterpolateSmooth);
+    const introClip = new THREE.AnimationClip('heroCoreIntro', 1.65, [introScaleTrack, introRotTrack]);
+
     const scaleTrack = new THREE.VectorKeyframeTrack(
       '.scale',
       [0, 2.5, 5],
-      [0.95, 0.95, 0.95, 1.07, 1.07, 1.07, 0.95, 0.95, 0.95]
+      [0.98, 0.98, 0.98, 1.07, 1.07, 1.07, 0.98, 0.98, 0.98]
     );
     scaleTrack.setInterpolation(THREE.InterpolateSmooth);
     const rotTrack = new THREE.NumberKeyframeTrack('.rotation[y]', [0, 14], [0, Math.PI * 2]);
     const coreClip = new THREE.AnimationClip('corePulseAndOrbit', 14, [scaleTrack, rotTrack]);
 
     const mixer = new THREE.AnimationMixer(coreGroup);
+    const introAction = mixer.clipAction(introClip);
+    introAction.setLoop(THREE.LoopOnce, 1);
+    introAction.clampWhenFinished = true;
+
     const coreAction = mixer.clipAction(coreClip);
     coreAction.setLoop(THREE.LoopRepeat, Infinity);
-    coreAction.play();
+
+    if (prefersReducedMotion) {
+      coreAction.play();
+    } else {
+      introAction.play();
+    }
+
+    const onMixerFinished = (e: { action: THREE.AnimationAction }) => {
+      if (e.action === introAction) {
+        coreAction.reset().play();
+        introAction.crossFadeTo(coreAction, 0.7, false);
+      }
+    };
+    mixer.addEventListener('finished', onMixerFinished);
+
+    const shockScaleTrack = new THREE.VectorKeyframeTrack(
+      '.scale',
+      [0, 1.55],
+      [0.25, 0.25, 0.25, 2.65, 2.65, 2.65]
+    );
+    shockScaleTrack.setInterpolation(THREE.InterpolateSmooth);
+    const shockOpacityTrack = new THREE.NumberKeyframeTrack('.material.opacity', [0, 0.35, 1.55], [0.0, 0.92, 0.0]);
+    const shockClip = new THREE.AnimationClip('heroShockwave', 1.55, [shockScaleTrack, shockOpacityTrack]);
+    const shockMixer = new THREE.AnimationMixer(shockRing);
+    const shockAction = shockMixer.clipAction(shockClip);
+    shockAction.setLoop(THREE.LoopOnce, 1);
+    shockAction.clampWhenFinished = true;
+    if (!prefersReducedMotion) {
+      shockAction.play();
+    }
 
     /* Timer independiente de FPS */
     const timer = new THREE.Timer();
@@ -258,11 +313,11 @@ const ThreeBackdrop = memo(function ThreeBackdrop({
 
     let pointerX = 0;
     let pointerY = 0;
-    let dampedRotY = 0;
-    let dampedRotX = 0;
-    let dampedCamZ = 14.5;
-    let dampedCoreX = 5.3;
-    let dampedCoreY = -0.2;
+    let dampedRotY = prefersReducedMotion ? 0 : -0.82;
+    let dampedRotX = prefersReducedMotion ? 0 : 0.24;
+    let dampedCamZ = prefersReducedMotion ? 14.5 : 23.0;
+    let dampedCoreX = prefersReducedMotion ? 3.2 : 6.4;
+    let dampedCoreY = prefersReducedMotion ? 0.85 : -1.2;
     let dampedRing2Z = 0;
 
     const onPointerMove = (e: PointerEvent) => {
@@ -286,6 +341,7 @@ const ThreeBackdrop = memo(function ThreeBackdrop({
 
       if (!prefersReducedMotion) {
         mixer.update(delta);
+        shockMixer.update(delta);
         innerCore.rotation.x = elapsed * 0.35;
         innerCore.rotation.z = -elapsed * 0.25;
 
@@ -344,8 +400,11 @@ const ThreeBackdrop = memo(function ThreeBackdrop({
     return () => {
       renderer.setAnimationLoop(null);
       timer.dispose();
+      mixer.removeEventListener('finished', onMixerFinished);
       mixer.stopAllAction();
       mixer.uncacheRoot(coreGroup);
+      shockMixer.stopAllAction();
+      shockMixer.uncacheRoot(shockRing);
       window.removeEventListener('pointermove', onPointerMove);
       window.removeEventListener('resize', onResize);
       spriteTex?.dispose();
@@ -361,6 +420,8 @@ const ThreeBackdrop = memo(function ThreeBackdrop({
       ringMat1.dispose();
       ringGeo2.dispose();
       ringMat2.dispose();
+      shockGeo.dispose();
+      shockMat.dispose();
       streamGeo.dispose();
       streamMat.dispose();
       renderer.dispose();

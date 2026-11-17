@@ -177,6 +177,49 @@ code {
   transition: width 0.3s var(--ease-out);
 }
 
+@keyframes headerDropIn {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroAuraBloom {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.55);
+  }
+  55% {
+    opacity: 0.72;
+  }
+  100% {
+    opacity: 0.36;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+}
+
+.hero-aura {
+  position: absolute;
+  left: 68%;
+  top: 48%;
+  width: 640px;
+  height: 640px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    rgba(94, 234, 212, 0.16) 0%,
+    rgba(139, 92, 246, 0.18) 38%,
+    rgba(109, 40, 217, 0) 70%
+  );
+  animation: heroAuraBloom 1.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform, opacity;
+}
+
 /* Header minimalista translúcido */
 .app-header {
   position: fixed;
@@ -195,6 +238,7 @@ code {
   padding: 0 clamp(20px, 3vw, 40px);
   z-index: 2000;
   color: var(--text-on-navy);
+  animation: headerDropIn 0.55s var(--ease-out) both;
 }
 
 .brand-cluster {
@@ -529,7 +573,7 @@ input:focus-visible {
 
 .deck-slide.slide-hero {
   min-height: clamp(600px, 88dvh, 760px);
-  padding: calc(var(--header-h) + 24px) clamp(32px, 6vw, 96px) 52px;
+  padding: calc(var(--header-h) + 22px) clamp(32px, 6vw, 96px) 78px;
 }
 
 .slide-inner {
